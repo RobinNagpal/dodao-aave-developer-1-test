@@ -1,0 +1,20 @@
+{
+  "name": "dodao-aave-developer-1-course",
+  "version": "1.0.0",
+  "description": "This course gives an introduction to AAVE",
+  "scripts": {
+    "test": "dodao-course-processor gen-all src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DoDAO-io/dodao-defi-course.git"
+  },
+  "author": "robin",
+  "bugs": {
+    "url": "https://github.com/DoDAO-io/dodao-aave-developer-1-course/issues"
+  },
+  "homepage": "https://github.com/DoDAO-io/dodao-aave-developer-1-course#readme",
+  "dependencies": {
+    "dodao-course-processor": "^0.1.28"
+  }
+}

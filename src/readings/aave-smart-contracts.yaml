@@ -1,0 +1,13 @@
+- uuid: c4085ae7-6623-449a-bbfd-c86174008669
+  title: Introduction to Decentralised Finance
+  shortTitle: Intro to DeFi
+  type: YoutubeVideo
+  url: https://www.youtube.com/watch?v=btB__oHQ0sU
+  subTopics:
+    - aave-smart-contracts-intro
+  details: |
+    This video enables learners to know about
+      * Centralised banking system
+      * DeFi components    
+      * DEXs
+      * DeFi advantages

@@ -1,0 +1,86 @@
+{
+  "key": "aave-developer-1",
+  "title": "AAVE Developer 1 (In Progress)",
+  "summary": "This is a technical course for developers willing to write applications on AAVE.\n",
+  "details": "ADD DEtails of the course\n",
+  "duration": "1 - 2 hours",
+  "highlights": [
+    "AAVE Smart Contract Introduction",
+    "Fetching AAVE Data",
+    "Developer Environment Setup",
+    "Writing simple UI application on top of AAVE"
+  ],
+  "publishStatus": "Live",
+  "thumbnail": "https://d31h13bdjwgzxs.cloudfront.net/courses/DoDAO/DeFi/defi_logo.jpeg",
+  "topics": [
+    {
+      "title": "AAVE Smart Contracts",
+      "key": "aave-smart-contracts",
+      "details": "This chapter taks about various important smart contracts of AAVE which forms the basis of lending and borrowing\n",
+      "order": 0,
+      "explanations": [
+        {
+          "title": "Title",
+          "shortTitle": "Short Title",
+          "key": "key-of-explanation",
+          "details": "#### What is Explanation?\nDetails\n"
+        }
+      ],
+      "questions": [
+        {
+          "uuid": "0f60f96b-4d15-4dd2-9ceb-20fe011b1c89",
+          "type": "SingleChoice",
+          "content": "What is the main purpose of DeFi?",
+          "hint": "noHint",
+          "explanation": "Decentralised Finance is responsible for providing financial solutions for existing problems in the Centralized system using blockchain.",
+          "answerKeys": [
+            "B"
+          ],
+          "subTopics": [
+            "aave-smart-contracts-intro"
+          ],
+          "difficultyLevel": "Low",
+          "choices": [
+            {
+              "content": "Provide banking facilties only to high worth individuals",
+              "key": "A"
+            },
+            {
+              "content": "Providing Decentralized global financial solutions on blockchain",
+              "key": "B"
+            },
+            {
+              "content": "Trade and earn more using cryptocurrency",
+              "key": "C"
+            },
+            {
+              "content": "To provide centralized financial solutions on the blockchain",
+              "key": "D"
+            }
+          ]
+        }
+      ],
+      "readings": [
+        {
+          "uuid": "c4085ae7-6623-449a-bbfd-c86174008669",
+          "title": "Introduction to Decentralised Finance",
+          "shortTitle": "Intro to DeFi",
+          "type": "YoutubeVideo",
+          "url": "https://www.youtube.com/watch?v=btB__oHQ0sU",
+          "subTopics": [
+            "aave-smart-contracts-intro"
+          ],
+          "details": "This video enables learners to know about\n  * Centralised banking system\n  * DeFi components    \n  * DEXs\n  * DeFi advantages\n"
+        }
+      ],
+      "summaries": [
+        {
+          "title": "AAVE Smart Contrcts Intro",
+          "shortTitle": "AAVE Smart Contracts",
+          "key": "aave-smart-contracts-intro",
+          "details": "### What is Smart Contract:\n"
+        }
+      ]
+    }
+  ]
+}
