@@ -7,8 +7,8 @@
 
     Aave's transition from a decentralized P2P lending approach (a direct loan relationship between lenders and borrowers, similar to ETHLend) to a pool-based strategy is marked by the creation of the Aave Protocol. By putting cryptocurrency in a pool contract, lenders offer liquidity. The pooled funds can also be borrowed inside the same contract by pledging collateral. Loans rely on the pooled money as well as the quantities borrowed and their collateral rather than on individual matching. This makes it possible to quickly lend money with terms that depend on the condition of the pool. Figure 1 below shows a simplified version of the protocol's structure.
 
-    ![Trilemma](https://raw.githubusercontent.com/DoDAO-io/dodao-defi-course/e84d2833e8d447fbd9bdca6dd26b4a1cacca5228/images/trilemma.png?raw=true)
-    `Reference: https://stablecoins.wtf/`
+    ![AAVE](https://github.com/DoDAO-io/dodao-aave-developer-1-course/blob/6bd13f67bbb027bc58280c103f78b0b29d5ad810/images/aave.jpg?raw=true)
+    `Reference: https://docs.aave.com/developers/v/2.0/`
 
     The participants lending the tokens get interest on their loan and the participants borrowing the tokens pay interest. An individual can lend and borrow simultaneously via Aave.
     The working mechanism of Aave involves allocating a platform specific token, called aTokens to a user's crypto investment. 
@@ -112,8 +112,8 @@
     On Github, the Aave Protocol repository can be found here: https://github.com/aave/
     Below image provides an overview of the protocol.
 
-    ![Trilemma](https://raw.githubusercontent.com/DoDAO-io/dodao-defi-course/e84d2833e8d447fbd9bdca6dd26b4a1cacca5228/images/trilemma.png?raw=true)
-    `Reference: https://stablecoins.wtf/`
+    ![Architecture](https://github.com/DoDAO-io/dodao-aave-developer-1-course/blob/6bd13f67bbb027bc58280c103f78b0b29d5ad810/images/architechture.png?raw=true)
+    `Reference: https://docs.aave.com/developers/v/2.0/the-core-protocol/protocol-overview`
 
     #### Main Contracts
     The main contracts in Aave and their purposes are:

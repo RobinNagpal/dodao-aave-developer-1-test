@@ -69,8 +69,8 @@
   details: |
     * Below image provides an overview of the protocol.
 
-    ![Trilemma](https://raw.githubusercontent.com/DoDAO-io/dodao-defi-course/e84d2833e8d447fbd9bdca6dd26b4a1cacca5228/images/trilemma.png?raw=true)
-    `Reference: https://stablecoins.wtf/`
+    ![Architecture](https://github.com/DoDAO-io/dodao-aave-developer-1-course/blob/6bd13f67bbb027bc58280c103f78b0b29d5ad810/images/architechture.png?raw=true)
+    `Reference: https://docs.aave.com/developers/v/2.0/the-core-protocol/protocol-overview`
 
     * On Github, the Aave Protocol repository can be found here: https://github.com/aave/
 
