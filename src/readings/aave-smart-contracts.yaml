@@ -1,13 +1,27 @@
-- uuid: c4085ae7-6623-449a-bbfd-c86174008669
-  title: Introduction to Decentralised Finance
-  shortTitle: Intro to DeFi
+- uuid: 7441eb5f-68f3-40de-b12f-80dc17c80b2c
+  title: Introduction to AAVE Smart Contracts
+  shortTitle: Intro to AAVE Smart Contracts
   type: YoutubeVideo
-  url: https://www.youtube.com/watch?v=btB__oHQ0sU
+  url: https://www.youtube.com/watch?v=AMAMvKc-O2s
   subTopics:
     - aave-smart-contracts-intro
   details: |
     This video enables learners to know about
-      * Centralised banking system
-      * DeFi components    
-      * DEXs
-      * DeFi advantages
+      * AAVE
+      * Main protocol features
+      * What's new in v2   
+      * Resources
+
+- uuid: 8b2485fe-7a9b-4dee-9e65-348c1dc7a66c
+  title: Introduction to AAVE Smart Contracts
+  shortTitle: Intro to AAVE Smart Contracts
+  type: YoutubeVideo
+  url: https://www.youtube.com/watch?v=LzaS8IiqnPY
+  subTopics:
+    - aave-smart-contracts-intro
+  details: |
+    This video enables learners to know about
+      * AAVE v3 features
+      * Build on top of AAVE
+
+
