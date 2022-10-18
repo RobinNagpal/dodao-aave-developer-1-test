@@ -1,5 +1,101 @@
-- title: AAVE Smart Contrcts Intro
-  shortTitle: "AAVE Smart Contracts"
+- title: Introduction
+  shortTitle: Introduction
   key: aave-smart-contracts-intro
   details: |
-   ### What is Smart Contract:
+    * Aave is a decentralized finance protocol that facilitates lending and borrowing of cryptocurrency tokens usAave ing diverse algorithms and smart contracts without the presence of centralized intermediaries. 
+    * It is a non-custodial liquidity protocol that allows users to participate as depositors or borrowers. Depositors provide liquidity to the market to earn a passive income, while borrowers are able to borrow in an overcollateralized manner.
+    * The participants lending the tokens get interest on their loan and the participants borrowing the tokens pay interest. 
+    * An individual can lend and borrow simultaneously via Aave.
+    * The working mechanism of Aave involves allocating a platform specific token, called aTokens to a user's crypto investment. This is what lenders get when they deposit their assets into the pool.
+    * For instance, a user who deposits Ethereum in Aave will hold aETH on Aave. 
+    * aToken is based on a particular crypto asset and the interest rate each aToken earns is specific to the token deposited, depending on the supply and demand for the original coin.
+
+    * Aave has a smart contract based working mechanism wherein the interest rates are determined by different algorithms.
+    * The depositors lend the funds in the liquidity pools and earn interest, similarly borrowers can borrow the funds from the liquidity pools. 
+    * The interest rate for both borrowers and lenders is decided algorithmically:
+    * **Interest rate for Borrowers**: The interest rate to be paid by the borrowers depends on the cost of money and the amount of funds available in the pool at a specific time.The amount of funds present in the pool has an inverse relationship with the interest rate. As funds are borrowed from the pool, the amount of funds available decreases which raises the interest rate. 
+    * **Interest rate for Lenders**: The interest rate received by the lenders corresponds to the earn rate, with the algorithm safeguarding a liquidity reserve to guarantee withdrawals at any time.
+
+    * Since cryptocurrency is highly volatile, borrowing in Aave demands overcollateralization. 
+    * A liquidation event happens when the price of the collateral drops below the liquidation threshold.
+
+- title: Important Tech Terms
+  shortTitle: Tech Terms
+  key: terminology
+  details: |
+    * **APY**: Annual Percentage Yield is the yield/interest after a year, including compounding interest. This differs from the Annual Percentage Rate (APR), which does not account for compounding effects.
+
+    * **Liquidity Index**: The reserve's interest accumulation during the time span since the last updated timestamp.
+
+    * **Loan To Value**: The maximum borrowing capacity of a particular collateral. If a collateral has a Loan to Value of 75%, the user will be allowed to borrow 0.75 ETH of primary currency for every 1 ETH of collateral. The Loan To Value is represented in percentage points and is set per collateral.
+
+    * **Liquidation Threshold**: The amount of a borrow position that must be liquidated because it is undercollateralized. When a collateral has an 80% liquidation threshold, it signifies that the loan will be liquidated when the debt value equals 80% of the collateral value. The liquidation threshold is defined in percentage points and is specified per collateral.
+
+    * **Liquidation Bonus**: The bonus paid to liquidators to encourage the purchase of specified collateral with a health factor less than one. The Liquidation Bonus is defined in percentage points and is determined per collateral.
+
+    * **Health factor**: The ratio of total collateral multiplied by the liquidation threshold to borrowed principal. When the Health Factor falls below one, the loan is considered undercollateralized and can be liquidated.
+
+    * **Stable rate**: A loan with a stable rate behaves like a fixed rate loan in the short term, but the rates can be rebalanced in the medium/long term in response to rapid market movements.
+
+    * **Reserve** : Reserves are the underlying assets' ERC-20 contracts.
+  
+- title: Released Versions
+  shortTitle: Versions
+  key: versions
+  details: |
+    * Aave has released three versions (v1, v2 and v3) as of now and the Governance token of Aave is "AAVE". Version 1 or v1 is the base version launched in 2017 and then there have been upgrades with multiple new features added. 
+    * Aave v2 improves on many areas of v1. Some of the changes are:
+      - There is no longer a LendingPoolCore contract in Aave v2 that retains all of the protocol's assets. Assets are held directly in the linked aToken contracts, with the LendingPool contract serving as the protocol's "core."
+      - Almost all actions in Aave v2 should be executed via the LendingPool contract. This differs from v1, when a redemption/withdrawal of aTokens required a call on the aToken contract.
+      - After depositing collateral into the protocol, a user can easily delegate credit to any address by using approveDelegation() on the relevant debt token.
+      - Flash loans are possible inside the Aave v2 protocol. Indeed, they are widely utilised within the protocol for position switching and other 'trading'-like functions.
+      - Flash loans can now be executed in batches, which means that many flash loans with varied parameters can be performed in the same call. This opens the door to strong new use cases, such as repaying numerous assets and positions with a single flash loan transaction.
+      - You can now do a combination of 'conventional' flash loans that are paid back instantly and flash loans that incur debt (i.e. the flash loan is not paid back immediately).
+      - AddressesProviders will be numerous in multiple markets. The AddressesProviderRegistry will keep track of all Aave market address providers.
+      - LendingPoolCore has been decommissioned. Only LendingPool is used, which simplifies integrations and Aave v2 development.
+    * The v3 improved features enable new use cases, sparking a flood of innovation from users and developers. Aave V3 generates I mprovements in all of the these areas - capital efficiency, security, decentralisation, and UX - while simultaneously delivering new functions to harness the capabilities of rollups and the developing ecosystem of rival L1s.
+      - Portal is a new set of core functionalities that can be utilised to enable provided assets to move easily between Aave markets on different networks. On the surface, the feature is fairly simple: the protocol uses the aTokens' unique pegged design to burn aTokens on the source network while minting them on the destination network.
+      - Borrowers can use High Efficiency Mode (E-Mode) to get the most borrowing power out of their collateral. Borrowers can use E-Mode to limit their borrowing to only assets in a specific category (e.g., stablecoins).
+      - One of the most important areas for improvement is managing the inherent complexities of risk exposure modulation.
+      - Repay with aTokens: Allows borrowers to repay with aTokens rather than the underlying asset.
+      - Despite all of the new features, the overall gas cost of all functions fell by about 25%.
+      - Smart contract re-engineering has considerably reduced code size (leaving more room for future revisions) by up to 100K optimizer runs!
+      - All token transfer functions (supply, repay) now support EIP 2612 authorization (this is especially important for L2).
+      - Signature on EIP 712 for credit delegation (no need for contracts to request a user transaction anymore).
+
+- title: Protocol Overview
+  shortTitle: Overview
+  key: overview
+  details: |
+    * Below image provides an overview of the protocol.
+
+    ![Trilemma](https://raw.githubusercontent.com/DoDAO-io/dodao-defi-course/e84d2833e8d447fbd9bdca6dd26b4a1cacca5228/images/trilemma.png?raw=true)
+    `Reference: https://stablecoins.wtf/`
+
+    * On Github, the Aave Protocol repository can be found here: https://github.com/aave/
+
+    #### Main Contracts
+    The main contracts in Aave and their purposes are:
+    * LendingPool: The main entry point into the Aave Protocol. Most interactions with Aave will happen via the LendingPool, including:
+      - deposit()
+      - borrow()
+      - repay()
+      - swapBorrowRateMode()
+      - setUserUseReserveAsCollateral()
+      - withdraw()
+      - flashloan()
+      - liquidationCall()
+    * LendingPoolAddressesProvider: The protocol's primary addresses register for specific marketplaces. The most recent contract addresses should be obtained from this contract by making the necessary calls.
+    * LendingPoolAddressesProviderRegistry: Contains a list of active LendingPoolAddressesProvider addresses, for different markets.
+    * aTokens: The yield-producing, tokenized deposits that are used throughout the Aave protocol. They implement, with minor modifications, the majority of the standard EIP-20/ERC20 token methods, as well as Aave-specific methods such as:
+      - scaledBalanceOf()
+      - getScaledUserBalanceAndSupply()
+      - scaledTotalSupply()
+      All aTokens also implement EIP-2612, which via the permit() function enables gas-less transfers and single transaction approve + actions.
+    * Stable and Variable Debt Tokens: The Aave protocol employs tokenised borrow locations throughout. Because debt tokens are non-transferable, most common EIP-20/ERC20 techniques are disabled.
+
+
+
+
+
+

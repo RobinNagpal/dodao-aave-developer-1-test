@@ -1,17 +1,17 @@
 - title: Introduction
   shortTitle: Introduction
-  key: introduction
+  key: aave-smart-contracts-intro
   details: |
     Aave is a decentralized finance protocol that facilitates lending and borrowing of cryptocurrency tokens usAave ing diverse algorithms and smart contracts without the presence of centralized intermediaries. 
     It is a non-custodial liquidity protocol that allows users to participate as depositors or borrowers. Depositors provide liquidity to the market to earn a passive income, while borrowers are able to borrow in an overcollateralized manner.
 
-    Aave's transition from a decentralised P2P lending approach (a direct loan relationship between lenders and borrowers, similar to ETHLend) to a pool-based strategy is marked by the creation of the Aave Protocol. By putting cryptocurrency in a pool contract, lenders offer liquidity. The pooled funds can also be borrowed inside the same contract by pledging collateral. Loans rely on the pooled money as well as the quantities borrowed and their collateral rather than on individual matching. This makes it possible to quickly lend money with terms that depend on the condition of the pool. Figure 1 below shows a simplified version of the protocol's structure.
+    Aave's transition from a decentralized P2P lending approach (a direct loan relationship between lenders and borrowers, similar to ETHLend) to a pool-based strategy is marked by the creation of the Aave Protocol. By putting cryptocurrency in a pool contract, lenders offer liquidity. The pooled funds can also be borrowed inside the same contract by pledging collateral. Loans rely on the pooled money as well as the quantities borrowed and their collateral rather than on individual matching. This makes it possible to quickly lend money with terms that depend on the condition of the pool. Figure 1 below shows a simplified version of the protocol's structure.
 
     ![Trilemma](https://raw.githubusercontent.com/DoDAO-io/dodao-defi-course/e84d2833e8d447fbd9bdca6dd26b4a1cacca5228/images/trilemma.png?raw=true)
     `Reference: https://stablecoins.wtf/`
 
     The participants lending the tokens get interest on their loan and the participants borrowing the tokens pay interest. An individual can lend and borrow simultaneously via Aave.
-    The working mechanism of Aave involves allocating a platform specific token, called aTokens to a user’s crypto investment. 
+    The working mechanism of Aave involves allocating a platform specific token, called aTokens to a user's crypto investment. 
     This is what lenders get when they deposit their assets into the pool.
     For instance, a user who deposits Ethereum in Aave will hold aETH on Aave. 
     aToken is based on a particular crypto asset and the interest rate each aToken earns is specific to the token deposited, depending on the supply and demand for the original coin.
@@ -97,7 +97,7 @@
     * You can now do a combination of 'conventional' flash loans that are paid back instantly and flash loans that incur debt (i.e. the flash loan is not paid back immediately).
     * AddressesProviders will be numerous in multiple markets. The AddressesProviderRegistry will keep track of all Aave market address providers.
     * LendingPoolCore has been decommissioned. Only LendingPool is used, which simplifies integrations and Aave v2 development.
-    The V3 improved features enable new use cases, sparking a flood of innovation from users and developers. Aave V3 generates I mprovements in all of the these areas - capital efficiency, security, decentralisation, and UX - while simultaneously delivering new functions to harness the capabilities of rollups and the developing ecosystem of rival L1s.
+    The v3 improved features enable new use cases, sparking a flood of innovation from users and developers. Aave V3 generates I mprovements in all of the these areas - capital efficiency, security, decentralisation, and UX - while simultaneously delivering new functions to harness the capabilities of rollups and the developing ecosystem of rival L1s.
     * Portal is a new set of core functionalities that can be utilised to enable provided assets to move easily between Aave markets on different networks. On the surface, the feature is fairly simple: the protocol uses the aTokens' unique pegged design to burn aTokens on the source network while minting them on the destination network.
     * Borrowers can use High Efficiency Mode (E-Mode) to get the most borrowing power out of their collateral. Borrowers can use E-Mode to limit their borrowing to only assets in a specific category (e.g., stablecoins).
     * One of the most important areas for improvement is managing the inherent complexities of risk exposure modulation.
@@ -110,7 +110,7 @@
     #### Protocol Overview
 
     On Github, the Aave Protocol repository can be found here: https://github.com/aave/
-    Below image gives an overview of the protocol.
+    Below image provides an overview of the protocol.
 
     ![Trilemma](https://raw.githubusercontent.com/DoDAO-io/dodao-defi-course/e84d2833e8d447fbd9bdca6dd26b4a1cacca5228/images/trilemma.png?raw=true)
     `Reference: https://stablecoins.wtf/`
