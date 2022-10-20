@@ -245,3 +245,163 @@ Explanation: Health factor is the ratio of total collateral multiplied by the li
 
 Sub Topics: terminology
  
+
+---
+
+##### What is the ratio in which aTokens can be redeemed for the underlying token?  
+
+- [ ]  aTokens can be redeemed for the underlying token in a 1:10 ratio
+- [ ]  aTokens can be redeemed for the underlying token in a 11:1 ratio
+- [x]  aTokens can be redeemed for the underlying token in a 1:1 ratio
+- [ ]  aTokens can be redeemed for the underlying token in a 1:11 ratio
+  
+Hint: NoHint
+         
+Explanation: aTokens can be redeemed for the underlying token in a 1:1 ratio
+
+Sub Topics: functions-1
+ 
+
+---
+
+##### Pick the correct option(s).  
+
+- [x]  AAVE protocol does not employ an EIP-20 wrapper
+- [ ]  AAVE protocol employs an EIP-20 wrapper
+- [ ]  The deposit() method's amount parameter must match the transaction's msg.value parameter
+- [ ]  The deposit() method's amount parameter may or may not match the transaction's msg.value parameter
+  
+Hint: NoHint
+         
+Explanation: Because the protocol does not employ an EIP-20 wrapper like wETH for ETH deposits, the deposit() method's amount parameter must match the transaction's msg.value parameter and be included in your deposit() call.
+
+Sub Topics: functions-1
+ 
+
+---
+
+##### Which method allows the user's deposit to be used as collateral?  
+
+- [ ]  deposit()
+- [ ]  setUserUseDepositAsCollateral()
+- [ ]  setUserReserveAsCollateral()
+- [x]  setUserUseReserveAsCollateral()
+  
+Hint: NoHint
+         
+Explanation: setUserUseReserveAsCollateral() allows the user's deposit to be used as collateral. Users will only be able to disable deposits that are not being used as collateral at the time.
+
+Sub Topics: functions-1
+ 
+
+---
+
+##### Which of the following statements about the repay() method is/are correct?  
+
+- [ ]  A borrowed asset has to be repaid in whole
+- [x]  A borrowed asset can be repaid in whole or in part
+- [x]  A third-party can repay another user's debt on their behalf
+- [ ]  A third-party can not repay another user's debt on their behalf
+  
+Hint: NoHint
+         
+Explanation: repay() method is used to repay a borrowed asset in whole or in part. The _onBehalfOf parameter can be used to repay a different user's debt. When a third-party repays another user's debt on their behalf, the third-party address must approve() the LendingPoolCore contract (which is separate from the LendingPool contract) with the _amount of the underlying ERC20 of the _reserve contract.
+
+Sub Topics: functions-2
+ 
+
+---
+
+##### Which method changes the borrow rate modes of the msg.sender from stable to variable?  
+
+- [ ]  rebalanceStableBorrowRate()
+- [ ]  rebalanceBorrowRateMode()
+- [ ]  swapStableBorrowRate()
+- [x]  swapBorrowRateMode()
+  
+Hint: NoHint
+         
+Explanation: swapBorrowRateMode() changes the borrow rate modes of the msg.sender from stable to variable. rebalanceStableBorrowRate() rebalances the stable rate of _user
+
+Sub Topics: functions-2
+ 
+
+---
+
+##### What happens when a liquidation is completed successfully?  
+
+- [x]  The position's health factor is enhanced, bringing it above 1
+- [ ]  The position's health factor is diminished, bringing it below 1
+- [ ]  The close factor is enhanced, bringing it above 1
+- [ ]  The close factor is diminished, bringing it below 1
+  
+Hint: NoHint
+         
+Explanation: When the liquidation is completed successfully, the position's health factor is enhanced, bringing it above 1. It does not affect the close factor.
+
+Sub Topics: functions-2
+ 
+
+---
+
+##### What is the close factor?  
+
+- [ ]  The ratio of total collateral multiplied by the liquidation threshold to borrowed principal
+- [ ]  The maximum borrowing capacity of a particular collateral
+- [x]  Determines how much collateral a liquidator can close
+- [x]  It is the amount of the liquidation discount
+  
+Hint: NoHint
+         
+Explanation: A close factor determines how much collateral a liquidator can close. The current close factor is 0.5. In other words, liquidators can only liquidate up to 50% of the amount owing in a position. This is the amount of the liquidation discount.
+
+Sub Topics: functions-2
+ 
+
+---
+
+##### What value of the purchaseAmount parameter can be set to proceed with the largest liquidation allowed by the close factor?  
+
+- [ ]  uint(1)
+- [x]  uint(-1)
+- [ ]  uint(10)
+- [ ]  uint(-10)
+  
+Hint: NoHint
+         
+Explanation: purchaseAmount parameter can be set to uint(-1) and the protocol will proceed with the largest liquidation allowed by the close factor.
+
+Sub Topics: functions-2
+ 
+
+---
+
+##### Select the correct statement(s) about Flash loans.  
+
+- [x]  Flash loans are also called One Block Borrows
+- [x]  Borrowed amount has to be returned in the same transaction
+- [ ]  There is no need to pay fees
+- [ ]  User has to provide collateral prior to the transaction
+  
+Hint: NoHint
+         
+Explanation: Flash Loans are special transactions that allow you to borrow an asset as long as the borrowed amount (plus a fee) is returned before the transaction ends (also called One Block Borrows). These transactions do not necessitate the provision of collateral by the user prior to the transaction.
+
+Sub Topics: functions-3
+ 
+
+---
+
+##### Which of the following is the fee received by LP?  
+
+- [ ]  FLASHLOAN_PREMIUM_TO_PROTOCOL
+- [ ]  FLASHLOAN_PREMIUM_TOTAL
+- [x]  FLASHLOAN_PREMIUM_TOTAL - FLASHLOAN_PREMIUM_TO_PROTOCOL
+- [ ]  FLASHLOAN_PREMIUM_TOTAL + FLASHLOAN_PREMIUM_TO_PROTOCOL
+  
+Hint: NoHint
+         
+Explanation: Fee to LP = FLASHLOAN_PREMIUM_TOTAL - FLASHLOAN_PREMIUM_TO_PROTOCOL, Fee to Protocol = FLASHLOAN_PREMIUM_TO_PROTOCOL
+
+Sub Topics: functions-3
+ 

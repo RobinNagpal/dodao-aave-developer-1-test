@@ -284,3 +284,197 @@
       key: C
     - content: The loan is considered overcollateralized and can not be liquidated.
       key: D
+- uuid: 2100e607-e07e-4c5b-a2b6-44301d59363e
+  type: SingleChoice
+  content: What is the ratio in which aTokens can be redeemed for the underlying token?
+  hint: NoHint
+  explanation: aTokens can be redeemed for the underlying token in a 1:1 ratio
+  answerKeys:
+    - C
+  subTopics:
+    - functions-1
+  difficultyLevel: Low
+  choices:
+    - content: aTokens can be redeemed for the underlying token in a 1:10 ratio
+      key: A
+    - content: aTokens can be redeemed for the underlying token in a 11:1 ratio
+      key: B
+    - content: aTokens can be redeemed for the underlying token in a 1:1 ratio
+      key: C
+    - content: aTokens can be redeemed for the underlying token in a 1:11 ratio
+      key: D
+- uuid: d97848fc-cec7-4ce4-b39f-694fc565ca65
+  type: MultipleChoice
+  content: Pick the correct option(s).
+  hint: NoHint
+  explanation: Because the protocol does not employ an EIP-20 wrapper like wETH for ETH deposits, the deposit() method's amount parameter must match the transaction's msg.value parameter and be included in your deposit() call.
+  answerKeys:
+    - A
+    - c
+  subTopics:
+    - functions-1
+  difficultyLevel: Low
+  choices:
+    - content: AAVE protocol does not employ an EIP-20 wrapper
+      key: A
+    - content: AAVE protocol employs an EIP-20 wrapper
+      key: B
+    - content: The deposit() method's amount parameter must match the transaction's msg.value parameter
+      key: C
+    - content: The deposit() method's amount parameter may or may not match the transaction's msg.value parameter
+      key: D
+- uuid: 82214e78-253d-4fbc-bb56-fcd4dd805de8
+  type: SingleChoice
+  content: Which method allows the user's deposit to be used as collateral?
+  hint: NoHint
+  explanation: setUserUseReserveAsCollateral() allows the user's deposit to be used as collateral. Users will only be able to disable deposits that are not being used as collateral at the time.
+  answerKeys:
+    - D
+  subTopics:
+    - functions-1
+  difficultyLevel: Low
+  choices:
+    - content: deposit()
+      key: A
+    - content: setUserUseDepositAsCollateral()
+      key: B
+    - content: setUserReserveAsCollateral()
+      key: C
+    - content: setUserUseReserveAsCollateral()
+      key: D
+- uuid: f8891660-96d9-4b5c-94fb-5d9c611815ee
+  type: MultipleChoice
+  content: Which of the following statements about the repay() method is/are correct?
+  hint: NoHint
+  explanation: repay() method is used to repay a borrowed asset in whole or in part. The _onBehalfOf parameter can be used to repay a different user's debt. When a third-party repays another user's debt on their behalf, the third-party address must approve() the LendingPoolCore contract (which is separate from the LendingPool contract) with the _amount of the underlying ERC20 of the _reserve contract.
+  answerKeys:
+    - B
+    - C
+  subTopics:
+    - functions-2
+  difficultyLevel: Low
+  choices:
+    - content: A borrowed asset has to be repaid in whole
+      key: A
+    - content: A borrowed asset can be repaid in whole or in part
+      key: B
+    - content: A third-party can repay another user's debt on their behalf
+      key: C
+    - content: A third-party can not repay another user's debt on their behalf
+      key: D
+- uuid: 7c65668d-8b7b-4de9-8bd9-33736175bb18
+  type: SingleChoice
+  content: Which method changes the borrow rate modes of the msg.sender from stable to variable?
+  hint: NoHint
+  explanation: swapBorrowRateMode() changes the borrow rate modes of the msg.sender from stable to variable. rebalanceStableBorrowRate() rebalances the stable rate of _user
+  answerKeys:
+    - D
+  subTopics:
+    - functions-2
+  difficultyLevel: Low
+  choices:
+    - content: rebalanceStableBorrowRate()
+      key: A
+    - content: rebalanceBorrowRateMode()
+      key: B
+    - content: swapStableBorrowRate()
+      key: C
+    - content: swapBorrowRateMode()
+      key: D
+- uuid: ecad25a7-bbdf-47cf-a062-325e8624ace5
+  type: SingleChoice
+  content: What happens when a liquidation is completed successfully?
+  hint: NoHint
+  explanation: When the liquidation is completed successfully, the position's health factor is enhanced, bringing it above 1. It does not affect the close factor.
+  answerKeys:
+    - A
+  subTopics:
+    - functions-2
+  difficultyLevel: Low
+  choices:
+    - content: The position's health factor is enhanced, bringing it above 1
+      key: A
+    - content: The position's health factor is diminished, bringing it below 1
+      key: B
+    - content: The close factor is enhanced, bringing it above 1
+      key: C
+    - content: The close factor is diminished, bringing it below 1
+      key: D
+- uuid: 48ffb9d9-108c-41e3-9a05-632b49b71d9b
+  type: MultipleChoice
+  content: What is the close factor?
+  hint: NoHint
+  explanation: A close factor determines how much collateral a liquidator can close. The current close factor is 0.5. In other words, liquidators can only liquidate up to 50% of the amount owing in a position. This is the amount of the liquidation discount.
+  answerKeys:
+    - C
+    - D
+  subTopics:
+    - functions-2
+  difficultyLevel: Low
+  choices:
+    - content: The ratio of total collateral multiplied by the liquidation threshold to borrowed principal
+      key: A
+    - content: The maximum borrowing capacity of a particular collateral
+      key: B
+    - content: Determines how much collateral a liquidator can close
+      key: C
+    - content: It is the amount of the liquidation discount
+      key: D
+- uuid: 26144fd7-a1ae-44c4-b70f-dc6cc578ea87
+  type: SingleChoice
+  content: What value of the purchaseAmount parameter can be set to proceed with the largest liquidation allowed by the close factor?
+  hint: NoHint
+  explanation: purchaseAmount parameter can be set to uint(-1) and the protocol will proceed with the largest liquidation allowed by the close factor.
+  answerKeys:
+    - B
+  subTopics:
+    - functions-2
+  difficultyLevel: Low
+  choices:
+    - content: uint(1)
+      key: A
+    - content: uint(-1)
+      key: B
+    - content: uint(10)
+      key: C
+    - content: uint(-10)
+      key: D
+- uuid: f355a01c-c3d1-41f3-9685-c65d64b16926
+  type: MultipleChoice
+  content: Select the correct statement(s) about Flash loans.
+  hint: NoHint
+  explanation: Flash Loans are special transactions that allow you to borrow an asset as long as the borrowed amount (plus a fee) is returned before the transaction ends (also called One Block Borrows). These transactions do not necessitate the provision of collateral by the user prior to the transaction.
+  answerKeys:
+    - A
+    - B
+  subTopics:
+    - functions-3
+  difficultyLevel: Low
+  choices:
+    - content: Flash loans are also called One Block Borrows
+      key: A
+    - content: Borrowed amount has to be returned in the same transaction
+      key: B
+    - content: There is no need to pay fees
+      key: C
+    - content: User has to provide collateral prior to the transaction
+      key: D
+- uuid: c535ee8a-5ac8-47bf-8404-30138aae06f6
+  type: SingleChoice
+  content: Which of the following is the fee received by LP?
+  hint: NoHint
+  explanation: Fee to LP = FLASHLOAN_PREMIUM_TOTAL - FLASHLOAN_PREMIUM_TO_PROTOCOL, Fee to Protocol = FLASHLOAN_PREMIUM_TO_PROTOCOL
+  answerKeys:
+    - C
+  subTopics:
+    - functions-3
+  difficultyLevel: Low
+  choices:
+    - content: FLASHLOAN_PREMIUM_TO_PROTOCOL
+      key: A
+    - content: FLASHLOAN_PREMIUM_TOTAL
+      key: B
+    - content: FLASHLOAN_PREMIUM_TOTAL - FLASHLOAN_PREMIUM_TO_PROTOCOL
+      key: C
+    - content: FLASHLOAN_PREMIUM_TOTAL + FLASHLOAN_PREMIUM_TO_PROTOCOL
+      key: D
