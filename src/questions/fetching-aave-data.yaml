@@ -1,0 +1,118 @@
+- uuid: eca9d545-0c8a-42f8-8d45-5dfd675a4187
+  type: MultipleChoice
+  content: Which of the following points about AAVE is/are correct?
+  hint: NoHint
+  explanation: AAVE is a DeFi protocol that facilitates the lending and borrowing of cryptocurrency tokens using diverse algorithms and smart contracts without centralized intermediaries. It is a non-custodial liquidity protocol that allows users to participate as lenders or borrowers. 
+  answerKeys:
+    - A
+    - C
+  subTopics:
+    - aave-data-intro
+  difficultyLevel: Low
+  choices:
+    - content: AAVE is a decentralized finance protocol
+      key: A
+    - content: AAVE is a centralized finance protocol
+      key: B
+    - content: AAVE is a non-custodial liquidity protocol
+      key: C
+    - content: AAVE is a custodial liquidity protocol
+      key: D
+- uuid: 7e090787-7925-4eda-8acd-fb90dce8582e
+  type: MultipleChoice
+  content: Select the correct statement(s).
+  hint: NoHint
+  explanation: RESTFUL APIs require developers to define unique endpoints for users that return specified data. If the user requires further information, they may need to make repeated API calls, potentially hundreds of API calls, to obtain it. As long as the developer has established a flexible schema, The Graph (which uses GraphQL) just requires one call to a subgraph.
+  answerKeys:
+    - A
+    - B
+    - D
+  subTopics:
+    - graphql
+  difficultyLevel: Low
+  choices:
+    - content: RESTFUL APIs require developers to define unique endpoints for users that return specified data.
+      key: A
+    - content: If the user requires further information, they may need to make repeated API calls
+      key: B
+    - content: The Graph requires developers to define unique endpoints for users that return specified data.
+      key: C
+    - content: The Graph just requires one call to a subgraph.
+      key: D
+- uuid: e2fb2ae0-dc82-454b-988e-ce59d450fe4a
+  type: SingleChoice
+  content: What is The Graph?
+  hint: NoHint
+  explanation: The Graph is a decentralized protocol for indexing and querying data from Ethereum-based blockchains.
+  answerKeys:
+    - B
+  subTopics:
+    - graphql
+  difficultyLevel: Low
+  choices:
+    - content: Centralized protocol for indexing and querying data
+      key: A
+    - content: Decentralized protocol for indexing and querying data
+      key: B
+    - content: Decentralized query language
+      key: C
+    - content: Centralized query language
+      key: D
+- uuid: 053c742c-3992-42da-abac-719e4260b878
+  type: SingleChoice
+  content: What happens when an address communicates with the Aave Protocol?
+  hint: NoHint
+  explanation: When an address communicates with the Aave Protocol, a UserReserve is generated, with the user ID equal to the user's address plus the reserve's ID (which is the ERC20 token address).
+  answerKeys:
+    - C
+  subTopics:
+    - graphql
+  difficultyLevel: Low
+  choices:
+    - content: A UserReserve is generated, with the user ID equal to the user's address
+      key: A
+    - content: A UserReserve is generated, with the user ID equal to the reserve's ID
+      key: B
+    - content: A UserReserve is generated, with the user ID equal to the user's address plus the reserve's ID
+      key: C
+    - content: No UserReserve is generated 
+      key: D
+- uuid: 078a4e4e-71e1-4e20-ad13-603502171e6c
+  type: MultipleChoice
+  content: Pick the correct statement(s) about the Aave's GraphQL queries.
+  hint: NoHint
+  explanation: All address values (for example, when used for id) must be in lowercase. In lowercase, the ID of reserves is the asset's address and the address of the market's LendingPoolAddressProvider. When utilizing the raw endpoints, the numeric number queried will be returned in either wei units (i.e. 10^18), the decimals of the asset itself (i.e. 10^6 for USDC), or ray units (i.e. 10^27).
+  answerKeys:
+    - B
+    - D
+  subTopics:
+    - graphql
+  difficultyLevel: Low
+  choices:
+    - content: All address values (for example, when used for id) must be in uppercase.
+      key: A
+    - content: All address values (for example, when used for id) must be in lowercase.
+      key: B
+    - content: When utilizing the raw endpoints, the numeric number queried will be returned in wei units (i.e. 10^18) only.
+      key: C
+    - content: When utilizing the raw endpoints, the numeric number queried will be returned in either wei units (i.e. 10^18), the decimals of the asset itself (i.e. 10^6 for USDC), or ray units (i.e. 10^27).
+      key: D
+- uuid: e950c0e1-a368-471f-8671-cc078c0b7571
+  type: SingleChoice
+  content: What is Goerli?
+  hint: NoHint
+  explanation: Goerli is an Ethereum test network that allows blockchain development testing prior to deployment on the main Ethereum network, Mainnet.
+  answerKeys:
+    - B
+  subTopics:
+    - graphql
+  difficultyLevel: Low
+  choices:
+    - content: Data query language
+      key: A
+    - content: An Ethereum test network
+      key: B
+    - content: A decentralized protocol for indexing and querying data
+      key: C
+    - content: A DeFi protocol
+      key: D
