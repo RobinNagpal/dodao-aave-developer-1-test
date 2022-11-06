@@ -79,7 +79,7 @@
       key: D
 - uuid: 078a4e4e-71e1-4e20-ad13-603502171e6c
   type: MultipleChoice
-  content: Pick the correct statement(s) about the GraphQL queries.
+  content: Pick the correct statement(s) about the Aave's GraphQL queries.
   hint: NoHint
   explanation: All address values (for example, when used for id) must be in lowercase. In lowercase, the ID of reserves is the asset's address and the address of the market's LendingPoolAddressProvider. When utilizing the raw endpoints, the numeric number queried will be returned in either wei units (i.e. 10^18), the decimals of the asset itself (i.e. 10^6 for USDC), or ray units (i.e. 10^27).
   answerKeys:
