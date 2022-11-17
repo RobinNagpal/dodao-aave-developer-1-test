@@ -74,4 +74,57 @@
     {"query": "{ reserves (where: {usageAsCollateralEnabled: true})  { id name price {id} liquidityRate variableBorrowRate stableBorrowRate}}" }
     ```
 
+- title: Querying Aave's GraphQL database using React and implementing a Pie chart
+  shortTitle: React App
+  key: react-app
+  details: |
+    * **Initial Setup**
+      First, we create a React project, you can refer [this](https://create-react-app.dev/docs/getting-started/) documentation.
+      Run npm start to check if the project runs fine.
+
+    * **Integrate ApolloClient**
+      Then we integrate the Apollo client library. We can install and setup the client using [this](https://www.apollographql.com/docs/react/get-started/) documentation.
+      We can use the sample code to fetch the data and test our setup.
+
+    * **Initialize the ApolloClient**
+      With our dependencies already set up, we can now create an ApolloClient instance.
+      We start by importing the symbols we require from @apollo/client into index.js.
+      Next, we initialize ApolloClient by handing it a configuration object including the uri and cache fields.
+
+    * **Connect the client to React**
+      We can connect Apollo Client to React with the ApolloProvider component. Similar to React's Context.Provider, ApolloProvider wraps our React app and places Apollo Client on the context, enabling us to access it from anywhere in our component tree.
+      In index.js, we wrap our React app with an ApolloProvider.
+
+    * **Fetching data with useQuery**
+      After the ApolloProvider is hooked up, we can start requesting data with useQuery. The useQuery hook is a React hook that shares GraphQL data with your UI.
+      We can define the query we want to execute by wrapping it in the gql template literal.
+      Next, we define a component named DisplayGraphs that executes our GET_QUERY query with the useQuery hook:
+
+    * **Implementing the Pie Chart**
+      Now, our aim is to create a pie chart using the data we receive. So now we use [react-chartjs-2](https://react-chartjs-2.js.org/). We will import it in our App.js.
+      Then we initialize our code to get a Pie chart. Finally we will add the code to get our Pie chart.
+
+    * This will give us a Pie chart in our React app.
+    * You can get the complete code [here](https://github.com/DoDAO-io/aava-analytics-sample-app).
+
+- title: Historical Rest Data
+  shortTitle: Historical Rest Data
+  key: historical-rest-data
+  details: |
+    * Now we will use the [Aave Protocol API](https://aave-api-v2.aave.com/) to create a time series graph.
+    * We will use the same react application to create the time series graph too, so if you still haven't create a react app by following the previous steps.
+    * Since the the [Aave Protocol API](https://aave-api-v2.aave.com/) is for v2 mainnet so now we need to query the Aave v2 mainnet subgraph.
+    * We need to make the fetch requests from https://aave-api-v2.aave.com/#/data/get_data_rates_history to get the time series data for any Aave reserve. 
+    * If you visit the above link, you can see that we require a reserveID to fetch the data (there is a sample reserveID already provided in case you want to try it out). So to get this reserveID, we will query the Aave v2 mainnet subgraph (https://thegraph.com/hosted-service/subgraph/aave/protocol-v2 ). We have already queried the reserveIDs for ChainLink Token (0x514910771af9ca656af840dff83e8264ecf986ca0xb53c1a33016b2dc2ff3653530bff1848a515c8c5) and TrueUSD (0x0000000000085d4780b73119b644ae5ecd22b3760xb53c1a33016b2dc2ff3653530bff1848a515c8c5) which we will be using to plot the graph. 
+    * We query an array of objects which contains the pools with the reserves id, name and symbol.
+    * Also, in the GET request we need to provide the start date (from) and time interval (resolutionInHours) to fetch the data. You can use [this](https://www.epochconverter.com/) UNIX timestamp convertor to change the date.
+    * So now you can visit the aave protocol api and playaround with different reserveID, from and resolutionInHours.
+    * Now, we visit our App.js and add some changes to code to get our desired graph and add some import statements as we need to use Line Chart this time to represent the time series data.
+    * Now, we need to fetch the get requests so for that we will use the useEffect hook from React and store the data using useState hook. So add the following code to your DisplayGraphs functions.
+    * The Get request also returns some unwanted data and the timestamp is in a format which we don't like much, so we update it.
+    * Finally, we create the Line chart.
+    * You can get the complete code [here](https://github.com/DoDAO-io/aava-analytics-sample-app). 
+
+
+
     
