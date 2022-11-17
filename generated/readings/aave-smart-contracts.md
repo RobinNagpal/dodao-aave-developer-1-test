@@ -3,7 +3,7 @@ This is the course header. This will be added on top of every page. Go to [DoDAO
 
  ---
  
- ## AAVE Smart Contracts
+ ## Fetch and Show AAVE Data
  
   **Introduction to AAVE Smart Contracts**
  

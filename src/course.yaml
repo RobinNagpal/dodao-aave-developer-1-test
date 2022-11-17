@@ -24,3 +24,14 @@ topics:
     questions: aave-smart-contracts.yaml
     status: In Progress
     completionWeek: In Progress
+  - title: Fetch and Show AAVE Data
+    key: fetching-aave-data
+    details: |
+      This chapter taks about how you can fetch real time and time series data from AAVE and show it on the UI.
+
+    explanations: fetching-aave-data.yaml
+    readings: aave-smart-contracts.yaml
+    summaries: fetching-aave-data.yaml
+    questions: fetching-aave-data.yaml
+    status: In Progress
+    completionWeek: In Progress

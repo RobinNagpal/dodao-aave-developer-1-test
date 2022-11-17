@@ -931,6 +931,286 @@
           "details": "* Flash Loans are special transactions that allow you to borrow an asset as long as the borrowed amount (plus a fee) is returned before the transaction ends (also called One Block Borrows). \n* These transactions do not necessitate the provision of collateral by the user prior to the transaction.\n* To use this feature, you must have a solid understanding of EVM, programming, and smart contracts. To do a Flash Loan, you must first create a contract requesting a Flash Loan. The contract must follow the instructions and repay the loan plus interest and fees in the same transaction.\n\n* Aave v3 provides two flash loan options:\n  - **flashLoan**: Allows the borrower to obtain liquidity from various reserves in a single flashLoan transaction. In this instance, the borrower has the option of opening a stable or variable rate debt position backed by supplied collateral or credit delegation.\n  - **NOTE**: For qualified flashBorrowers, the loan charge is waived (managed by ACLManager)\n  - **flashLoanSimple**: Allows the borrower to access a single reserve of liquidity for the transaction. In this situation, the flash loan fee is not waived, and the borrower is not permitted to open any debt positions at the conclusion of the transaction. For individuals attempting to take advantage of a simple flash loan with a single reserve asset, this strategy is gas efficient.\n\n#### Flow of Execution\n* A helpful mental model to consider when creating your solution for developers:\n  - Your contract contacts the Pool contract and requests a Flash Loan for a specific amount(s) of reserve(s) using flashLoanSimple() or flashLoan() ().\n  - The Pool sends the requested amounts of reserves to your contract after some sanity checks, then executes executeOperation() on the receiver contract.\n  - Your contract now does any arbitrary operation in its code while holding the flash borrowed amount(s).\n  - When you finish your code for a flashLoanSimple, you approve Pool for the flash loaned amount + charge.\n  - If you are executing flashLoan, then all reserves must be granted for flash borrowed amount + fee or adequate collateral or credit delegation must be provided to start debt position, based on the interestRateMode passed for the asset.\n  - If the amount owed is not available (due to a lack of balance or authorisation, or insufficient debt collateral), the transaction is reverted.\n  - All of the preceding occurs in a single transaction (hence in a single ethereum block).\n\n#### Flash Loan Applications\n* Aave Flash Loans are already used for the liquidity swap functionality in Aave V3. Other real-world instances include: arbitrage between assets without requiring the main amount to be present.\n* Liquidating borrow positions without having to repay the debt of the positions and paying off flashLoan amount + charge with discounted collateral claimed.\n\n#### Fee for a Flash loan\n* The flash loan charge is set to 0.09% at deployment and can be changed via Governance Vote. To obtain the current value, use FLASHLOAN PREMIUM TOTAL.\n* The LPs (liquidity providers) and the protocol treasury can split the flashloan charge. The FLASHLOAN PREMIUM TOTAL variable represents the total charge paid by borrowers, which includes:\n* Fee to LP: FLASHLOAN_PREMIUM_TOTAL - FLASHLOAN_PREMIUM_TO_PROTOCOL\n* Fee to Protocol: FLASHLOAN_PREMIUM_TO_PROTOCOL\n* At initialization, FLASHLOAN_PREMIUM_TO_PROTOCOL is 0.\n\n#### First step: Setting Up\n* By implementing the relevant executeOperation() function, your contract that receives the amounts from flash loans must comply with the IFlashLoanSimpleReceiver.sol or IFlashLoanReceiver.sol interface.\n* Additionally, keep in mind that since the owing sums will be deducted from your contract, your contract must let the Pool to deduct those monies in order to repay the flash loan amount plus premiums.\n\n#### Second Step: Calling flashLoan() or flashLoanSimple()\n* To invoke either of the Pool's two flash lending methods, we must provide the necessary parameters. There are three possibilities.\n  - From an EOA ('normal' Ethereum account)\n    - To use an EOA, send a transaction to the appropriate Pool and use the flashLoan() or flashLoanSimple() functions. For parameter information, see the Pool API documentation, making sure to use your contract address from step 1 for the receiverAddress.\n  - From a different contract\n    - As with transmitting a transaction from an EOA, make sure the receiverAddress matches your contract address from step 1.\n  - From the same contract\n    - Utilize address(this) for the receiverAddress parameter in the flash loan method if you wish to use the same contract as in step 1.\n* **Note**: Never keep funds permanently on your FlashLoanReceiverBase contract as they could be exposed to a ['griefing' attack](https://ethereum.stackexchange.com/a/92457/19365), where the stored funds are used by an attacker.\n\n#### Final Step: Completing the flash loan\n* If you used flashLoanSimple() or interestRateMode=0 in flashLoan() for any of the assets in the modes parameter, you will need to repay the flash loaned amounts once you have completed your logic with the flash loaned assets (in your executeOperation() method).\n  - Repaying a flash loaned asset\n    - Check that your contract includes the appropriate amount + premium to repay the borrowed asset. This can be calculated by adding the relevant entries in the amounts and premiums array given to the executeOperation() function. \\\n    - You are not required to return the owing sum to the Pool. The cash will be automatically withdrawn at the end of your operation.\n  - Getting into debt (i.e. not immediately paying back)\n    - If you used mode=1 or mode=2 for any of the assets in the modes parameter, the address put in for onBehalfOf will incur the obligation if the onBehalfOf address previously authorised the msg.sender to incur debts on their behalf.\n    - This means that you can have some assets that are promptly paid back while others incur debt.\n"
         }
       ]
+    },
+    {
+      "title": "Fetch and Show AAVE Data",
+      "key": "fetching-aave-data",
+      "details": "This chapter taks about how you can fetch real time and time series data from AAVE and show it on the UI.\n",
+      "order": 1,
+      "explanations": [
+        {
+          "title": "Introduction",
+          "shortTitle": "Introduction",
+          "key": "aave-data-intro",
+          "details": "AAVE is a DeFi protocol that facilitates the lending and borrowing of cryptocurrency tokens using diverse algorithms and smart contracts without centralized intermediaries. \nIt is a non-custodial liquidity protocol that allows users to participate as lenders or borrowers. Depositors provide liquidity to the market to earn a passive income, while borrowers are able to borrow in an overcollateralized manner.\nAave's GraphQL data layer is a great resource for developers, allowing developers to access data that may not have been available otherwise. This way developers can work with more data and create more advanced applications. \nJust like any decentralized blockchain application, Aave's data can be classified into three types: \n- **Real-time data or current information** - This includes the current state and the new events. With real-time data, you can use data visualisations that reflect changes as they occur in real-time. This means that dashboards are interactive and accurate at any given moment.\n- **Historical** - This includes past state and events. With historical data, you can get a snapshot of information displayed in a chart.\n\nAs discussed above, there are multiple use cases of this data provided by Aave and varied applications (including read-only as well as read/write applications) can be built on top of it and we can examine this data to gain insights on how to update and continue to improve the application.\n\nThe focus of this chapter will be to use Aave's data and show it on the UI in a couple of use cases. \n- Creating a pie graph to review the aave treasury in USDT \n- Implementing a time series graph of how the holdings of different pools have changed over time.\n\nBefore moving on to the code, let's have a look at the importance of analytics.\n\n**Importance of Analytics**\n- Make informed decisions\n- Improve efficiency\n- Identify frauds\n- Improve protocol governance\n- Accelerate through uncertainty\n- Tackle bugs and problems\n- Transform raw data into more valuable information\n\nAave's data can be queried in the form of REST or GraphQL. Aave uses “The Graph” to index its data and anyone can query the subgraphs to get access to this information.\n"
+        },
+        {
+          "title": "Realtime GraphQL Data",
+          "shortTitle": "GraphQL",
+          "key": "graphql",
+          "details": "#### The Graph and GraphQL\nThe Graph is a decentralized protocol for indexing and querying data from Ethereum-based blockchains. That is, obtaining specific data from the blockchain is a more convenient approach while adhering to the web3 ethos and benefiting from decentralization and stability.\n\nThe underlying query language used in The Graph is GraphQL. What is the distinction between RESTFUL API calls and GraphQL calls? Traditional APIs, on the other hand, require developers to define unique endpoints for users that return specified data. If the user requires further information, they may need to make repeated API calls, potentially hundreds of API calls, to obtain it. As long as the developer has established a flexible schema, The Graph (which uses GraphQL) just requires one call to a subgraph.\nSee this [GraphQL primer](https://medium.com/graphprotocol/graphql-will-power-the-decentralized-web-d7443a69c69a) for additional information on The Graph and the underlying GraphQL.\n\n#### Source of Aave Subgraphs\nTo view the source of the subgraphs, see our [Github repo](https://github.com/aave/protocol-v2-subgraph).\n\nProduction Network: [Polygon](https://thegraph.com/hosted-service/subgraph/aave/protocol-v3-polygon)\n\n#### How to Make Use of the Playground\n\n- If you use your browser to navigate to the above playground links, you will be directed to The Graph's playground, where you can simply write and test GraphQL queries.\n- Select the purple play button to run your query.\n- In the middle column, the query results will be returned.\n- Use the 'Schema' column on the right to see what data is available, which may be investigated to discover the underlying data.\n- You can also type in the left column and use the auto-complete feature to identify the appropriate query/types.\n\n#### Points to keep in mind\n- All address values (for example, when used for id) must be in lowercase.\n- In lowercase, the ID of reserves is the asset's address and the address of the market's LendingPoolAddressProvider.\n- When utilizing the raw endpoints, the numeric number queried will be returned in either wei units (i.e. 10^18), the decimals of the asset itself (i.e. 10^6 for USDC), or ray units (i.e. 10^27).\n- By default, each 'page' of results returns 100 entries. This is expandable to a maximum of 1000 entries per page.\n- To list the following 1000 entries, for example, put something like: (skip:1000, first: 1000) to your query's arguments.\n- This is also true for nested entries, such as arrays.\n\nThis Graph endpoint contains only static data. To obtain a user's most recent balance (including interest earned up to that moment), you must either compute it yourself or make a balanceOf() call to the aToken contract.\n\n| Return Data Type           | Subgraph Address                                                       |\n| -------------------------- | ---------------------------------------------------------------------- | \n| Mainnet                    | https://thegraph.com/explorer/subgraph/aave/aave-v2-matic              |\n| Görli (Goerli) Testnet     | https://thegraph.com/hosted-service/subgraph/aave/protocol-v3-goerli   |\n\nGoerli is an Ethereum test network that allows blockchain development testing prior to deployment on the main Ethereum network, Mainnet. Görli (Goerli) Testnet is the first proof-of-authority cross-client testnet, synching Parity Ethereum, Geth, Nethermind, Hyperledger Besu (formerly Pantheon), and EthereumJS. This testnet is a community-based project, completely open-source, naturally. It was born in September 2018 during ETHBerlin and has been growing in contributors ever since.\n\n#### Using your app to access GraphQL data\n\nThe preferred method is to utilize a client library that can handle the 'plumbing' to ensure you have up-to-date data (with caching sometimes included). Apollo is used internally, but there are several choices depending on your programming language; read the official GraphQL page for more information.\nIf you are unable to utilize a client library (for example, while querying using Postman), you can send a POST request to our subgraph's HTTP endpoint with the header: \"Content-Type: application/json\" and the body comprising of your query on one line in quotations. As an example:\n```\n{\"query\": \"{ reserves (where: {usageAsCollateralEnabled: true})  { id name price {id} liquidityRate variableBorrowRate stableBorrowRate}}\" }\n```\n\n#### Examples of Queries\n\nWe'll be using the mainnet Big uints GraphQL endpoints in the queries below. These queries can be copied and pasted into the Graph playground links.\n\n##### Reserve Data\nIf we want to receive a list of all the reserves that can be used as collateral, as well as the interest rates for each reserve, we can use the following query:\n```\n{\n  reserves (where: {\n    usageAsCollateralEnabled: true\n  }) {\n    id\n    name\n    price {\n      id\n    }\n    liquidityRate\n    variableBorrowRate\n    stableBorrowRate\n  }\n}\n```\nWe would utilise the reserves ERC20 token address to retrieve data for a certain reserve. For the Chainlink reserve, for example:\n```\n{\n  reserve(id: \"0x514910771af9ca656af840dff83e8264ecf986ca0x24a42fd28c976a61df5d00d0599c34c4f90748c8\") { // LINK\n    symbol\n    price\n    aToken {\n      id\n    }\n  }\n}\n```\n\nIf we wish to retrieve historical interest rate data for a specific reserve and paginate through the records, our query may look like this:\n```\n{\n  reserve (id: \"0x0000000000085d4780b73119b644ae5ecd22b3760x24a42fd28c976a61df5d00d0599c34c4f90748c8\") { // TUSD\n    id\n    paramsHistory(skip:1000, first: 1000) {\n      id\n      variableBorrowRate\n      utilizationRate\n      liquidityRate\n      timestamp\n    }\n  }\n}\n```\n\n##### User Data\nWhen an address communicates with the Aave Protocol, a UserReserve is generated, with the user ID equal to the user's address plus the reserve's ID (which is the ERC20 token address).\nTo obtain information on a certain UserReserve:\n```\n{\n  userReserve(id: \"USER_ADDRESS_AND_RESERVE_ADDRESS\") {\n    reserve {\n      id\n      symbol\n    }\n    user {\n      id\n    }\n  }\n}\n```\n\nTo retrieve all reserves (i.e. positions) held by a specific user (notice that the user address must be lower case):\n```\n{\n  userReserves(where: { user: \"USER_ADDRESS\"}) {\n    id\n    reserve{\n      id\n      symbol\n    }\n    user {\n      id\n    }\n  }\n}\n```\n\n##### Deposit data\nTo obtain recent deposits for a certain asset:\n```\n{\n  deposits (orderBy: timestamp, orderDirection: desc, where: { \n    reserve: \"0xdac17f958d2ee523a2206206994597c13d831ec70x24a42fd28c976a61df5d00d0599c34c4f90748c8\" // USDT\n  }) {\n    id\n    amount\n    timestamp\n  }\n}\n```\n\n##### Borrow data\nTo obtain recent borrows for a certain asset:\n```\n{\n  borrows (orderBy: timestamp, orderDirection: desc, where: { \n    reserve: \"0xdac17f958d2ee523a2206206994597c13d831ec70x24a42fd28c976a61df5d00d0599c34c4f90748c8\" // USDT\n  }) {\n    id\n    amount\n    timestamp\n  }\n}\n```\n\n##### Flash loan data\nFor instance, consider the following query for analysing the five most recent Flash Loans:\n```\n{ \n  flashLoans( \n    first: 5 \n    orderBy: timestamp \n    orderDirection: desc \n  ) { \n    id \n    reserve { \n      id \n      name \n      symbol \n    } \n    amount \n    totalFee \n    timestamp \n  } \n} \n```\n"
+        },
+        {
+          "title": "Querying Aave's GraphQL database using React and implementing a Pie chart",
+          "shortTitle": "React App",
+          "key": "react-app",
+          "details": "* **Initial Setup**\n  First, let's create a React project, you can refer [this](https://create-react-app.dev/docs/getting-started/) documentation.\n  ```\n  npx create-react-app aave-analytics-sample-app\n  ```\n  Run npm start to check if the project runs fine.\n\n* **Integrate ApolloClient**\n  Let's integrate the Apollo client library. We can install and setup the client using [this](https://www.apollographql.com/docs/react/get-started/) documentation.\n  ```\n  npm install @apollo/client graphql\n  ```\n  We can use the sample code to fetch the data and test our setup.\n\n* **Initialize the ApolloClient**\n  With our dependencies already set up, we can now create an ApolloClient instance.\n  Let's start by importing the symbols we require from @apollo/client into index.js:\n  ```\n  import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';\n  ```\n  Next, we'll initialize ApolloClient by handing it a configuration object including the uri and cache fields:\n  ```\n  const client = new ApolloClient({\n    uri: 'https://api.thegraph.com/subgraphs/name/aave/protocol-v3-goerli',\n    cache: new InMemoryCache(),\n  });\n  ```\n\n* **Connect the client to React**\n  We can connect Apollo Client to React with the ApolloProvider component. Similar to React's Context.Provider, ApolloProvider wraps our React app and places Apollo Client on the context, enabling us to access it from anywhere in our component tree.\n\n  In index.js, let's wrap our React app with an ApolloProvider\n  ```\n  import React from 'react';\n  import * as ReactDOM from 'react-dom/client';\n  import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';\n  import App from './App';\n\n  const client = new ApolloClient({\n    uri: 'https://api.thegraph.com/subgraphs/name/aave/protocol-v3-goerli',\n    cache: new InMemoryCache(),\n  });\n\n  const root = ReactDOM.createRoot(document.getElementById('root'));\n\n  root.render(\n    <ApolloProvider client={client}>\n      <App />\n    </ApolloProvider>,\n  );\n  ```\n\n* **Fetching data with useQuery**\n  After the ApolloProvider is hooked up, we can start requesting data with useQuery. The useQuery hook is a React hook that shares GraphQL data with your UI.\n  Switching over to our App.js file, we'll start by replacing our existing file contents with the code snippet below:\n  ```\n  import { useQuery, gql } from '@apollo/client';\n\n  export default function App() {\n  return (\n      <div className=\"App\">\n          <h2 className=\"App-header\">AAVE Analytics</h2>\n          <br/>\n          <DisplayGraphs />\n      </div>\n  );\n  }\n  ```\n  We can define the query we want to execute by wrapping it in the gql template literal:\n  ```\n  const GET_QUERY = gql`\n  {\n      reserves {\n          id\n          symbol\n          name\n    \n          totalLiquidity\n      }\n  }\n  `;\n  ```\n  Next, let's define a component named DisplayGraphs that executes our GET_QUERY query with the useQuery hook:\n  ```\n  function DisplayLocations() {\n    const { loading, error, data } = useQuery(GET_QUERY);\n\n    if (loading) return <p>Loading...</p>;\n    if (error) return <p>Error :(</p>;\n\n    let names = data.reserves.map(a => a.name);\n      let total = data.reserves.map(a => a.totalLiquidity);\n      let utilization = data.reserves.map(a => a.utilizationRate);\n\n      total.forEach((element, index) => {\n          total[index] = element % 10^18;\n      });\n  ….\n  }\n  ```\n\n* **Implementing the Pie Chart**\n  Now, our aim is to create a pie chart using the data we receive. So now we'll use [react-chartjs-2](https://react-chartjs-2.js.org/).\n  ```\n  npm install --save chart.js react-chartjs-2\n  ```\n  Then we will import it in our App.js:\n  ```\n  import { Pie } from 'react-chartjs-2';\n  ```\n  Now we need to initialize our code to get a Pie chart:\n  ```\n  ChartJS.register(ArcElement, Tooltip, Legend);\n  ```\n\n* Finally we will add the code to get our Pie chart:\n  ```\n  const piedata = {\n          labels: names,\n          datasets: [\n            {\n              label: 'percentage',\n              data: total,\n              backgroundColor: [\n                'rgba(255, 99, 132, 0.2)',\n                'rgba(54, 162, 235, 0.2)',\n                'rgba(255, 206, 86, 0.2)',\n                'rgba(75, 192, 192, 0.2)',\n                'rgba(153, 102, 255, 0.2)',\n                'rgba(255, 159, 64, 0.2)',\n                'rgba(255, 140, 64, 0.2)',\n                'rgba(205, 159, 64, 0.2)',\n              ],\n              borderColor: [\n                'rgba(255, 99, 132, 1)',\n                'rgba(54, 162, 235, 1)',\n                'rgba(255, 206, 86, 1)',\n                'rgba(75, 192, 192, 1)',\n                'rgba(153, 102, 255, 1)',\n                'rgba(255, 159, 64, 1)',\n                'rgba(205, 159, 64, 1)',\n                'rgba(255, 149, 64, 1)',\n              ],\n              borderWidth: 1,\n            },\n          ],\n      };\n\n  const optionsPieChart = {\n          responsive: true,\n          plugins: {\n            legend: {\n              position: 'top',\n            },\n            title: {\n              display: true,\n              text: 'Total Liquidity',\n            },\n          },\n      };\n\n    return (\n          <div className=\"Chart-container\">\n              <div className=\"Pie-container\">\n                  <Pie options={optionsPieChart} data={piedata} />\n              </div>\n          </div>\n      );\n  ```\n\n  This will give us a Pie chart in our React app.\n\n  You can get the complete code [here](https://github.com/DoDAO-io/aava-analytics-sample-app).\n"
+        },
+        {
+          "title": "Historical Rest Data",
+          "shortTitle": "Historical Rest Data",
+          "key": "historical-rest-data",
+          "details": "Now we will use the [Aave Protocol API](https://aave-api-v2.aave.com/) to create a time series graph.\nWe will use the same react application to create the time series graph too, so if you still haven't create a react app by following the previous steps.\n\nSince the the [Aave Protocol API](https://aave-api-v2.aave.com/) is for v2 mainnet so now we need to query the Aave v2 mainnet subgraph.\n\nWe need to make the fetch requests from https://aave-api-v2.aave.com/#/data/get_data_rates_history to get the time series data for any Aave reserve. \nIf you visit the above link, you can see that we require a reserveID to fetch the data (there is a sample reserveID already provided in case you want to try it out). So to get this reserveID, we will query the Aave v2 mainnet subgraph (https://thegraph.com/hosted-service/subgraph/aave/protocol-v2 ). We have already queried the reserveIDs for ChainLink Token (0x514910771af9ca656af840dff83e8264ecf986ca0xb53c1a33016b2dc2ff3653530bff1848a515c8c5) and TrueUSD (0x0000000000085d4780b73119b644ae5ecd22b3760xb53c1a33016b2dc2ff3653530bff1848a515c8c5) which we will be using to plot the graph. \n\nIf you want to query the reserveID yourself, you can try this:\n```\n{\n  pools {\n    reserves {\n      id\n      name\n      symbol\n    }\n  }\n}\n```\n\nThis query returns us an array of objects which contains the pools with the reserves id, name and symbol.\n\nAlso, in the GET request we need to provide the start date (from) and time interval (resolutionInHours) to fetch the data. You can use [this](https://www.epochconverter.com/) UNIX timestamp convertor to change the date.\nSo now you can visit the aave protocol api and playaround with different reserveID, from and resolutionInHours.\n\nNow, let's visit our App.js and add some changes to code to get our desired graph.\n\n* Let's add some import statements as we need to use Line Chart this time to represent the time series data. So you can update your import statements to the following:\n  ```\n  import React, {useEffect, useState} from 'react';\n  import { useQuery, gql } from '@apollo/client';\n  import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement, Title, } from 'chart.js';\n\n  import { Pie, Line } from 'react-chartjs-2';\n  import './App.css';\n\n  ChartJS.register(ArcElement, \n      CategoryScale,\n      LinearScale,\n      PointElement,\n      LineElement,\n      Title,\n      Tooltip,\n      Legend\n  );\n  ```\n\n* Now, we need to fetch the get requests so for that we will use the useEffect hook from React and store the data using useState hook. So add the following code to your DisplayGraphs functions:\n  ```\n  const [linedata1, setLinedata1] = useState([]);\n      const [linedata2, setLinedata2] = useState([]);\n\n      useEffect(() => {\n          Promise.all([\n              fetch('https://aave-api-v2.aave.com/data/rates-history?reserveId=0x514910771af9ca656af840dff83e8264ecf986ca0xb53c1a33016b2dc2ff3653530bff1848a515c8c5&from=1667952000&resolutionInHours=6'),\n              fetch('https://aave-api-v2.aave.com/data/rates-history?reserveId=0x0000000000085d4780b73119b644ae5ecd22b3760xb53c1a33016b2dc2ff3653530bff1848a515c8c5&from=1667952000&resolutionInHours=6'),\n          ])\n          .then(([resData1, resData2]) => \n              Promise.all([resData1.json(), resData2.json()])\n          )\n          .then(([data1, data2]) => {\n              console.log(data1, data2);\n              setLinedata1(data1);\n              setLinedata2(data2);\n          })\n          .catch(([err1, err2]) => {\n              console.log(err1.message, err2.message);\n          });\n      }, []);\n  ```\n\n  The Get request also returns some unwanted data and the timestamp is in a format which we don't like much, so let's update it:\n  ```\n  let timestamps = linedata1.map(a => (a.x.year + '/' + a.x.month + '/' + a.x.date + ' ' + a.x.hours + ' hours'));\n      let utilization1 = linedata1.map(a => a.utilizationRate_avg);\n      let utilization2 = linedata2.map(a => a.utilizationRate_avg);\n\n      timestamps.forEach((element, index) => {\n          timestamps[index] = element.toString();\n      });\n  ```\n* Now, let's create the Line chart using the following code:\n  ```\n  const optionsLineChart = {\n          responsive: true,\n          plugins: {\n            legend: {\n              position: 'top',\n            },\n            title: {\n              display: true,\n              text: 'Avg Utilization Rate',\n            },\n          },\n      };\n        \n  const linedata = {\n      labels: timestamps,\n      datasets: [\n        {\n          label: 'ChainLink Token',\n          data: utilization1,\n          borderColor: 'rgb(255, 99, 132)',\n          backgroundColor: 'rgba(255, 99, 132, 0.5)',\n        },\n        {\n          label: 'TrueUSD',\n          data: utilization2,\n          borderColor: 'rgb(53, 162, 235)',\n          backgroundColor: 'rgba(53, 162, 235, 0.5)',\n        },\n      ],\n  };\n\n  return (\n      <div className=\"Chart-container\">\n          <div className=\"Pie-container\">\n              <Pie options={optionsPieChart} data={piedata} />\n          </div>\n          <div className=\"Line-container\">\n              <Line options={optionsLineChart} data={linedata} />\n          </div> \n      </div>\n  );\n  ```\n\nThis will provide us with the following time series graph:\n\nYou can get the complete code [here](https://github.com/DoDAO-io/aava-analytics-sample-app). \n"
+        }
+      ],
+      "questions": [
+        {
+          "uuid": "eca9d545-0c8a-42f8-8d45-5dfd675a4187",
+          "type": "MultipleChoice",
+          "content": "Which of the following points about AAVE is/are correct?",
+          "hint": "NoHint",
+          "explanation": "AAVE is a DeFi protocol that facilitates the lending and borrowing of cryptocurrency tokens using diverse algorithms and smart contracts without centralized intermediaries. It is a non-custodial liquidity protocol that allows users to participate as lenders or borrowers.",
+          "answerKeys": [
+            "A",
+            "C"
+          ],
+          "subTopics": [
+            "aave-data-intro"
+          ],
+          "difficultyLevel": "Low",
+          "choices": [
+            {
+              "content": "AAVE is a decentralized finance protocol",
+              "key": "A"
+            },
+            {
+              "content": "AAVE is a centralized finance protocol",
+              "key": "B"
+            },
+            {
+              "content": "AAVE is a non-custodial liquidity protocol",
+              "key": "C"
+            },
+            {
+              "content": "AAVE is a custodial liquidity protocol",
+              "key": "D"
+            }
+          ]
+        },
+        {
+          "uuid": "7e090787-7925-4eda-8acd-fb90dce8582e",
+          "type": "MultipleChoice",
+          "content": "Select the correct statement(s).",
+          "hint": "NoHint",
+          "explanation": "RESTFUL APIs require developers to define unique endpoints for users that return specified data. If the user requires further information, they may need to make repeated API calls, potentially hundreds of API calls, to obtain it. As long as the developer has established a flexible schema, The Graph (which uses GraphQL) just requires one call to a subgraph.",
+          "answerKeys": [
+            "A",
+            "B",
+            "D"
+          ],
+          "subTopics": [
+            "graphql"
+          ],
+          "difficultyLevel": "Low",
+          "choices": [
+            {
+              "content": "RESTFUL APIs require developers to define unique endpoints for users that return specified data.",
+              "key": "A"
+            },
+            {
+              "content": "If the user requires further information, they may need to make repeated API calls",
+              "key": "B"
+            },
+            {
+              "content": "The Graph requires developers to define unique endpoints for users that return specified data.",
+              "key": "C"
+            },
+            {
+              "content": "The Graph just requires one call to a subgraph.",
+              "key": "D"
+            }
+          ]
+        },
+        {
+          "uuid": "e2fb2ae0-dc82-454b-988e-ce59d450fe4a",
+          "type": "SingleChoice",
+          "content": "What is The Graph?",
+          "hint": "NoHint",
+          "explanation": "The Graph is a decentralized protocol for indexing and querying data from Ethereum-based blockchains.",
+          "answerKeys": [
+            "B"
+          ],
+          "subTopics": [
+            "graphql"
+          ],
+          "difficultyLevel": "Low",
+          "choices": [
+            {
+              "content": "Centralized protocol for indexing and querying data",
+              "key": "A"
+            },
+            {
+              "content": "Decentralized protocol for indexing and querying data",
+              "key": "B"
+            },
+            {
+              "content": "Decentralized query language",
+              "key": "C"
+            },
+            {
+              "content": "Centralized query language",
+              "key": "D"
+            }
+          ]
+        },
+        {
+          "uuid": "053c742c-3992-42da-abac-719e4260b878",
+          "type": "SingleChoice",
+          "content": "What happens when an address communicates with the Aave Protocol?",
+          "hint": "NoHint",
+          "explanation": "When an address communicates with the Aave Protocol, a UserReserve is generated, with the user ID equal to the user's address plus the reserve's ID (which is the ERC20 token address).",
+          "answerKeys": [
+            "C"
+          ],
+          "subTopics": [
+            "graphql"
+          ],
+          "difficultyLevel": "Low",
+          "choices": [
+            {
+              "content": "A UserReserve is generated, with the user ID equal to the user's address",
+              "key": "A"
+            },
+            {
+              "content": "A UserReserve is generated, with the user ID equal to the reserve's ID",
+              "key": "B"
+            },
+            {
+              "content": "A UserReserve is generated, with the user ID equal to the user's address plus the reserve's ID",
+              "key": "C"
+            },
+            {
+              "content": "No UserReserve is generated",
+              "key": "D"
+            }
+          ]
+        },
+        {
+          "uuid": "078a4e4e-71e1-4e20-ad13-603502171e6c",
+          "type": "MultipleChoice",
+          "content": "Pick the correct statement(s) about the GraphQL queries.",
+          "hint": "NoHint",
+          "explanation": "All address values (for example, when used for id) must be in lowercase. In lowercase, the ID of reserves is the asset's address and the address of the market's LendingPoolAddressProvider. When utilizing the raw endpoints, the numeric number queried will be returned in either wei units (i.e. 10^18), the decimals of the asset itself (i.e. 10^6 for USDC), or ray units (i.e. 10^27).",
+          "answerKeys": [
+            "B",
+            "D"
+          ],
+          "subTopics": [
+            "graphql"
+          ],
+          "difficultyLevel": "Low",
+          "choices": [
+            {
+              "content": "All address values (for example, when used for id) must be in uppercase.",
+              "key": "A"
+            },
+            {
+              "content": "All address values (for example, when used for id) must be in lowercase.",
+              "key": "B"
+            },
+            {
+              "content": "When utilizing the raw endpoints, the numeric number queried will be returned in wei units (i.e. 10^18) only.",
+              "key": "C"
+            },
+            {
+              "content": "When utilizing the raw endpoints, the numeric number queried will be returned in either wei units (i.e. 10^18), the decimals of the asset itself (i.e. 10^6 for USDC), or ray units (i.e. 10^27).",
+              "key": "D"
+            }
+          ]
+        },
+        {
+          "uuid": "e950c0e1-a368-471f-8671-cc078c0b7571",
+          "type": "SingleChoice",
+          "content": "What is Goerli?",
+          "hint": "NoHint",
+          "explanation": "Goerli is an Ethereum test network that allows blockchain development testing prior to deployment on the main Ethereum network, Mainnet.",
+          "answerKeys": [
+            "B"
+          ],
+          "subTopics": [
+            "graphql"
+          ],
+          "difficultyLevel": "Low",
+          "choices": [
+            {
+              "content": "Data query language",
+              "key": "A"
+            },
+            {
+              "content": "An Ethereum test network",
+              "key": "B"
+            },
+            {
+              "content": "A decentralized protocol for indexing and querying data",
+              "key": "C"
+            },
+            {
+              "content": "A DeFi protocol",
+              "key": "D"
+            }
+          ]
+        }
+      ],
+      "readings": [
+        {
+          "uuid": "7441eb5f-68f3-40de-b12f-80dc17c80b2c",
+          "title": "Introduction to AAVE Smart Contracts",
+          "shortTitle": "Introduction",
+          "type": "YoutubeVideo",
+          "url": "https://www.youtube.com/watch?v=AMAMvKc-O2s",
+          "subTopics": [
+            "aave-smart-contracts-intro"
+          ],
+          "details": "This video enables learners to know about\n  * AAVE\n  * Main protocol features\n  * What's new in v2   \n  * Resources\n"
+        },
+        {
+          "uuid": "8b2485fe-7a9b-4dee-9e65-348c1dc7a66c",
+          "title": "Introduction to AAVE Smart Contracts",
+          "shortTitle": "Introduction",
+          "type": "YoutubeVideo",
+          "url": "https://www.youtube.com/watch?v=LzaS8IiqnPY",
+          "subTopics": [
+            "aave-smart-contracts-intro"
+          ],
+          "details": "This video enables learners to know about\n  * AAVE v3 features\n  * Build on top of AAVE\n"
+        }
+      ],
+      "summaries": [
+        {
+          "title": "Introduction",
+          "shortTitle": "Introduction",
+          "key": "aave-data-intro",
+          "details": "* AAVE is a DeFi protocol that facilitates the lending and borrowing of cryptocurrency tokens using diverse algorithms and smart contracts without centralized intermediaries. \n* It is a non-custodial liquidity protocol that allows users to participate as lenders or borrowers. Depositors provide liquidity to the market to earn a passive income, while borrowers are able to borrow in an overcollateralized manner.\n* Aave's GraphQL data layer is a great resource for developers, allowing developers to access data that may not have been available otherwise. This way developers can work with more data and create more advanced applications. \n* Just like any decentralized blockchain application, Aave's data can be classified into three types: \n  - **Real-time data or current information** - This includes the current state and the new events. With real-time data, you can use data visualisations that reflect changes as they occur in real-time. This means that dashboards are interactive and accurate at any given moment.\n  - **Historical** - This includes past state and events. With historical data, you can get a snapshot of information displayed in a chart.\n\n* There are multiple use cases of this data provided by Aave and varied applications (including read-only as well as read/write applications) can be built on top of it and we can examine this data to gain insights on how to update and continue to improve the application.\n\n* The focus of this chapter will be to use Aave's data and show it on the UI in a couple of use cases. \n  - Creating a pie graph to review the aave treasury in USDT \n  - Implementing a time series graph of how the holdings of different pools have changed over time.\n\n* **Importance of Analytics**\n  - Make informed decisions\n  - Improve efficiency\n  - Identify frauds\n  - Improve protocol governance\n  - Accelerate through uncertainty\n  - Tackle bugs and problems\n  - Transform raw data into more valuable information\n\n* Aave's data can be queried in the form of REST or GraphQL. Aave uses “The Graph” to index its data and anyone can query the subgraphs to get access to this information.\n"
+        },
+        {
+          "title": "Realtime GraphQL Data",
+          "shortTitle": "GraphQL",
+          "key": "graphql",
+          "details": "#### The Graph and GraphQL\n* The Graph is a decentralized protocol for indexing and querying data from Ethereum-based blockchains. That is, obtaining specific data from the blockchain is a more convenient approach while adhering to the web3 ethos and benefiting from decentralization and stability.\n\n* The underlying query language used in The Graph is GraphQL. What is the distinction between RESTFUL API calls and GraphQL calls? Traditional APIs, on the other hand, require developers to define unique endpoints for users that return specified data. If the user requires further information, they may need to make repeated API calls, potentially hundreds of API calls, to obtain it. As long as the developer has established a flexible schema, The Graph (which uses GraphQL) just requires one call to a subgraph.\n* See this [GraphQL primer](https://medium.com/graphprotocol/graphql-will-power-the-decentralized-web-d7443a69c69a) for additional information on The Graph and the underlying GraphQL.\n\n#### Source of Aave Subgraphs\n* To view the source of the subgraphs, see our [Github repo](https://github.com/aave/protocol-v2-subgraph).\n\nProduction Network: [Polygon](https://thegraph.com/hosted-service/subgraph/aave/protocol-v3-polygon)\n\n#### How to Make Use of the Playground\n\n* If you use your browser to navigate to the above playground links, you will be directed to The Graph's playground, where you can simply write and test GraphQL queries.\n* Select the purple play button to run your query.\n* In the middle column, the query results will be returned.\n* Use the 'Schema' column on the right to see what data is available, which may be investigated to discover the underlying data.\n* You can also type in the left column and use the auto-complete feature to identify the appropriate query/types.\n\n#### Points to keep in mind\n* All address values (for example, when used for id) must be in lowercase.\n* In lowercase, the ID of reserves is the asset's address and the address of the market's LendingPoolAddressProvider.\n* When utilizing the raw endpoints, the numeric number queried will be returned in either wei units (i.e. 10^18), the decimals of the asset itself (i.e. 10^6 for USDC), or ray units (i.e. 10^27).\n* By default, each 'page' of results returns 100 entries. This is expandable to a maximum of 1000 entries per page.\n* To list the following 1000 entries, for example, put something like: (skip:1000, first: 1000) to your query's arguments.\n* This is also true for nested entries, such as arrays.\n\n* This Graph endpoint contains only static data. To obtain a user's most recent balance (including interest earned up to that moment), you must either compute it yourself or make a balanceOf() call to the aToken contract.\n\n| Return Data Type           | Subgraph Address                                                       |\n| -------------------------- | ---------------------------------------------------------------------- | \n| Mainnet                    | https://thegraph.com/explorer/subgraph/aave/aave-v2-matic              |\n| Görli (Goerli) Testnet     | https://thegraph.com/hosted-service/subgraph/aave/protocol-v3-goerli   |\n\n* Goerli is an Ethereum test network that allows blockchain development testing prior to deployment on the main Ethereum network, Mainnet. Görli (Goerli) Testnet is the first proof-of-authority cross-client testnet, synching Parity Ethereum, Geth, Nethermind, Hyperledger Besu (formerly Pantheon), and EthereumJS. This testnet is a community-based project, completely open-source, naturally. It was born in September 2018 during ETHBerlin and has been growing in contributors ever since.\n\n#### Using your app to access GraphQL data\n\n* The preferred method is to utilize a client library that can handle the 'plumbing' to ensure you have up-to-date data (with caching sometimes included).  Apollo is used internally, but there are several choices depending on your programming language; read the official GraphQL page for more information.\n* If you are unable to utilize a client library (for example, while querying using Postman), you can send a POST request to our subgraph's HTTP endpoint with the header: \"Content-Type: application/json\" and the body comprising of your query on one line in quotations. As an example:\n```\n{\"query\": \"{ reserves (where: {usageAsCollateralEnabled: true})  { id name price {id} liquidityRate variableBorrowRate stableBorrowRate}}\" }\n```\n"
+        },
+        {
+          "title": "Querying Aave's GraphQL database using React and implementing a Pie chart",
+          "shortTitle": "React App",
+          "key": "react-app",
+          "details": "* **Initial Setup**\n  First, we create a React project, you can refer [this](https://create-react-app.dev/docs/getting-started/) documentation.\n  Run npm start to check if the project runs fine.\n\n* **Integrate ApolloClient**\n  Then we integrate the Apollo client library. We can install and setup the client using [this](https://www.apollographql.com/docs/react/get-started/) documentation.\n  We can use the sample code to fetch the data and test our setup.\n\n* **Initialize the ApolloClient**\n  With our dependencies already set up, we can now create an ApolloClient instance.\n  We start by importing the symbols we require from @apollo/client into index.js.\n  Next, we initialize ApolloClient by handing it a configuration object including the uri and cache fields.\n\n* **Connect the client to React**\n  We can connect Apollo Client to React with the ApolloProvider component. Similar to React's Context.Provider, ApolloProvider wraps our React app and places Apollo Client on the context, enabling us to access it from anywhere in our component tree.\n  In index.js, we wrap our React app with an ApolloProvider.\n\n* **Fetching data with useQuery**\n  After the ApolloProvider is hooked up, we can start requesting data with useQuery. The useQuery hook is a React hook that shares GraphQL data with your UI.\n  We can define the query we want to execute by wrapping it in the gql template literal.\n  Next, we define a component named DisplayGraphs that executes our GET_QUERY query with the useQuery hook:\n\n* **Implementing the Pie Chart**\n  Now, our aim is to create a pie chart using the data we receive. So now we use [react-chartjs-2](https://react-chartjs-2.js.org/). We will import it in our App.js.\n  Then we initialize our code to get a Pie chart. Finally we will add the code to get our Pie chart.\n\n* This will give us a Pie chart in our React app.\n* You can get the complete code [here](https://github.com/DoDAO-io/aava-analytics-sample-app).\n"
+        },
+        {
+          "title": "Historical Rest Data",
+          "shortTitle": "Historical Rest Data",
+          "key": "historical-rest-data",
+          "details": "* Now we will use the [Aave Protocol API](https://aave-api-v2.aave.com/) to create a time series graph.\n* We will use the same react application to create the time series graph too, so if you still haven't create a react app by following the previous steps.\n* Since the the [Aave Protocol API](https://aave-api-v2.aave.com/) is for v2 mainnet so now we need to query the Aave v2 mainnet subgraph.\n* We need to make the fetch requests from https://aave-api-v2.aave.com/#/data/get_data_rates_history to get the time series data for any Aave reserve. \n* If you visit the above link, you can see that we require a reserveID to fetch the data (there is a sample reserveID already provided in case you want to try it out). So to get this reserveID, we will query the Aave v2 mainnet subgraph (https://thegraph.com/hosted-service/subgraph/aave/protocol-v2 ). We have already queried the reserveIDs for ChainLink Token (0x514910771af9ca656af840dff83e8264ecf986ca0xb53c1a33016b2dc2ff3653530bff1848a515c8c5) and TrueUSD (0x0000000000085d4780b73119b644ae5ecd22b3760xb53c1a33016b2dc2ff3653530bff1848a515c8c5) which we will be using to plot the graph. \n* We query an array of objects which contains the pools with the reserves id, name and symbol.\n* Also, in the GET request we need to provide the start date (from) and time interval (resolutionInHours) to fetch the data. You can use [this](https://www.epochconverter.com/) UNIX timestamp convertor to change the date.\n* So now you can visit the aave protocol api and playaround with different reserveID, from and resolutionInHours.\n* Now, we visit our App.js and add some changes to code to get our desired graph and add some import statements as we need to use Line Chart this time to represent the time series data.\n* Now, we need to fetch the get requests so for that we will use the useEffect hook from React and store the data using useState hook. So add the following code to your DisplayGraphs functions.\n* The Get request also returns some unwanted data and the timestamp is in a format which we don't like much, so we update it.\n* Finally, we create the Line chart.\n* You can get the complete code [here](https://github.com/DoDAO-io/aava-analytics-sample-app). \n"
+        }
+      ]
     }
   ]
 }
