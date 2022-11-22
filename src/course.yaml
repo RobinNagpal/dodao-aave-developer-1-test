@@ -1,7 +1,8 @@
 title: AAVE Developer 1 (In Progress)
 key: aave-developer-1
-summary: |
-  This is a technical course for developers willing to write applications on AAVE.
+summary: >
+  This is a technical course for developers willing to write applications on
+  AAVE.
 highlights:
   - AAVE Smart Contract Introduction
   - Fetching AAVE Data
@@ -9,15 +10,20 @@ highlights:
   - Writing simple UI application on top of AAVE
 publishStatus: Live
 thumbnail: https://d31h13bdjwgzxs.cloudfront.net/courses/DoDAO/DeFi/defi_logo.jpeg
-details:  | 
-  ADD DEtails of the course
+details: >-
+  In this course we cover the following
+
+  1) Chapter 1 - Information about various smart contracts of AAVE
+
+  2) Chapter 2 - How to pull data from AAVE which can be used to create
+  analytics applications
 duration: 1 - 2 hours
 topics:
   - title: AAVE Smart Contracts
     key: aave-smart-contracts
-    details: |
-      This chapter taks about various important smart contracts of AAVE which forms the basis of lending and borrowing
-      
+    details: >
+      This chapter taks about various important smart contracts of AAVE which
+      forms the basis of lending and borrowing
     explanations: aave-smart-contracts.yaml
     readings: aave-smart-contracts.yaml
     summaries: aave-smart-contracts.yaml
@@ -26,9 +32,9 @@ topics:
     completionWeek: In Progress
   - title: Fetch and Show AAVE Data
     key: fetching-aave-data
-    details: |
-      This chapter taks about how you can fetch real time and time series data from AAVE and show it on the UI.
-
+    details: >
+      This chapter taks about how you can fetch real time and time series data
+      from AAVE and show it on the UI.
     explanations: fetching-aave-data.yaml
     readings: aave-smart-contracts.yaml
     summaries: fetching-aave-data.yaml
