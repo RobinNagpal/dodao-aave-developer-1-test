@@ -72,7 +72,7 @@ Sub Topics: graphql
 
 ---
 
-##### Pick the correct statement(s) about the GraphQL queries.  
+##### Pick the correct statement(s) about the Aave's GraphQL queries.  
 
 - [ ]  All address values (for example, when used for id) must be in uppercase.
 - [x]  All address values (for example, when used for id) must be in lowercase.

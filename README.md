@@ -8,8 +8,9 @@ This is the course header. This will be added on top of every page. Go to [DoDAO
 
  
  ## Description
- ADD DEtails of the course
-
+ In this course we cover the following
+1) Chapter 1 - Information about various smart contracts of AAVE
+2) Chapter 2 - How to pull data from AAVE which can be used to create analytics applications
  
  ## Chapters
  
