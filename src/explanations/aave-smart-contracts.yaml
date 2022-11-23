@@ -458,8 +458,8 @@
 
     #### Methods
 
-    ####  **`function deposit( address _reserve, uint256 _amount, uint16
-    _referralCode)`**
+    ####  `function deposit( address _reserve, uint256 _amount, uint16
+    _referralCode)`
 
 
     Deposits a certain `_amount` of an asset specified by the `_reserve`
@@ -510,7 +510,7 @@
 
 
     #### `function setUserUseReserveAsCollateral(address _reserve, bool
-    _useAsCollateral)`**
+    _useAsCollateral)`
 
 
     Allow the user's deposit to be used as collateral. Users will only be able
