@@ -807,10 +807,8 @@
             "A",
             "B"
           ],
-          "subTopics": [
-            "functions-3"
-          ],
-          "difficultyLevel": "Low",
+          "subTopics": [],
+          "difficultyLevel": "Medium",
           "choices": [
             {
               "content": "Flash loans are also called One Block Borrows",
@@ -827,6 +825,10 @@
             {
               "content": "User has to provide collateral prior to the transaction",
               "key": "D"
+            },
+            {
+              "content": "1",
+              "key": "cb5023c0"
             }
           ]
         },

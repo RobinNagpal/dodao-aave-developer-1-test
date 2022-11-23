@@ -2,7 +2,9 @@
   type: SingleChoice
   content: Select the correct option.
   hint: NoHint
-  explanation: Since cryptocurrency is highly volatile, borrowing in Aave demands overcollateralization.
+  explanation: >-
+    Since cryptocurrency is highly volatile, borrowing in Aave demands
+    overcollateralization.
   answerKeys:
     - B
   subTopics:
@@ -19,9 +21,11 @@
       key: D
 - uuid: 98442878-4460-4bdd-88f0-1b2a9bce6dfd
   type: SingleChoice
-  content: When does a liquidation event occur? 
+  content: When does a liquidation event occur?
   hint: NoHint
-  explanation: A liquidation event happens when the price of the collateral drops below the liquidation threshold.
+  explanation: >-
+    A liquidation event happens when the price of the collateral drops below the
+    liquidation threshold.
   answerKeys:
     - C
   subTopics:
@@ -40,26 +44,40 @@
   type: SingleChoice
   content: What is Liquidation Bonus?
   hint: NoHint
-  explanation: Liquidation bonus is the bonus paid to liquidators to encourage the purchase of specified collateral with a health factor less than one
+  explanation: >-
+    Liquidation bonus is the bonus paid to liquidators to encourage the purchase
+    of specified collateral with a health factor less than one
   answerKeys:
     - D
   subTopics:
     - terminology
   difficultyLevel: Low
   choices:
-    - content: The bonus paid to liquidators to encourage the purchase of specified collateral with a health factor more than one
+    - content: >-
+        The bonus paid to liquidators to encourage the purchase of specified
+        collateral with a health factor more than one
       key: A
-    - content: The bonus paid to liquidators to encourage the purchase of specified collateral with a health factor equal to one
+    - content: >-
+        The bonus paid to liquidators to encourage the purchase of specified
+        collateral with a health factor equal to one
       key: B
-    - content: The bonus paid to liquidators to encourage the purchase of specified collateral with a health factor more than or equal to one
+    - content: >-
+        The bonus paid to liquidators to encourage the purchase of specified
+        collateral with a health factor more than or equal to one
       key: C
-    - content: The bonus paid to liquidators to encourage the purchase of specified collateral with a health factor less than one
+    - content: >-
+        The bonus paid to liquidators to encourage the purchase of specified
+        collateral with a health factor less than one
       key: D
 - uuid: b8d4ad4a-c761-47f2-ad99-2904f842fbd2
   type: SingleChoice
   content: What is the maximum borrowing capacity of a particular collateral known as?
   hint: NoHint
-  explanation: Loan To Value is the maximum borrowing capacity of a particular collateral. If a collateral has a Loan to Value of 75%, the user will be allowed to borrow 0.75 ETH of primary currency for every 1 ETH of collateral. The Loan To Value is represented in percentage points and is set per collateral.
+  explanation: >-
+    Loan To Value is the maximum borrowing capacity of a particular collateral.
+    If a collateral has a Loan to Value of 75%, the user will be allowed to
+    borrow 0.75 ETH of primary currency for every 1 ETH of collateral. The Loan
+    To Value is represented in percentage points and is set per collateral.
   answerKeys:
     - C
   subTopics:
@@ -78,18 +96,29 @@
   type: SingleChoice
   content: What do you understand by liquidation threshold?
   hint: NoHint
-  explanation: Liquidation Threshold is the amount of a borrow position that must be liquidated because it is undercollateralized. When a collateral has an 80% liquidation threshold, it signifies that the loan will be liquidated when the debt value equals 80% of the collateral value. The liquidation threshold is defined in percentage points and is specified per collateral.
+  explanation: >-
+    Liquidation Threshold is the amount of a borrow position that must be
+    liquidated because it is undercollateralized. When a collateral has an 80%
+    liquidation threshold, it signifies that the loan will be liquidated when
+    the debt value equals 80% of the collateral value. The liquidation threshold
+    is defined in percentage points and is specified per collateral.
   answerKeys:
     - A
   subTopics:
     - terminology
   difficultyLevel: Low
   choices:
-    - content: The amount of a borrow position that must be liquidated because it is undercollateralized
+    - content: >-
+        The amount of a borrow position that must be liquidated because it is
+        undercollateralized
       key: A
-    - content: The ratio of total collateral multiplied by the liquidation threshold to borrowed principal
+    - content: >-
+        The ratio of total collateral multiplied by the liquidation threshold to
+        borrowed principal
       key: B
-    - content: The amount of a borrow position that must be liquidated because it is overcollateralized
+    - content: >-
+        The amount of a borrow position that must be liquidated because it is
+        overcollateralized
       key: C
     - content: The maximum borrowing capacity of a particular collateral
       key: D
@@ -116,16 +145,23 @@
   type: SingleChoice
   content: What is Health Factor?
   hint: NoHint
-  explanation: Health factor is the ratio of total collateral multiplied by the liquidation threshold to borrowed principal. When the Health Factor falls below one, the loan is considered undercollateralized and can be liquidated.
+  explanation: >-
+    Health factor is the ratio of total collateral multiplied by the liquidation
+    threshold to borrowed principal. When the Health Factor falls below one, the
+    loan is considered undercollateralized and can be liquidated.
   answerKeys:
     - A
   subTopics:
     - terminology
   difficultyLevel: Low
   choices:
-    - content: The ratio of total collateral multiplied by the liquidation threshold to borrowed principal
+    - content: >-
+        The ratio of total collateral multiplied by the liquidation threshold to
+        borrowed principal
       key: A
-    - content: The ratio of total collateral multiplied by the borrowed principal to liquidation threshold
+    - content: >-
+        The ratio of total collateral multiplied by the borrowed principal to
+        liquidation threshold
       key: B
     - content: The ratio of total collateral to borrowed principal
       key: C
@@ -135,7 +171,9 @@
   type: SingleChoice
   content: Which contract has been decommissioned in Aave v2?
   hint: NoHint
-  explanation: LendingPoolCore has been decommissioned. Only LendingPool is used, which simplifies integrations and Aave v2 development.
+  explanation: >-
+    LendingPoolCore has been decommissioned. Only LendingPool is used, which
+    simplifies integrations and Aave v2 development.
   answerKeys:
     - C
   subTopics:
@@ -154,7 +192,13 @@
   type: MultipleChoice
   content: Pick the correct option(s).
   hint: NoHint
-  explanation: Flash loans can now be executed in batches, which means that many flash loans with varied parameters can be performed in the same call. This opens the door to strong new use cases, such as repaying numerous assets and positions with a single flash loan transaction. You can now do a combination of 'conventional' flash loans that are paid back instantly and flash loans that incur debt (i.e. the flash loan is not paid back immediately).
+  explanation: >-
+    Flash loans can now be executed in batches, which means that many flash
+    loans with varied parameters can be performed in the same call. This opens
+    the door to strong new use cases, such as repaying numerous assets and
+    positions with a single flash loan transaction. You can now do a combination
+    of 'conventional' flash loans that are paid back instantly and flash loans
+    that incur debt (i.e. the flash loan is not paid back immediately).
   answerKeys:
     - A
     - C
@@ -162,19 +206,29 @@
     - versions
   difficultyLevel: Low
   choices:
-    - content: Many flash loans with varied parameters can now be performed in the same call
+    - content: >-
+        Many flash loans with varied parameters can now be performed in the same
+        call
       key: A
-    - content: Many flash loans with varied parameters can not be performed in the same call
+    - content: >-
+        Many flash loans with varied parameters can not be performed in the same
+        call
       key: B
-    - content: You can now do a combination of 'conventional' flash loans that are paid back instantly and flash loans that incur debt
+    - content: >-
+        You can now do a combination of 'conventional' flash loans that are paid
+        back instantly and flash loans that incur debt
       key: C
-    - content: You can not do a combination of 'conventional' flash loans that are paid back instantly and flash loans that incur debt
+    - content: >-
+        You can not do a combination of 'conventional' flash loans that are paid
+        back instantly and flash loans that incur debt
       key: D
 - uuid: 1e7412d2-0f89-4fd1-b742-5ea072b8efb6
   type: SingleChoice
   content: Which contract is the main entry point into the Aave Protocol?
   hint: NoHint
-  explanation: LendingPool is the main entry point into the Aave Protocol. Most interactions with Aave will happen via the LendingPool.
+  explanation: >-
+    LendingPool is the main entry point into the Aave Protocol. Most
+    interactions with Aave will happen via the LendingPool.
   answerKeys:
     - B
   subTopics:
@@ -193,7 +247,10 @@
   type: SingleChoice
   content: Which contract can be used to obtain the most recent contract addresses?
   hint: NoHint
-  explanation: LendingPoolAddressesProvideris the protocol's primary addresses register for specific marketplaces. The most recent contract addresses should be obtained from this contract by making the necessary calls.
+  explanation: >-
+    LendingPoolAddressesProvideris the protocol's primary addresses register for
+    specific marketplaces. The most recent contract addresses should be obtained
+    from this contract by making the necessary calls.
   answerKeys:
     - A
   subTopics:
@@ -212,7 +269,10 @@
   type: SingleChoice
   content: Which of the following methods is not included in the LendingPool contract?
   hint: NoHint
-  explanation: Most interactions with Aave will happen via the LendingPool, including deposit(), borrow(), repay(), swapBorrowRateMode(), setUserUseReserveAsCollateral(), withdraw(), flashloan(), liquidationCall().
+  explanation: >-
+    Most interactions with Aave will happen via the LendingPool, including
+    deposit(), borrow(), repay(), swapBorrowRateMode(),
+    setUserUseReserveAsCollateral(), withdraw(), flashloan(), liquidationCall().
   answerKeys:
     - D
   subTopics:
@@ -229,7 +289,9 @@
       key: D
 - uuid: 7c7535a8-942c-4d6f-a49c-ecbbb587f175
   type: SingleChoice
-  content: Despite all of the new features added in v3, the overall gas cost of all functions fell. By what percentage did the gas cost fall?
+  content: >-
+    Despite all of the new features added in v3, the overall gas cost of all
+    functions fell. By what percentage did the gas cost fall?
   hint: NoHint
   explanation: explanation
   answerKeys:
@@ -248,9 +310,12 @@
       key: D
 - uuid: aadd93bd-8e38-4969-9f4d-ecbc5f2f3802
   type: SingleChoice
-  content: Can any individual lend and borrow simultaneously via Aave? 
+  content: Can any individual lend and borrow simultaneously via Aave?
   hint: NoHint
-  explanation: An individual can lend and borrow simultaneously via Aave. The participants lending the tokens get interest on their loan and the participants borrowing the tokens pay interest. 
+  explanation: >-
+    An individual can lend and borrow simultaneously via Aave. The participants
+    lending the tokens get interest on their loan and the participants borrowing
+    the tokens pay interest.
   answerKeys:
     - A
   subTopics:
@@ -261,15 +326,22 @@
       key: A
     - content: No, any individual can not lend and borrow simultaneously via Aave
       key: B
-    - content: Only possible when the price of the collateral drops below the liquidation threshold
+    - content: >-
+        Only possible when the price of the collateral drops below the
+        liquidation threshold
       key: C
-    - content: Only possible when the price of the collateral rises above the liquidation threshold
+    - content: >-
+        Only possible when the price of the collateral rises above the
+        liquidation threshold
       key: D
 - uuid: 13dc4af8-4bac-44d8-8977-26a93135de9c
   type: SingleChoice
   content: What happens when the Health Factor falls below one?
   hint: NoHint
-  explanation: Health factor is the ratio of total collateral multiplied by the liquidation threshold to borrowed principal. When the Health Factor falls below one, the loan is considered undercollateralized and can be liquidated.
+  explanation: >-
+    Health factor is the ratio of total collateral multiplied by the liquidation
+    threshold to borrowed principal. When the Health Factor falls below one, the
+    loan is considered undercollateralized and can be liquidated.
   answerKeys:
     - C
   subTopics:
@@ -307,7 +379,10 @@
   type: MultipleChoice
   content: Pick the correct option(s).
   hint: NoHint
-  explanation: Because the protocol does not employ an EIP-20 wrapper like wETH for ETH deposits, the deposit() method's amount parameter must match the transaction's msg.value parameter and be included in your deposit() call.
+  explanation: >-
+    Because the protocol does not employ an EIP-20 wrapper like wETH for ETH
+    deposits, the deposit() method's amount parameter must match the
+    transaction's msg.value parameter and be included in your deposit() call.
   answerKeys:
     - A
     - c
@@ -319,15 +394,22 @@
       key: A
     - content: AAVE protocol employs an EIP-20 wrapper
       key: B
-    - content: The deposit() method's amount parameter must match the transaction's msg.value parameter
+    - content: >-
+        The deposit() method's amount parameter must match the transaction's
+        msg.value parameter
       key: C
-    - content: The deposit() method's amount parameter may or may not match the transaction's msg.value parameter
+    - content: >-
+        The deposit() method's amount parameter may or may not match the
+        transaction's msg.value parameter
       key: D
 - uuid: 82214e78-253d-4fbc-bb56-fcd4dd805de8
   type: SingleChoice
   content: Which method allows the user's deposit to be used as collateral?
   hint: NoHint
-  explanation: setUserUseReserveAsCollateral() allows the user's deposit to be used as collateral. Users will only be able to disable deposits that are not being used as collateral at the time.
+  explanation: >-
+    setUserUseReserveAsCollateral() allows the user's deposit to be used as
+    collateral. Users will only be able to disable deposits that are not being
+    used as collateral at the time.
   answerKeys:
     - D
   subTopics:
@@ -346,7 +428,13 @@
   type: MultipleChoice
   content: Which of the following statements about the repay() method is/are correct?
   hint: NoHint
-  explanation: repay() method is used to repay a borrowed asset in whole or in part. The _onBehalfOf parameter can be used to repay a different user's debt. When a third-party repays another user's debt on their behalf, the third-party address must approve() the LendingPoolCore contract (which is separate from the LendingPool contract) with the _amount of the underlying ERC20 of the _reserve contract.
+  explanation: >-
+    repay() method is used to repay a borrowed asset in whole or in part. The
+    _onBehalfOf parameter can be used to repay a different user's debt. When a
+    third-party repays another user's debt on their behalf, the third-party
+    address must approve() the LendingPoolCore contract (which is separate from
+    the LendingPool contract) with the _amount of the underlying ERC20 of the
+    _reserve contract.
   answerKeys:
     - B
     - C
@@ -364,9 +452,14 @@
       key: D
 - uuid: 7c65668d-8b7b-4de9-8bd9-33736175bb18
   type: SingleChoice
-  content: Which method changes the borrow rate modes of the msg.sender from stable to variable?
+  content: >-
+    Which method changes the borrow rate modes of the msg.sender from stable to
+    variable?
   hint: NoHint
-  explanation: swapBorrowRateMode() changes the borrow rate modes of the msg.sender from stable to variable. rebalanceStableBorrowRate() rebalances the stable rate of _user
+  explanation: >-
+    swapBorrowRateMode() changes the borrow rate modes of the msg.sender from
+    stable to variable. rebalanceStableBorrowRate() rebalances the stable rate
+    of _user
   answerKeys:
     - D
   subTopics:
@@ -385,7 +478,9 @@
   type: SingleChoice
   content: What happens when a liquidation is completed successfully?
   hint: NoHint
-  explanation: When the liquidation is completed successfully, the position's health factor is enhanced, bringing it above 1. It does not affect the close factor.
+  explanation: >-
+    When the liquidation is completed successfully, the position's health factor
+    is enhanced, bringing it above 1. It does not affect the close factor.
   answerKeys:
     - A
   subTopics:
@@ -404,7 +499,11 @@
   type: MultipleChoice
   content: What is the close factor?
   hint: NoHint
-  explanation: A close factor determines how much collateral a liquidator can close. The current close factor is 0.5. In other words, liquidators can only liquidate up to 50% of the amount owing in a position. This is the amount of the liquidation discount.
+  explanation: >-
+    A close factor determines how much collateral a liquidator can close. The
+    current close factor is 0.5. In other words, liquidators can only liquidate
+    up to 50% of the amount owing in a position. This is the amount of the
+    liquidation discount.
   answerKeys:
     - C
     - D
@@ -412,7 +511,9 @@
     - functions-2
   difficultyLevel: Low
   choices:
-    - content: The ratio of total collateral multiplied by the liquidation threshold to borrowed principal
+    - content: >-
+        The ratio of total collateral multiplied by the liquidation threshold to
+        borrowed principal
       key: A
     - content: The maximum borrowing capacity of a particular collateral
       key: B
@@ -422,9 +523,13 @@
       key: D
 - uuid: 26144fd7-a1ae-44c4-b70f-dc6cc578ea87
   type: SingleChoice
-  content: What value of the purchaseAmount parameter can be set to proceed with the largest liquidation allowed by the close factor?
+  content: >-
+    What value of the purchaseAmount parameter can be set to proceed with the
+    largest liquidation allowed by the close factor?
   hint: NoHint
-  explanation: purchaseAmount parameter can be set to uint(-1) and the protocol will proceed with the largest liquidation allowed by the close factor.
+  explanation: >-
+    purchaseAmount parameter can be set to uint(-1) and the protocol will
+    proceed with the largest liquidation allowed by the close factor.
   answerKeys:
     - B
   subTopics:
@@ -443,27 +548,34 @@
   type: MultipleChoice
   content: Select the correct statement(s) about Flash loans.
   hint: NoHint
-  explanation: Flash Loans are special transactions that allow you to borrow an asset as long as the borrowed amount (plus a fee) is returned before the transaction ends (also called One Block Borrows). These transactions do not necessitate the provision of collateral by the user prior to the transaction.
+  explanation: >-
+    Flash Loans are special transactions that allow you to borrow an asset as
+    long as the borrowed amount (plus a fee) is returned before the transaction
+    ends (also called One Block Borrows). These transactions do not necessitate
+    the provision of collateral by the user prior to the transaction.
   answerKeys:
     - A
     - B
-  subTopics:
-    - functions-3
-  difficultyLevel: Low
+  subTopics: []
+  difficultyLevel: Medium
   choices:
-    - content: Flash loans are also called One Block Borrows
-      key: A
-    - content: Borrowed amount has to be returned in the same transaction
-      key: B
-    - content: There is no need to pay fees
-      key: C
-    - content: User has to provide collateral prior to the transaction
-      key: D
+    - key: A
+      content: Flash loans are also called One Block Borrows
+    - key: B
+      content: Borrowed amount has to be returned in the same transaction
+    - key: C
+      content: There is no need to pay fees
+    - key: D
+      content: User has to provide collateral prior to the transaction
+    - key: cb5023c0
+      content: '1'
 - uuid: c535ee8a-5ac8-47bf-8404-30138aae06f6
   type: SingleChoice
   content: Which of the following is the fee received by LP?
   hint: NoHint
-  explanation: Fee to LP = FLASHLOAN_PREMIUM_TOTAL - FLASHLOAN_PREMIUM_TO_PROTOCOL, Fee to Protocol = FLASHLOAN_PREMIUM_TO_PROTOCOL
+  explanation: >-
+    Fee to LP = FLASHLOAN_PREMIUM_TOTAL - FLASHLOAN_PREMIUM_TO_PROTOCOL, Fee to
+    Protocol = FLASHLOAN_PREMIUM_TO_PROTOCOL
   answerKeys:
     - C
   subTopics:
