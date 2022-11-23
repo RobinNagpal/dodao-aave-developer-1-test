@@ -567,8 +567,6 @@
       content: There is no need to pay fees
     - key: D
       content: User has to provide collateral prior to the transaction
-    - key: cb5023c0
-      content: '1'
 - uuid: c535ee8a-5ac8-47bf-8404-30138aae06f6
   type: SingleChoice
   content: Which of the following is the fee received by LP?

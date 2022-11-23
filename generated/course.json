@@ -825,10 +825,6 @@
             {
               "content": "User has to provide collateral prior to the transaction",
               "key": "D"
-            },
-            {
-              "content": "1",
-              "key": "cb5023c0"
             }
           ]
         },
