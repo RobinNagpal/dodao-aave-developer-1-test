@@ -866,14 +866,12 @@
       "readings": [
         {
           "uuid": "7441eb5f-68f3-40de-b12f-80dc17c80b2c",
-          "title": "Introduction to AAVE Smart Contracts",
           "shortTitle": "Introduction",
+          "details": "This video enables learners to know about\n  * AAVE\n  * Main protocol features\n  * What's new in v2   \n  * Resources\n",
+          "title": "Introduction to AAVE Smart Contracts",
           "type": "YoutubeVideo",
           "url": "https://www.youtube.com/watch?v=AMAMvKc-O2s",
-          "subTopics": [
-            "aave-smart-contracts-intro"
-          ],
-          "details": "This video enables learners to know about\n  * AAVE\n  * Main protocol features\n  * What's new in v2   \n  * Resources\n"
+          "subTopics": []
         },
         {
           "uuid": "8b2485fe-7a9b-4dee-9e65-348c1dc7a66c",
