@@ -127,9 +127,9 @@ The main contracts in Aave and their purposes are:
 * LendingPoolAddressesProvider: The protocol's primary addresses register for specific marketplaces. The most recent contract addresses should be obtained from this contract by making the necessary calls.
 * LendingPoolAddressesProviderRegistry: Contains a list of active LendingPoolAddressesProvider addresses, for different markets.
 * aTokens: The yield-producing, tokenized deposits that are used throughout the Aave protocol. They implement, with minor modifications, the majority of the standard EIP-20/ERC20 token methods, as well as Aave-specific methods such as:
-  - scaledBalanceOf()
-  - getScaledUserBalanceAndSupply()
-  - scaledTotalSupply()
+  - `scaledBalanceOf()`
+  - `getScaledUserBalanceAndSupply()`
+  - `scaledTotalSupply()`
   All aTokens also implement EIP-2612, which via the permit() function enables gas-less transfers and single transaction approve + actions.
 * Stable and Variable Debt Tokens: The Aave protocol employs tokenised borrow locations throughout. Because debt tokens are non-transferable, most common EIP-20/ERC20 techniques are disabled.
 
@@ -159,6 +159,7 @@ The parameters for the optimised base curves are:
   - variableRateSlope2
   - stableRateSlope1
   - stableRateSlope2
+
 The interest rates are calculated depending on the available liquidity and the total borrowed amount.
  
  **AAVE Functionalities in Details - I**        
