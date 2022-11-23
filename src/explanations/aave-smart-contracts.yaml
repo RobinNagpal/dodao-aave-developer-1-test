@@ -355,9 +355,9 @@
 
     * LendingPool: The main entry point into the Aave Protocol. Most
     interactions with Aave will happen via the LendingPool, including:
-      - deposit()
-      - borrow()
-      - repay()
+      - `deposit()`
+      - `borrow()`
+      - `repay()`
       - swapBorrowRateMode()
       - setUserUseReserveAsCollateral()
       - withdraw()
