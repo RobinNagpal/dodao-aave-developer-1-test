@@ -373,9 +373,9 @@
     the Aave protocol. They implement, with minor modifications, the majority of
     the standard EIP-20/ERC20 token methods, as well as Aave-specific methods
     such as:
-      - scaledBalanceOf()
-      - getScaledUserBalanceAndSupply()
-      - scaledTotalSupply()
+      - `scaledBalanceOf()`
+      - `getScaledUserBalanceAndSupply()`
+      - `scaledTotalSupply()`
       All aTokens also implement EIP-2612, which via the permit() function enables gas-less transfers and single transaction approve + actions.
     * Stable and Variable Debt Tokens: The Aave protocol employs tokenised
     borrow locations throughout. Because debt tokens are non-transferable, most
@@ -422,6 +422,7 @@
       - variableRateSlope2
       - stableRateSlope1
       - stableRateSlope2
+
     The interest rates are calculated depending on the available liquidity and
     the total borrowed amount.
   title: AAVE Architecture
