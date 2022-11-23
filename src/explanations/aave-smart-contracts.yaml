@@ -458,9 +458,7 @@
 
     #### Methods
 
-    #### `deposit()`
-
-    **`function deposit( address _reserve, uint256 _amount, uint16
+    ####  **`function deposit( address _reserve, uint256 _amount, uint16
     _referralCode)`**
 
 
@@ -511,9 +509,7 @@
     https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH4HvCIm09jkjFv%2Flending%20pool%20deposit.png?alt=media&token=c92f8256-9d73-41a1-9e96-a3d807425d08 
 
 
-    #### setUserUseReserveAsCollateral()
-
-    **`function setUserUseReserveAsCollateral(address _reserve, bool
+    #### `function setUserUseReserveAsCollateral(address _reserve, bool
     _useAsCollateral)`**
 
 
