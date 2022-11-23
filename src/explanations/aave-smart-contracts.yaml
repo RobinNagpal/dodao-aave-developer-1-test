@@ -254,6 +254,7 @@
     otherwise.                                                                                     
     |
 - key: architecture
+  title: AAVE Architecture
   shortTitle: Architecture
   details: >
     Aave has released three versions (v1, v2 and v3) as of now and the
@@ -376,6 +377,7 @@
       - `scaledBalanceOf()`
       - `getScaledUserBalanceAndSupply()`
       - `scaledTotalSupply()`
+
       All aTokens also implement EIP-2612, which via the permit() function enables gas-less transfers and single transaction approve + actions.
     * Stable and Variable Debt Tokens: The Aave protocol employs tokenised
     borrow locations throughout. Because debt tokens are non-transferable, most
@@ -407,6 +409,7 @@
       - Updates a reserve's decimals,
       - Updates a reserve's interest rate strategy address,
       - Activates / Deactivates all functions of a LendingPool in emergencies.
+
       For all of the above functions, relevant events are emitted to the blockchain. Anyone can monitor these changes to know when values have been modified or added/removed.
     * Interest Rate Strategy: Contains the data required to calculate and adjust
     the interest rates on individual reserves.
@@ -425,7 +428,6 @@
 
     The interest rates are calculated depending on the available liquidity and
     the total borrowed amount.
-  title: AAVE Architecture
 - title: AAVE Functionalities in Details - I
   shortTitle: Functions - I
   key: functions-1
