@@ -488,12 +488,12 @@
     deposits, the deposit() method's amount parameter must match the
     transaction's msg.value parameter and be included in your deposit() call.
 
-    E.g: lendingPool.deposit{ value: msg.value }(reserve, msg.value,
-    referralCode)
+    E.g: `lendingPool.deposit{ value: msg.value }(reserve, msg.value,
+    referralCode)`
 
-    Because ETH is utilised directly in the protocol (rather than an abstraction
+    Because ETH is utilized directly in the protocol (rather than an abstraction
     like WETH), we use a dummy address to represent it:
-    0xEeeeeEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    `0xEeeeeEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee`
 
 
     **ERC20 deposits**
@@ -513,8 +513,9 @@
 
     #### setUserUseReserveAsCollateral()
 
-    **function setUserUseReserveAsCollateral(address _reserve, bool
-    _useAsCollateral)**
+    **`function setUserUseReserveAsCollateral(address _reserve, bool
+    _useAsCollateral)`**
+
 
     Allow the user's deposit to be used as collateral. Users will only be able
     to disable deposits that are not being used as collateral at the time.
@@ -524,6 +525,7 @@
 
 
     **Stable vs Variable Interest Rate**
+
 
     In the short-term, stable rates function as a fixed rate, but they can be
     rebalanced in the long run in reaction to alterations in the market
