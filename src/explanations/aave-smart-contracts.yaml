@@ -254,6 +254,7 @@
     otherwise.                                                                                     
     |
 - key: architecture
+  title: AAVE Architecture
   shortTitle: Architecture
   details: >
     Aave has released three versions (v1, v2 and v3) as of now and the
@@ -354,14 +355,14 @@
 
     * LendingPool: The main entry point into the Aave Protocol. Most
     interactions with Aave will happen via the LendingPool, including:
-      - deposit()
-      - borrow()
-      - repay()
-      - swapBorrowRateMode()
-      - setUserUseReserveAsCollateral()
-      - withdraw()
-      - flashloan()
-      - liquidationCall()
+      - `deposit()`
+      - `borrow()`
+      - `repay()`
+      - `swapBorrowRateMode()`
+      - `setUserUseReserveAsCollateral()`
+      - `withdraw()`
+      - `flashloan()`
+      - `liquidationCall()`
     * LendingPoolAddressesProvider: The protocol's primary addresses register
     for specific marketplaces. The most recent contract addresses should be
     obtained from this contract by making the necessary calls.
@@ -376,6 +377,7 @@
       - `scaledBalanceOf()`
       - `getScaledUserBalanceAndSupply()`
       - `scaledTotalSupply()`
+
       All aTokens also implement EIP-2612, which via the permit() function enables gas-less transfers and single transaction approve + actions.
     * Stable and Variable Debt Tokens: The Aave protocol employs tokenised
     borrow locations throughout. Because debt tokens are non-transferable, most
@@ -407,6 +409,7 @@
       - Updates a reserve's decimals,
       - Updates a reserve's interest rate strategy address,
       - Activates / Deactivates all functions of a LendingPool in emergencies.
+
       For all of the above functions, relevant events are emitted to the blockchain. Anyone can monitor these changes to know when values have been modified or added/removed.
     * Interest Rate Strategy: Contains the data required to calculate and adjust
     the interest rates on individual reserves.
@@ -425,10 +428,9 @@
 
     The interest rates are calculated depending on the available liquidity and
     the total borrowed amount.
-  title: AAVE Architecture
-- title: AAVE Functionalities in Details - I
+- key: functions-1
+  title: AAVE Functionalities in Details - I
   shortTitle: Functions - I
-  key: functions-1
   details: >
     The LendingPool contract is the protocol's principal contract. It exposes
     all user-oriented operations that may be performed with the Solidity or web3
@@ -456,24 +458,28 @@
 
     #### Methods
 
-    #### deposit()
+    #### `deposit()`
 
-    **function deposit( address _reserve, uint256 _amount, uint16
-    _referralCode)**
+    **`function deposit( address _reserve, uint256 _amount, uint16
+    _referralCode)`**
 
-    Deposits a certain _amount of an asset specified by the _reserve parameter.
+
+    Deposits a certain `_amount` of an asset specified by the `_reserve`
+    parameter.
 
     In exchange, the caller receives a specific number of aTokens. aTokens can
     be redeemed for the underlying token in a 1:1 ratio.
 
+
     Please see the referral programme section for further information about
-    _referralCode input. You can use the referral code: 0 during testing.
+    `_referralCode` input. You can use the referral code: 0 during testing.
 
-    When depositing an ERC-20 token, the LendingPoolCore contract (not the
-    LendingPool contract) must have the required allowance of _amount for the
-    underlying ERC20 of the _reserve asset via approve().
 
-    Emitted events: _reserve, _user, _amount, _referral, _timestamp
+    When depositing an ERC-20 token, the `LendingPoolCore` contract (not the
+    `LendingPool` contract) must have the required allowance of `_amount` for
+    the underlying ERC20 of the `_reserve` asset via `approve()`.
+
+    Emitted events: `_reserve`, `_user`, `_amount`, `_referral`, `_timestamp`
 
 
     **ETH deposits**
