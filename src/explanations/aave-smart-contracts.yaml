@@ -358,11 +358,11 @@
       - `deposit()`
       - `borrow()`
       - `repay()`
-      - swapBorrowRateMode()
-      - setUserUseReserveAsCollateral()
-      - withdraw()
-      - flashloan()
-      - liquidationCall()
+      - `swapBorrowRateMode()`
+      - `setUserUseReserveAsCollateral()`
+      - `withdraw()`
+      - `flashloan()`
+      - `liquidationCall()`
     * LendingPoolAddressesProvider: The protocol's primary addresses register
     for specific marketplaces. The most recent contract addresses should be
     obtained from this contract by making the necessary calls.
