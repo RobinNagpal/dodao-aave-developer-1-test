@@ -1,123 +1,360 @@
-- title: Introduction
+- key: aave-smart-contracts-intro
   shortTitle: Introduction
-  key: aave-smart-contracts-intro
-  details: |
-    Aave is a decentralized finance protocol that facilitates lending and borrowing of cryptocurrency tokens usAave ing diverse algorithms and smart contracts without the presence of centralized intermediaries. 
-    It is a non-custodial liquidity protocol that allows users to participate as depositors or borrowers. Depositors provide liquidity to the market to earn a passive income, while borrowers are able to borrow in an overcollateralized manner.
+  details: >
+    Aave is a decentralized finance protocol that facilitates lending and
+    borrowing of cryptocurrency tokens usAave ing diverse algorithms and smart
+    contracts without the presence of centralized intermediaries. 
 
-    Aave's transition from a decentralized P2P lending approach (a direct loan relationship between lenders and borrowers, similar to ETHLend) to a pool-based strategy is marked by the creation of the Aave Protocol. By putting cryptocurrency in a pool contract, lenders offer liquidity. The pooled funds can also be borrowed inside the same contract by pledging collateral. Loans rely on the pooled money as well as the quantities borrowed and their collateral rather than on individual matching. This makes it possible to quickly lend money with terms that depend on the condition of the pool. Figure 1 below shows a simplified version of the protocol's structure.
+    It is a non-custodial liquidity protocol that allows users to participate as
+    depositors or borrowers. Depositors provide liquidity to the market to earn
+    a passive income, while borrowers are able to borrow in an
+    overcollateralized manner.
+
+
+    Aave's transition from a decentralized P2P lending approach (a direct loan
+    relationship between lenders and borrowers, similar to ETHLend) to a
+    pool-based strategy is marked by the creation of the Aave Protocol. By
+    putting cryptocurrency in a pool contract, lenders offer liquidity. The
+    pooled funds can also be borrowed inside the same contract by pledging
+    collateral. Loans rely on the pooled money as well as the quantities
+    borrowed and their collateral rather than on individual matching. This makes
+    it possible to quickly lend money with terms that depend on the condition of
+    the pool. Figure 1 below shows a simplified version of the protocol's
+    structure.
+
 
     ![AAVE](https://github.com/DoDAO-io/dodao-aave-developer-1-course/blob/6bd13f67bbb027bc58280c103f78b0b29d5ad810/images/aave.jpg?raw=true)
+
     `Reference: https://docs.aave.com/developers/v/2.0/`
 
-    The participants lending the tokens get interest on their loan and the participants borrowing the tokens pay interest. An individual can lend and borrow simultaneously via Aave.
-    The working mechanism of Aave involves allocating a platform specific token, called aTokens to a user's crypto investment. 
-    This is what lenders get when they deposit their assets into the pool.
-    For instance, a user who deposits Ethereum in Aave will hold aETH on Aave. 
-    aToken is based on a particular crypto asset and the interest rate each aToken earns is specific to the token deposited, depending on the supply and demand for the original coin.
 
-    Aave Protocol was created with security in mind and has been audited by various auditors.
-    The White Paper provides a more in-depth look at the protocol, economics, and how it operates.
-    On Github, the Aave Protocol repository can be found here: https://github.com/aave/.
+    The participants lending the tokens get interest on their loan and the
+    participants borrowing the tokens pay interest. An individual can lend and
+    borrow simultaneously via Aave.
+
+    The working mechanism of Aave involves allocating a platform specific token,
+    called aTokens to a user's crypto investment. 
+
+    This is what lenders get when they deposit their assets into the pool.
+
+    For instance, a user who deposits Ethereum in Aave will hold aETH on Aave. 
+
+    aToken is based on a particular crypto asset and the interest rate each
+    aToken earns is specific to the token deposited, depending on the supply and
+    demand for the original coin.
+
+
+    Aave Protocol was created with security in mind and has been audited by
+    various auditors.
+
+    The White Paper provides a more in-depth look at the protocol, economics,
+    and how it operates.
+
+    On Github, the Aave Protocol repository can be found here:
+    https://github.com/aave/.
+
 
     #### Lending and borrowing
-    Aave has a smart contract based working mechanism wherein the interest rates are determined by different algorithms.
-    The depositors lend the funds in the liquidity pools and earn interest, similarly borrowers can borrow the funds from the liquidity pools. 
+
+    Aave has a smart contract based working mechanism wherein the interest rates
+    are determined by different algorithms.
+
+    The depositors lend the funds in the liquidity pools and earn interest,
+    similarly borrowers can borrow the funds from the liquidity pools. 
+
 
     The interest rate for both borrowers and lenders is decided algorithmically:
 
-    * **Interest rate for Borrowers**: The interest rate to be paid by the borrowers depends on the cost of money and the amount of funds available in the pool at a specific time.The amount of funds present in the pool has an inverse relationship with the interest rate. As funds are borrowed from the pool, the amount of funds available decreases which raises the interest rate. 
 
-    * **Interest rate for Lenders**: The interest rate received by the lenders corresponds to the earn rate, with the algorithm safeguarding a liquidity reserve to guarantee withdrawals at any time.
+    * **Interest rate for Borrowers**: The interest rate to be paid by the
+    borrowers depends on the cost of money and the amount of funds available in
+    the pool at a specific time.The amount of funds present in the pool has an
+    inverse relationship with the interest rate. As funds are borrowed from the
+    pool, the amount of funds available decreases which raises the interest
+    rate. 
 
-    And since cryptocurrency is highly volatile, borrowing in Aave demands overcollateralization. 
-    For example-  Kevin wants to borrow $500 worth of ETH from the AAve protocol. In order to do so, Kevin will have to put up more than that amount in a different cryptocurrency. If the price falls and the amount in collateral no longer covers the amount borrowed, the collateral can be liquidated, meaning the protocol takes it to cover the cost of the loan.
-    A liquidation event happens when the price of the collateral drops below the liquidation threshold.
 
+    * **Interest rate for Lenders**: The interest rate received by the lenders
+    corresponds to the earn rate, with the algorithm safeguarding a liquidity
+    reserve to guarantee withdrawals at any time.
+
+
+    And since cryptocurrency is highly volatile, borrowing in Aave demands
+    overcollateralization. 
+
+    For example-  Kevin wants to borrow $500 worth of ETH from the AAve
+    protocol. In order to do so, Kevin will have to put up more than that amount
+    in a different cryptocurrency. If the price falls and the amount in
+    collateral no longer covers the amount borrowed, the collateral can be
+    liquidated, meaning the protocol takes it to cover the cost of the loan.
+
+    A liquidation event happens when the price of the collateral drops below the
+    liquidation threshold.
+  title: Introduction
 - title: Important Tech Terms
   shortTitle: Tech Terms
   key: terminology
-  details: |
-    * **APY**: Annual Percentage Yield is the yield/interest after a year, including compounding interest. This differs from the Annual Percentage Rate (APR), which does not account for compounding effects.
+  details: >
+    * **APY**: Annual Percentage Yield is the yield/interest after a year,
+    including compounding interest. This differs from the Annual Percentage Rate
+    (APR), which does not account for compounding effects.
 
-    * **Liquidity Index**: The reserve's interest accumulation during the time span since the last updated timestamp.
 
-    * **Loan To Value**: The maximum borrowing capacity of a particular collateral. If a collateral has a Loan to Value of 75%, the user will be allowed to borrow 0.75 ETH of primary currency for every 1 ETH of collateral. The Loan To Value is represented in percentage points and is set per collateral.
+    * **Liquidity Index**: The reserve's interest accumulation during the time
+    span since the last updated timestamp.
 
-    * **Liquidation Threshold**: The amount of a borrow position that must be liquidated because it is undercollateralized. When a collateral has an 80% liquidation threshold, it signifies that the loan will be liquidated when the debt value equals 80% of the collateral value. The liquidation threshold is defined in percentage points and is specified per collateral.
 
-    * **Liquidation Bonus**: The bonus paid to liquidators to encourage the purchase of specified collateral with a health factor less than one. The Liquidation Bonus is defined in percentage points and is determined per collateral.
+    * **Loan To Value**: The maximum borrowing capacity of a particular
+    collateral. If a collateral has a Loan to Value of 75%, the user will be
+    allowed to borrow 0.75 ETH of primary currency for every 1 ETH of
+    collateral. The Loan To Value is represented in percentage points and is set
+    per collateral.
 
-    * **Health factor**: The ratio of total collateral multiplied by the liquidation threshold to borrowed principal. When the Health Factor falls below one, the loan is considered undercollateralized and can be liquidated.
 
-    * **Stable rate**: A loan with a stable rate behaves like a fixed rate loan in the short term, but the rates can be rebalanced in the medium/long term in response to rapid market movements.
+    * **Liquidation Threshold**: The amount of a borrow position that must be
+    liquidated because it is undercollateralized. When a collateral has an 80%
+    liquidation threshold, it signifies that the loan will be liquidated when
+    the debt value equals 80% of the collateral value. The liquidation threshold
+    is defined in percentage points and is specified per collateral.
+
+
+    * **Liquidation Bonus**: The bonus paid to liquidators to encourage the
+    purchase of specified collateral with a health factor less than one. The
+    Liquidation Bonus is defined in percentage points and is determined per
+    collateral.
+
+
+    * **Health factor**: The ratio of total collateral multiplied by the
+    liquidation threshold to borrowed principal. When the Health Factor falls
+    below one, the loan is considered undercollateralized and can be liquidated.
+
+
+    * **Stable rate**: A loan with a stable rate behaves like a fixed rate loan
+    in the short term, but the rates can be rebalanced in the medium/long term
+    in response to rapid market movements.
+
 
     * **Reserve** : Reserves are the underlying assets' ERC-20 contracts.
 
+
     * **Variables in Code**
+
     Following is the list of most common variables used in the code:
 
-    | Parameter Name             | Type            | Description                                                                                                                                            |
-    | -------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-    | reserve                    | address         | address of the [underlying asset](https://docs.aave.com/developers/v/1.0/deployed-contracts/deployed-contract-instances#reserves-assets)               |
-    | amount                     | uint256         | amount to borrow/deposit/repay, expressed in decimal units                                                                                             |
-    | referralCode               | uint256         | referral code for the referral program                                                                                                                 |
-    | useAsCollateral            | bool            | if true, the asset is allowed as a collateral for borrow                                                                                               |
-    | interestRateMode           | uint256         | type of interest rate mode to use, with uint 2 representing variable rate and uint 1 representing stable rate                                          |
-    | onBehalfOf                 | address payable | address to repay on behalf of. If the caller is repaying their own loan, then this value should be equal to msg.sender                                 |
-    | user                       | address         | address of the user to rebalance                                                                                                                       |
-    | collateral                 | address         | address of the liquidated collateral reserve                                                                                                           |
-    | purchaseAmount             | uint256         | amount of the discounted purchase                                                                                                                      |
-    | receiveaToken              | bool            | if true, the user receives the aTokens equivalent of the purchased collateral. If false, the user receives the underlying asset directly               |
-    | timestamp                  | uint256         | timestamp of the transaction, in Unix time                                                                                                             |
-    | borrowRateMode             | uint256         | interest rate mode 0 for None, 1 for stable and 2 for variable                                                                                         |
-    | borrowRate                 | uint256         | APY of the loan at the time of the borrow() call. in Wei.                                                                                              |
-    | originationFee             | uint256         | amount of the originationFee of the loan, in [Ray units](https://docs.aave.com/developers/v/1.0/developing-on-aave/important-considerations#ray-math). |
-    | borrowBalanceIncrease      | uint256         | amount of debt increased since the last update by the user, in Wei.                                                                                    |
-    | repayer                    | uint256         | address of the repayer                                                                                                                                 |
-    | amountMinusFees            | uint256         | amount repayed, without fees.                                                                                                                          |
-    | fees                       | uint256         | fees paid                                                                                                                                              |
-    | purchaseAmount             | uint256         | amount of the liquidation, in Wei.                                                                                                                     |
-    | liquidatedCollateralAmount | uint256         | amount of collateral being liquidated                                                                                                                  |
-    | accruedBorrowInterest      | uint256         | amount of debt increased since the last update by the user, in Wei.                                                                                    |
-    | liquidator                 | address         | address of the liquidator                                                                                                                              |
-    | receiveAToken              | bool            | true if the liquidator wants to receive aTokens, false otherwise.                                                                                      |
-    
+
+    | Parameter Name             | Type            |
+    Description                                                                                                                                           
+    |
+
+    | -------------------------- | --------------- |
+    ------------------------------------------------------------------------------------------------------------------------------------------------------
+    |
+
+    | reserve                    | address         | address of the [underlying
+    asset](https://docs.aave.com/developers/v/1.0/deployed-contracts/deployed-contract-instances#reserves-assets)              
+    |
+
+    | amount                     | uint256         | amount to
+    borrow/deposit/repay, expressed in decimal
+    units                                                                                            
+    |
+
+    | referralCode               | uint256         | referral code for the
+    referral
+    program                                                                                                                
+    |
+
+    | useAsCollateral            | bool            | if true, the asset is
+    allowed as a collateral for
+    borrow                                                                                              
+    |
+
+    | interestRateMode           | uint256         | type of interest rate mode
+    to use, with uint 2 representing variable rate and uint 1 representing
+    stable rate                                          |
+
+    | onBehalfOf                 | address payable | address to repay on behalf
+    of. If the caller is repaying their own loan, then this value should be
+    equal to msg.sender                                 |
+
+    | user                       | address         | address of the user to
+    rebalance                                                                                                                      
+    |
+
+    | collateral                 | address         | address of the liquidated
+    collateral
+    reserve                                                                                                          
+    |
+
+    | purchaseAmount             | uint256         | amount of the discounted
+    purchase                                                                                                                     
+    |
+
+    | receiveaToken              | bool            | if true, the user receives
+    the aTokens equivalent of the purchased collateral. If false, the user
+    receives the underlying asset directly               |
+
+    | timestamp                  | uint256         | timestamp of the
+    transaction, in Unix
+    time                                                                                                            
+    |
+
+    | borrowRateMode             | uint256         | interest rate mode 0 for
+    None, 1 for stable and 2 for
+    variable                                                                                        
+    |
+
+    | borrowRate                 | uint256         | APY of the loan at the time
+    of the borrow() call. in
+    Wei.                                                                                             
+    |
+
+    | originationFee             | uint256         | amount of the
+    originationFee of the loan, in [Ray
+    units](https://docs.aave.com/developers/v/1.0/developing-on-aave/important-considerations#ray-math).
+    |
+
+    | borrowBalanceIncrease      | uint256         | amount of debt increased
+    since the last update by the user, in
+    Wei.                                                                                   
+    |
+
+    | repayer                    | uint256         | address of the
+    repayer                                                                                                                                
+    |
+
+    | amountMinusFees            | uint256         | amount repayed, without
+    fees.                                                                                                                         
+    |
+
+    | fees                       | uint256         | fees
+    paid                                                                                                                                             
+    |
+
+    | purchaseAmount             | uint256         | amount of the liquidation,
+    in
+    Wei.                                                                                                                    
+    |
+
+    | liquidatedCollateralAmount | uint256         | amount of collateral being
+    liquidated                                                                                                                 
+    |
+
+    | accruedBorrowInterest      | uint256         | amount of debt increased
+    since the last update by the user, in
+    Wei.                                                                                   
+    |
+
+    | liquidator                 | address         | address of the
+    liquidator                                                                                                                             
+    |
+
+    | receiveAToken              | bool            | true if the liquidator
+    wants to receive aTokens, false
+    otherwise.                                                                                     
+    |
 - title: AAVE Architecture
   shortTitle: Architecture
   key: architecture
-  details: |
-    Aave has released three versions (v1, v2 and v3) as of now and the Governance token of Aave is "AAVE". Version 1 or v1 is the base version launched in 2017 and then there have been upgrades with multiple new features added. 
-    Aave v2 improves on many areas of v1, allowing developers to create a wide new design space in which to construct products and services. If you previously developed on Aave v1, you should be aware of the following changes:
-    * There is no longer a LendingPoolCore contract in Aave v2 that retains all of the protocol's assets. Assets are held directly in the linked aToken contracts, with the LendingPool contract serving as the protocol's "core."
-    * Almost all actions in Aave v2 should be executed via the LendingPool contract. This differs from v1, when a redemption/withdrawal of aTokens required a call on the aToken contract.
-    * After depositing collateral into the protocol, a user can easily delegate credit to any address by using approveDelegation() on the relevant debt token.
-    * Flash loans are possible inside the Aave v2 protocol. Indeed, they are widely utilised within the protocol for position switching and other 'trading'-like functions.
-    * Flash loans can now be executed in batches, which means that many flash loans with varied parameters can be performed in the same call. This opens the door to strong new use cases, such as repaying numerous assets and positions with a single flash loan transaction.
-    * You can now do a combination of 'conventional' flash loans that are paid back instantly and flash loans that incur debt (i.e. the flash loan is not paid back immediately).
-    * AddressesProviders will be numerous in multiple markets. The AddressesProviderRegistry will keep track of all Aave market address providers.
-    * LendingPoolCore has been decommissioned. Only LendingPool is used, which simplifies integrations and Aave v2 development.
-    The v3 improved features enable new use cases, sparking a flood of innovation from users and developers. Aave V3 generates I mprovements in all of the these areas - capital efficiency, security, decentralisation, and UX - while simultaneously delivering new functions to harness the capabilities of rollups and the developing ecosystem of rival L1s.
-    * Portal is a new set of core functionalities that can be utilised to enable provided assets to move easily between Aave markets on different networks. On the surface, the feature is fairly simple: the protocol uses the aTokens' unique pegged design to burn aTokens on the source network while minting them on the destination network.
-    * Borrowers can use High Efficiency Mode (E-Mode) to get the most borrowing power out of their collateral. Borrowers can use E-Mode to limit their borrowing to only assets in a specific category (e.g., stablecoins).
-    * One of the most important areas for improvement is managing the inherent complexities of risk exposure modulation.
-    * Repay with aTokens: Allows borrowers to repay with aTokens rather than the underlying asset.
-    * Despite all of the new features, the overall gas cost of all functions fell by about 25%.
-    * Smart contract re-engineering has considerably reduced code size (leaving more room for future revisions) by up to 100K optimizer runs!
-    * All token transfer functions (supply, repay) now support EIP 2612 authorization (this is especially important for L2).
-    * Signature on EIP 712 for credit delegation (no need for contracts to request a user transaction anymore).
+  details: >
+    Aave has released three versions (v1, v2 and v3) as of now and the
+    Governance token of Aave is "AAVE". Version 1 or v1 is the base version
+    launched in 2017 and then there have been upgrades with multiple new
+    features added. 
+
+    Aave v2 improves on many areas of v1, allowing developers to create a wide
+    new design space in which to construct products and services. If you
+    previously developed on Aave v1, you should be aware of the following
+    changes:
+
+    * There is no longer a LendingPoolCore contract in Aave v2 that retains all
+    of the protocol's assets. Assets are held directly in the linked aToken
+    contracts, with the LendingPool contract serving as the protocol's "core."
+
+    * Almost all actions in Aave v2 should be executed via the LendingPool
+    contract. This differs from v1, when a redemption/withdrawal of aTokens
+    required a call on the aToken contract.
+
+    * After depositing collateral into the protocol, a user can easily delegate
+    credit to any address by using approveDelegation() on the relevant debt
+    token.
+
+    * Flash loans are possible inside the Aave v2 protocol. Indeed, they are
+    widely utilised within the protocol for position switching and other
+    'trading'-like functions.
+
+    * Flash loans can now be executed in batches, which means that many flash
+    loans with varied parameters can be performed in the same call. This opens
+    the door to strong new use cases, such as repaying numerous assets and
+    positions with a single flash loan transaction.
+
+    * You can now do a combination of 'conventional' flash loans that are paid
+    back instantly and flash loans that incur debt (i.e. the flash loan is not
+    paid back immediately).
+
+    * AddressesProviders will be numerous in multiple markets. The
+    AddressesProviderRegistry will keep track of all Aave market address
+    providers.
+
+    * LendingPoolCore has been decommissioned. Only LendingPool is used, which
+    simplifies integrations and Aave v2 development.
+
+    The v3 improved features enable new use cases, sparking a flood of
+    innovation from users and developers. Aave V3 generates I mprovements in all
+    of the these areas - capital efficiency, security, decentralisation, and UX
+    - while simultaneously delivering new functions to harness the capabilities
+    of rollups and the developing ecosystem of rival L1s.
+
+    * Portal is a new set of core functionalities that can be utilised to enable
+    provided assets to move easily between Aave markets on different networks.
+    On the surface, the feature is fairly simple: the protocol uses the aTokens'
+    unique pegged design to burn aTokens on the source network while minting
+    them on the destination network.
+
+    * Borrowers can use High Efficiency Mode (E-Mode) to get the most borrowing
+    power out of their collateral. Borrowers can use E-Mode to limit their
+    borrowing to only assets in a specific category (e.g., stablecoins).
+
+    * One of the most important areas for improvement is managing the inherent
+    complexities of risk exposure modulation.
+
+    * Repay with aTokens: Allows borrowers to repay with aTokens rather than the
+    underlying asset.
+
+    * Despite all of the new features, the overall gas cost of all functions
+    fell by about 25%.
+
+    * Smart contract re-engineering has considerably reduced code size (leaving
+    more room for future revisions) by up to 100K optimizer runs!
+
+    * All token transfer functions (supply, repay) now support EIP 2612
+    authorization (this is especially important for L2).
+
+    * Signature on EIP 712 for credit delegation (no need for contracts to
+    request a user transaction anymore).
+
 
     #### Protocol Overview
 
-    On Github, the Aave Protocol repository can be found here: https://github.com/aave/
+
+    On Github, the Aave Protocol repository can be found here:
+    https://github.com/aave/
+
     Below image provides an overview of the protocol.
 
+
     ![Architecture](https://github.com/DoDAO-io/dodao-aave-developer-1-course/blob/6bd13f67bbb027bc58280c103f78b0b29d5ad810/images/architechture.png?raw=true)
-    `Reference: https://docs.aave.com/developers/v/2.0/the-core-protocol/protocol-overview`
+
+    `Reference:
+    https://docs.aave.com/developers/v/2.0/the-core-protocol/protocol-overview`
+
 
     #### Main Contracts
+
     The main contracts in Aave and their purposes are:
-    * LendingPool: The main entry point into the Aave Protocol. Most interactions with Aave will happen via the LendingPool, including:
+
+    * LendingPool: The main entry point into the Aave Protocol. Most
+    interactions with Aave will happen via the LendingPool, including:
       - deposit()
       - borrow()
       - repay()
@@ -126,21 +363,40 @@
       - withdraw()
       - flashloan()
       - liquidationCall()
-    * LendingPoolAddressesProvider: The protocol's primary addresses register for specific marketplaces. The most recent contract addresses should be obtained from this contract by making the necessary calls.
-    * LendingPoolAddressesProviderRegistry: Contains a list of active LendingPoolAddressesProvider addresses, for different markets.
-    * aTokens: The yield-producing, tokenized deposits that are used throughout the Aave protocol. They implement, with minor modifications, the majority of the standard EIP-20/ERC20 token methods, as well as Aave-specific methods such as:
+    * LendingPoolAddressesProvider: The protocol's primary addresses register
+    for specific marketplaces. The most recent contract addresses should be
+    obtained from this contract by making the necessary calls.
+
+    * LendingPoolAddressesProviderRegistry: Contains a list of active
+    LendingPoolAddressesProvider addresses, for different markets.
+
+    * aTokens: The yield-producing, tokenized deposits that are used throughout
+    the Aave protocol. They implement, with minor modifications, the majority of
+    the standard EIP-20/ERC20 token methods, as well as Aave-specific methods
+    such as:
       - scaledBalanceOf()
       - getScaledUserBalanceAndSupply()
       - scaledTotalSupply()
       All aTokens also implement EIP-2612, which via the permit() function enables gas-less transfers and single transaction approve + actions.
-    * Stable and Variable Debt Tokens: The Aave protocol employs tokenised borrow locations throughout. Because debt tokens are non-transferable, most common EIP-20/ERC20 techniques are disabled.
-    
+    * Stable and Variable Debt Tokens: The Aave protocol employs tokenised
+    borrow locations throughout. Because debt tokens are non-transferable, most
+    common EIP-20/ERC20 techniques are disabled.
+
+
     #### Supporting contracts
-    The following contracts should generally not be interacted with directly, but are used throughout the Aave Protocol via contract calls.
-    * LendingPoolCollateralManager: The LendingPoolCollateralManager implements protocol activities involving collateral management using delegatecall via the LendingPool contract, including:
+
+    The following contracts should generally not be interacted with directly,
+    but are used throughout the Aave Protocol via contract calls.
+
+    * LendingPoolCollateralManager: The LendingPoolCollateralManager implements
+    protocol activities involving collateral management using delegatecall via
+    the LendingPool contract, including:
       - liquidationCall()
-    Only the primary LendingPool contract should be used to call the above function.
-    * Lending Pool Configurator: Configuration functions for LendingPool contracts are provided. It also serves a variety of vital purposes:
+    Only the primary LendingPool contract should be used to call the above
+    function.
+
+    * Lending Pool Configurator: Configuration functions for LendingPool
+    contracts are provided. It also serves a variety of vital purposes:
       - Activates / Deactivates reserves,
       - Enables / Disables borrowing for a reserve,
       - Enables / Disables using a reserve as collateral,
@@ -153,173 +409,417 @@
       - Updates a reserve's interest rate strategy address,
       - Activates / Deactivates all functions of a LendingPool in emergencies.
       For all of the above functions, relevant events are emitted to the blockchain. Anyone can monitor these changes to know when values have been modified or added/removed.
-    * Interest Rate Strategy: Contains the data required to calculate and adjust the interest rates on individual reserves.
-    Each contract stores the optimised base curves using the relevant currency parameters. This means that each asset pool's interest rate is determined by a mathematical function, with the interest rate varying based on the amount of borrowed funds and the asset pool's total liquidity (i.e. utilisation).
+    * Interest Rate Strategy: Contains the data required to calculate and adjust
+    the interest rates on individual reserves.
+
+    Each contract stores the optimised base curves using the relevant currency
+    parameters. This means that each asset pool's interest rate is determined by
+    a mathematical function, with the interest rate varying based on the amount
+    of borrowed funds and the asset pool's total liquidity (i.e. utilisation).
+
     The parameters for the optimised base curves are:
       - baseVariableBorrowRate
       - variableRateSlope1
       - variableRateSlope2
       - stableRateSlope1
       - stableRateSlope2
-    The interest rates are calculated depending on the available liquidity and the total borrowed amount.
-
+    The interest rates are calculated depending on the available liquidity and
+    the total borrowed amount.
 - title: AAVE Functionalities in Details - I
   shortTitle: Functions - I
   key: functions-1
-  details: |
-    The LendingPool contract is the protocol's principal contract. It exposes all user-oriented operations that may be performed with the Solidity or web3 libraries. The source code is available [here](https://github.com/aave/aave-protocol/blob/master/contracts/lendingpool/LendingPool.sol).
-    To concentrate on method interactions, Web3 code samples remove imports and transactional sections. Join the #developers channel on the [Aave community Discord server](https://discord.gg/fVaDMqT) if you require development assistance.
+  details: >
+    The LendingPool contract is the protocol's principal contract. It exposes
+    all user-oriented operations that may be performed with the Solidity or web3
+    libraries. The source code is available
+    [here](https://github.com/aave/aave-protocol/blob/master/contracts/lendingpool/LendingPool.sol).
+
+    To concentrate on method interactions, Web3 code samples remove imports and
+    transactional sections. Join the #developers channel on the [Aave community
+    Discord server](https://discord.gg/fVaDMqT) if you require development
+    assistance.
+
 
     #### Deposit/Lending
-    Lenders share the interest payments made by borrowers based on the utilization rate multiplied by the average borrowing rate. The yield for depositors increases as reserve utilization increases.
-    Lenders are also entitled to a portion of the Flash Loan fees, equal to 0.09% of the Flash Loan volume.
-    There is no minimum or maximum deposit amount; you may deposit any amount you choose.
+
+    Lenders share the interest payments made by borrowers based on the
+    utilization rate multiplied by the average borrowing rate. The yield for
+    depositors increases as reserve utilization increases.
+
+    Lenders are also entitled to a portion of the Flash Loan fees, equal to
+    0.09% of the Flash Loan volume.
+
+    There is no minimum or maximum deposit amount; you may deposit any amount
+    you choose.
+
 
     #### Methods
+
     #### deposit()
-    **function deposit( address _reserve, uint256 _amount, uint16 _referralCode)**
+
+    **function deposit( address _reserve, uint256 _amount, uint16
+    _referralCode)**
+
     Deposits a certain _amount of an asset specified by the _reserve parameter.
-    In exchange, the caller receives a specific number of aTokens. aTokens can be redeemed for the underlying token in a 1:1 ratio.
-    Please see the referral programme section for further information about _referralCode input. You can use the referral code: 0 during testing.
-    When depositing an ERC-20 token, the LendingPoolCore contract (not the LendingPool contract) must have the required allowance of _amount for the underlying ERC20 of the _reserve asset via approve().
+
+    In exchange, the caller receives a specific number of aTokens. aTokens can
+    be redeemed for the underlying token in a 1:1 ratio.
+
+    Please see the referral programme section for further information about
+    _referralCode input. You can use the referral code: 0 during testing.
+
+    When depositing an ERC-20 token, the LendingPoolCore contract (not the
+    LendingPool contract) must have the required allowance of _amount for the
+    underlying ERC20 of the _reserve asset via approve().
+
     Emitted events: _reserve, _user, _amount, _referral, _timestamp
 
-    **ETH deposits**
-    Because the protocol does not employ an EIP-20 wrapper like wETH for ETH deposits, the deposit() method's amount parameter must match the transaction's msg.value parameter and be included in your deposit() call.
-    E.g: lendingPool.deposit{ value: msg.value }(reserve, msg.value, referralCode)
-    Because ETH is utilised directly in the protocol (rather than an abstraction like WETH), we use a dummy address to represent it: 0xEeeeeEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-    
-    **ERC20 deposits**
-    The _reserve parameter corresponds to the underlying asset's ERC20 contract address.
 
-    Code: https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L753
-    
+    **ETH deposits**
+
+    Because the protocol does not employ an EIP-20 wrapper like wETH for ETH
+    deposits, the deposit() method's amount parameter must match the
+    transaction's msg.value parameter and be included in your deposit() call.
+
+    E.g: lendingPool.deposit{ value: msg.value }(reserve, msg.value,
+    referralCode)
+
+    Because ETH is utilised directly in the protocol (rather than an abstraction
+    like WETH), we use a dummy address to represent it:
+    0xEeeeeEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+
+
+    **ERC20 deposits**
+
+    The _reserve parameter corresponds to the underlying asset's ERC20 contract
+    address.
+
+
+    Code:
+    https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L753
+
+
     The deposit() flow within the protocol:
+
     https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH4HvCIm09jkjFv%2Flending%20pool%20deposit.png?alt=media&token=c92f8256-9d73-41a1-9e96-a3d807425d08 
 
-    #### setUserUseReserveAsCollateral()
-    **function setUserUseReserveAsCollateral(address _reserve, bool _useAsCollateral)**
-    Allow the user's deposit to be used as collateral. Users will only be able to disable deposits that are not being used as collateral at the time.
-    Code: https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L341 
-    
-    **Stable vs Variable Interest Rate**
-    In the short-term, stable rates function as a fixed rate, but they can be rebalanced in the long run in reaction to alterations in the market environment. Depending on supply and demand in Aave, the variable rate can change.
-    The stable rate is the better choice for forecasting how much interest you will have to pay because, as its name suggests, it will remain fairly stable. The variable rate changes over time and, depending on market conditions, could be the optimal rate.
 
+    #### setUserUseReserveAsCollateral()
+
+    **function setUserUseReserveAsCollateral(address _reserve, bool
+    _useAsCollateral)**
+
+    Allow the user's deposit to be used as collateral. Users will only be able
+    to disable deposits that are not being used as collateral at the time.
+
+    Code:
+    https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L341 
+
+
+    **Stable vs Variable Interest Rate**
+
+    In the short-term, stable rates function as a fixed rate, but they can be
+    rebalanced in the long run in reaction to alterations in the market
+    environment. Depending on supply and demand in Aave, the variable rate can
+    change.
+
+    The stable rate is the better choice for forecasting how much interest you
+    will have to pay because, as its name suggests, it will remain fairly
+    stable. The variable rate changes over time and, depending on market
+    conditions, could be the optimal rate.
 - title: AAVE Functionalities in Details - II
   shortTitle: Functions - II
   key: functions-2
-  details: |
+  details: >
     #### Borrow
-    You must deposit any asset to be used as collateral before borrowing.The amount you can borrow depends on the value you have deposited and the readily available liquidity.For instance, if there isn’t enough liquidity or if your health factor (minimum threshold of the collateral = 1, below this value, liquidation of your collateral is triggered) prevents it, you can’t borrow an asset. The loan is repaid with the same asset that you borrowed.
-    For instance, if you borrow 1 ETH, you’ll need to pay back 1 ETH plus interest.
-    In the updated Version 2 of the Aave Protocol, you can also use your collateral to make payments. You can borrow any of the stablecoins like USDC, DAI, USDT, etc. if you want to repay the loan based on the price of the USD.
+
+    You must deposit any asset to be used as collateral before borrowing.The
+    amount you can borrow depends on the value you have deposited and the
+    readily available liquidity.For instance, if there isn’t enough liquidity or
+    if your health factor (minimum threshold of the collateral = 1, below this
+    value, liquidation of your collateral is triggered) prevents it, you can’t
+    borrow an asset. The loan is repaid with the same asset that you borrowed.
+
+    For instance, if you borrow 1 ETH, you’ll need to pay back 1 ETH plus
+    interest.
+
+    In the updated Version 2 of the Aave Protocol, you can also use your
+    collateral to make payments. You can borrow any of the stablecoins like
+    USDC, DAI, USDT, etc. if you want to repay the loan based on the price of
+    the USD.
+
 
     #### Methods
-    #### borrow()
-    **function borrow(address _reserve, uint256 _amount, uint256 _interestRateMode, uint16 _referralCode)** 
-    Transfers a certain amount of the asset identified by the _reserve parameter to the msg.sender, provided the caller has deposited enough collateral to fund the borrow in advance.
-    Every loan can be opened in either a fixed or variable rate mode. Borrows have an indefinite term and no payback date. In the event of market swings, a borrow position is liquidated if the collateral price falls below a specific threshold. Please read the White Paper to learn more about the stable rate economy.
-    Please see the [referral programme section](https://docs.aave.com/developers/v/1.0/integrating-aave/referral-program) for further information about _referralCode input. You can use the referral code: 0 during testing.
-    Emitted events: _reserve, _user, _amount, _referral, _timestamp, _borrowRateMode, _borrowRate, _originationFee, _borrowBalanceIncrease
 
-    Code: https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L219 
-    
+    #### borrow()
+
+    **function borrow(address _reserve, uint256 _amount, uint256
+    _interestRateMode, uint16 _referralCode)** 
+
+    Transfers a certain amount of the asset identified by the _reserve parameter
+    to the msg.sender, provided the caller has deposited enough collateral to
+    fund the borrow in advance.
+
+    Every loan can be opened in either a fixed or variable rate mode. Borrows
+    have an indefinite term and no payback date. In the event of market swings,
+    a borrow position is liquidated if the collateral price falls below a
+    specific threshold. Please read the White Paper to learn more about the
+    stable rate economy.
+
+    Please see the [referral programme
+    section](https://docs.aave.com/developers/v/1.0/integrating-aave/referral-program)
+    for further information about _referralCode input. You can use the referral
+    code: 0 during testing.
+
+    Emitted events: _reserve, _user, _amount, _referral, _timestamp,
+    _borrowRateMode, _borrowRate, _originationFee, _borrowBalanceIncrease
+
+
+    Code:
+    https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L219 
+
+
     The borrow() flow within the protocol:
+
     https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH3GOEvYvbizwHC%2Flending%20pool%20borrow.png?alt=media&token=2031b536-733e-4a8a-866c-23c86706e641 
 
-    #### repay()
-    **function repay( address _reserve, uint256 _amount, address payable _onBehalfOf)**
-    Repay a borrowed asset in whole or in part. The _onBehalfOf parameter can be used to repay a different user's debt.
-    When a third-party repays another user's debt on their behalf, the third-party address must approve() the LendingPoolCore contract (which is separate from the LendingPool contract) with the _amount of the underlying ERC20 of the _reserve contract.
-    Emitted events: _reserve, _user, _repayer, _fees, _referral, _timestamp, _amountMinusFees, _borrowBalanceIncrease
 
-    Code: https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L249 
+    #### repay()
+
+    **function repay( address _reserve, uint256 _amount, address payable
+    _onBehalfOf)**
+
+    Repay a borrowed asset in whole or in part. The _onBehalfOf parameter can be
+    used to repay a different user's debt.
+
+    When a third-party repays another user's debt on their behalf, the
+    third-party address must approve() the LendingPoolCore contract (which is
+    separate from the LendingPool contract) with the _amount of the underlying
+    ERC20 of the _reserve contract.
+
+    Emitted events: _reserve, _user, _repayer, _fees, _referral, _timestamp,
+    _amountMinusFees, _borrowBalanceIncrease
+
+
+    Code:
+    https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L249 
+
 
     The repay() flow within the protocol: 
+
     https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH9NighH7i_73lI%2Flending%20pool%20repay.png?alt=media&token=cb6e102e-222b-412a-92f0-763ae34e7cce 
 
+
     #### swapBorrowRateMode()
+
     **function swapBorrowRateMode(address _reserve)**
+
     Changes the borrow rate modes of the msg.sender from stable to variable.
-    Code: https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L326 
+
+    Code:
+    https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L326 
+
 
     #### rebalanceStableBorrowRate()
+
     **function rebalanceStableBorrowRate(address _reserve, address _user)**
+
     Rebalances the stable rate of _user
-    Code: https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L336 
-    
-    The rebalance flow for stable rates in the protocol: https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH7rY4WFE5jRwrB%2Flending%20pool%20rebalancing.png?alt=media&token=8a442d62-6087-4adf-b27b-163478547f79 
-    
+
+    Code:
+    https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L336 
+
+
+    The rebalance flow for stable rates in the protocol:
+    https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH7rY4WFE5jRwrB%2Flending%20pool%20rebalancing.png?alt=media&token=8a442d62-6087-4adf-b27b-163478547f79 
+
+
     #### liquidationCall()
-    **function liquidationCall(address _collateral, address _reserve, address _user, uint256 _purchaseAmount, bool _receiveaToken)**
+
+    **function liquidationCall(address _collateral, address _reserve, address
+    _user, uint256 _purchaseAmount, bool _receiveaToken)**
+
     Positions with a health factor less than one should be liquidated.
-    When a position's health factor falls below one, liquidators repay part or all of the outstanding borrowed amount on behalf of the borrower in exchange for a discounted quantity of collateral (sometimes known as a liquidation "bonus"). Liquidators have the option of receiving an equal quantity of collateral aTokens or the underlying asset directly. When the liquidation is completed successfully, the position's health factor is enhanced, bringing it above 1.
-    A close factor determines how much collateral a liquidator can close. The current close factor is 0.5. In other words, liquidators can only liquidate up to 50% of the amount owing in a position. This is the amount of the liquidation discount.
-    Liquidators must approve() the LendingPoolCore contract (which is distinct from the LendingPool contract) in order to use the underlying ERC20 of the _reserve asset for the liquidation.
-    **NOTE**: In most cases, profitable liquidators will choose to liquidate as much of the _user position as possible.
-    purchaseAmount parameter can be set to uint(-1) and the protocol will proceed with the largest liquidation allowed by the close factor.
-    For ETH liquidations, the transaction's msg.value should be identical to the _purchaseAmount parameter.
+
+    When a position's health factor falls below one, liquidators repay part or
+    all of the outstanding borrowed amount on behalf of the borrower in exchange
+    for a discounted quantity of collateral (sometimes known as a liquidation
+    "bonus"). Liquidators have the option of receiving an equal quantity of
+    collateral aTokens or the underlying asset directly. When the liquidation is
+    completed successfully, the position's health factor is enhanced, bringing
+    it above 1.
+
+    A close factor determines how much collateral a liquidator can close. The
+    current close factor is 0.5. In other words, liquidators can only liquidate
+    up to 50% of the amount owing in a position. This is the amount of the
+    liquidation discount.
+
+    Liquidators must approve() the LendingPoolCore contract (which is distinct
+    from the LendingPool contract) in order to use the underlying ERC20 of the
+    _reserve asset for the liquidation.
+
+    **NOTE**: In most cases, profitable liquidators will choose to liquidate as
+    much of the _user position as possible.
+
+    purchaseAmount parameter can be set to uint(-1) and the protocol will
+    proceed with the largest liquidation allowed by the close factor.
+
+    For ETH liquidations, the transaction's msg.value should be identical to the
+    _purchaseAmount parameter.
+
     To determine a user's health factor, use getUserAccountData().
-    Code: https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L360 
-    
+
+    Code:
+    https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L360 
+
+
     The liquidation flow in the protocol:
+
     https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH6dX0q9LDXBn9X%2Flending%20pool%20liquidation.png?alt=media&token=6701e381-1fd1-42ce-919b-39da57434c57 
-
-
 - title: AAVE Functionalities in Details - III
   shortTitle: Functions - III
   key: functions-3
-  details: |
-    Flash Loans are special transactions that allow you to borrow an asset as long as the borrowed amount (plus a fee) is returned before the transaction ends (also called One Block Borrows). These transactions do not necessitate the provision of collateral by the user prior to the transaction. Because there is no real-world equivalent for Flash Loans, some basic grasp of how the state is managed within blocks in blockchains is required.
-    Due to the technical understanding necessary to execute one, flash loans are a feature developed for developers. To use this feature, you must have a solid understanding of EVM, programming, and smart contracts. To do a Flash Loan, you must first create a contract requesting a Flash Loan. The contract must follow the instructions and repay the loan plus interest and fees in the same transaction.
+  details: >
+    Flash Loans are special transactions that allow you to borrow an asset as
+    long as the borrowed amount (plus a fee) is returned before the transaction
+    ends (also called One Block Borrows). These transactions do not necessitate
+    the provision of collateral by the user prior to the transaction. Because
+    there is no real-world equivalent for Flash Loans, some basic grasp of how
+    the state is managed within blocks in blockchains is required.
+
+    Due to the technical understanding necessary to execute one, flash loans are
+    a feature developed for developers. To use this feature, you must have a
+    solid understanding of EVM, programming, and smart contracts. To do a Flash
+    Loan, you must first create a contract requesting a Flash Loan. The contract
+    must follow the instructions and repay the loan plus interest and fees in
+    the same transaction.
+
 
     Can you use Flash Loans without knowing how to code?
-    Yes, there are currently programs available that enable end users to gain from Flash Loans, such as [defisaver](https://defisaver.com/) and [collateralswap](https://collateralswap.com/). At https://medium.com/aave/sneak-peek-at-flash-loans-f2b28a394d62 , you may find more application cases.
-    Even those without coding experience may use Flash Loans because of user interfaces like the one [furucombo](https://furucombo.app/) offers. Details are provided below: https://medium.com/furucombo/create-flashloan-combo-on-furucombo-c7c3b23267f0 
+
+    Yes, there are currently programs available that enable end users to gain
+    from Flash Loans, such as [defisaver](https://defisaver.com/) and
+    [collateralswap](https://collateralswap.com/). At
+    https://medium.com/aave/sneak-peek-at-flash-loans-f2b28a394d62 , you may
+    find more application cases.
+
+    Even those without coding experience may use Flash Loans because of user
+    interfaces like the one [furucombo](https://furucombo.app/) offers. Details
+    are provided below:
+    https://medium.com/furucombo/create-flashloan-combo-on-furucombo-c7c3b23267f0 
+
 
     Aave v3 provides two flash loan options:
-    **flashLoan**: Allows the borrower to obtain liquidity from various reserves in a single flashLoan transaction. In this instance, the borrower has the option of opening a stable or variable rate debt position backed by supplied collateral or credit delegation.
-    **NOTE**: For qualified flashBorrowers, the loan charge is waived (managed by ACLManager)
-    **flashLoanSimple**: Allows the borrower to access a single reserve of liquidity for the transaction. In this situation, the flash loan fee is not waived, and the borrower is not permitted to open any debt positions at the conclusion of the transaction. For individuals attempting to take advantage of a simple flash loan with a single reserve asset, this strategy is gas efficient.
+
+    **flashLoan**: Allows the borrower to obtain liquidity from various reserves
+    in a single flashLoan transaction. In this instance, the borrower has the
+    option of opening a stable or variable rate debt position backed by supplied
+    collateral or credit delegation.
+
+    **NOTE**: For qualified flashBorrowers, the loan charge is waived (managed
+    by ACLManager)
+
+    **flashLoanSimple**: Allows the borrower to access a single reserve of
+    liquidity for the transaction. In this situation, the flash loan fee is not
+    waived, and the borrower is not permitted to open any debt positions at the
+    conclusion of the transaction. For individuals attempting to take advantage
+    of a simple flash loan with a single reserve asset, this strategy is gas
+    efficient.
+
 
     #### Flow of Execution
-    A helpful mental model to consider when creating your solution for developers:
-    * Your contract contacts the Pool contract and requests a Flash Loan for a specific amount(s) of reserve(s) using flashLoanSimple() or flashLoan() ().
-    * The Pool sends the requested amounts of reserves to your contract after some sanity checks, then executes executeOperation() on the receiver contract.
-    * Your contract now does any arbitrary operation in its code while holding the flash borrowed amount(s).
-    * When you finish your code for a flashLoanSimple, you approve Pool for the flash loaned amount + charge.
-    * If you are executing flashLoan, then all reserves must be granted for flash borrowed amount + fee or adequate collateral or credit delegation must be provided to start debt position, based on the interestRateMode passed for the asset.
-    * If the amount owed is not available (due to a lack of balance or authorisation, or insufficient debt collateral), the transaction is reverted.
-    * All of the preceding occurs in a single transaction (hence in a single ethereum block).
+
+    A helpful mental model to consider when creating your solution for
+    developers:
+
+    * Your contract contacts the Pool contract and requests a Flash Loan for a
+    specific amount(s) of reserve(s) using flashLoanSimple() or flashLoan() ().
+
+    * The Pool sends the requested amounts of reserves to your contract after
+    some sanity checks, then executes executeOperation() on the receiver
+    contract.
+
+    * Your contract now does any arbitrary operation in its code while holding
+    the flash borrowed amount(s).
+
+    * When you finish your code for a flashLoanSimple, you approve Pool for the
+    flash loaned amount + charge.
+
+    * If you are executing flashLoan, then all reserves must be granted for
+    flash borrowed amount + fee or adequate collateral or credit delegation must
+    be provided to start debt position, based on the interestRateMode passed for
+    the asset.
+
+    * If the amount owed is not available (due to a lack of balance or
+    authorisation, or insufficient debt collateral), the transaction is
+    reverted.
+
+    * All of the preceding occurs in a single transaction (hence in a single
+    ethereum block).
+
 
     #### Flash Loan Applications
-    Aave Flash Loans are already used for the liquidity swap functionality in Aave V3. Other real-world instances include: arbitrage between assets without requiring the main amount to be present.
-    Liquidating borrow positions without having to repay the debt of the positions and paying off flashLoan amount + charge with discounted collateral claimed.
+
+    Aave Flash Loans are already used for the liquidity swap functionality in
+    Aave V3. Other real-world instances include: arbitrage between assets
+    without requiring the main amount to be present.
+
+    Liquidating borrow positions without having to repay the debt of the
+    positions and paying off flashLoan amount + charge with discounted
+    collateral claimed.
+
 
     #### Fee for a Flash loan
-    The flash loan charge is set to 0.09% at deployment and can be changed via Governance Vote. To obtain the current value, use FLASHLOAN PREMIUM TOTAL.
-    The LPs (liquidity providers) and the protocol treasury can split the flashloan charge. The FLASHLOAN PREMIUM TOTAL variable represents the total charge paid by borrowers, which includes:
+
+    The flash loan charge is set to 0.09% at deployment and can be changed via
+    Governance Vote. To obtain the current value, use FLASHLOAN PREMIUM TOTAL.
+
+    The LPs (liquidity providers) and the protocol treasury can split the
+    flashloan charge. The FLASHLOAN PREMIUM TOTAL variable represents the total
+    charge paid by borrowers, which includes:
+
     Fee to LP: FLASHLOAN_PREMIUM_TOTAL - FLASHLOAN_PREMIUM_TO_PROTOCOL
+
     Fee to Protocol: FLASHLOAN_PREMIUM_TO_PROTOCOL
+
     At initialization, FLASHLOAN_PREMIUM_TO_PROTOCOL is 0.
 
+
     #### First step: Setting Up
-    By implementing the relevant executeOperation() function, your contract that receives the amounts from flash loans must comply with the IFlashLoanSimpleReceiver.sol or IFlashLoanReceiver.sol interface.
-    Additionally, keep in mind that since the owing sums will be deducted from your contract, your contract must let the Pool to deduct those monies in order to repay the flash loan amount plus premiums.
+
+    By implementing the relevant executeOperation() function, your contract that
+    receives the amounts from flash loans must comply with the
+    IFlashLoanSimpleReceiver.sol or IFlashLoanReceiver.sol interface.
+
+    Additionally, keep in mind that since the owing sums will be deducted from
+    your contract, your contract must let the Pool to deduct those monies in
+    order to repay the flash loan amount plus premiums.
+
 
     #### Second Step: Calling flashLoan() or flashLoanSimple()
-    To invoke either of the Pool's two flash lending methods, we must provide the necessary parameters. There are three possibilities:
+
+    To invoke either of the Pool's two flash lending methods, we must provide
+    the necessary parameters. There are three possibilities:
+
     * From an EOA ('normal' Ethereum account)
       - To use an EOA, send a transaction to the appropriate Pool and use the flashLoan() or flashLoanSimple() functions. For parameter information, see the Pool API documentation, making sure to use your contract address from step 1 for the receiverAddress.
     * From a different contract
       - As with transmitting a transaction from an EOA, make sure the receiverAddress matches your contract address from step 1.
     * From the same contract
       - Utilize address(this) for the receiverAddress parameter in the flash loan method if you wish to use the same contract as in step 1.
-    **Note**: Never keep funds permanently on your FlashLoanReceiverBase contract as they could be exposed to a ['griefing' attack](https://ethereum.stackexchange.com/a/92457/19365), where the stored funds are used by an attacker.
+    **Note**: Never keep funds permanently on your FlashLoanReceiverBase
+    contract as they could be exposed to a ['griefing'
+    attack](https://ethereum.stackexchange.com/a/92457/19365), where the stored
+    funds are used by an attacker.
+
 
     #### Final Step: Completing the flash loan
-    If you used flashLoanSimple() or interestRateMode=0 in flashLoan() for any of the assets in the modes parameter, you will need to repay the flash loaned amounts once you have completed your logic with the flash loaned assets (in your executeOperation() method).
+
+    If you used flashLoanSimple() or interestRateMode=0 in flashLoan() for any
+    of the assets in the modes parameter, you will need to repay the flash
+    loaned amounts once you have completed your logic with the flash loaned
+    assets (in your executeOperation() method).
+
     * Repaying a flash loaned asset
       - Check that your contract includes the appropriate amount + premium to repay the borrowed asset. This can be calculated by adding the relevant entries in the amounts and premiums array given to the executeOperation() function. \
       - You are not required to return the owing sum to the Pool. The cash will be automatically withdrawn at the end of your operation.
