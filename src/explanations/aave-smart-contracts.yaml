@@ -266,12 +266,12 @@
     previously developed on Aave v1, you should be aware of the following
     changes:
 
-    * There is no longer a `LendingPoolCore` contract in Aave v2 that retains
-    all of the protocol's assets. Assets are held directly in the linked aToken
+    * There is no longer a LendingPoolCore contract in Aave v2 that retains all
+    of the protocol's assets. Assets are held directly in the linked aToken
     contracts, with the LendingPool contract serving as the protocol's "core."
 
-    * Almost all actions in Aave v2 should be executed via the `LendingPool`
-    contract. This differs from v1, when a `redemption/withdrawal` of aTokens
+    * Almost all actions in Aave v2 should be executed via the LendingPool
+    contract. This differs from v1, when a redemption/withdrawal of aTokens
     required a call on the aToken contract.
 
     * After depositing collateral into the protocol, a user can easily delegate
@@ -299,7 +299,7 @@
     simplifies integrations and Aave v2 development.
 
     The v3 improved features enable new use cases, sparking a flood of
-    innovation from users and developers. Aave V3 generates Improvements in all
+    innovation from users and developers. Aave V3 generates I mprovements in all
     of the these areas - capital efficiency, security, decentralisation, and UX
     - while simultaneously delivering new functions to harness the capabilities
     of rollups and the developing ecosystem of rival L1s.
@@ -344,7 +344,6 @@
 
     ![Architecture](https://github.com/DoDAO-io/dodao-aave-developer-1-course/blob/6bd13f67bbb027bc58280c103f78b0b29d5ad810/images/architechture.png?raw=true)
 
-
     `Reference:
     https://docs.aave.com/developers/v/2.0/the-core-protocol/protocol-overview`
 
@@ -353,16 +352,16 @@
 
     The main contracts in Aave and their purposes are:
 
-    * `LendingPool`: The main entry point into the Aave Protocol. Most
+    * LendingPool: The main entry point into the Aave Protocol. Most
     interactions with Aave will happen via the LendingPool, including:
-      - `deposit()`
-      - `borrow()`
-      - `repay()`
-      - `swapBorrowRateMode()`
-      - `setUserUseReserveAsCollateral()`
-      - `withdraw()`
-      - `flashloan()`
-      - `liquidationCall()`
+      - deposit()
+      - borrow()
+      - repay()
+      - swapBorrowRateMode()
+      - setUserUseReserveAsCollateral()
+      - withdraw()
+      - flashloan()
+      - liquidationCall()
     * LendingPoolAddressesProvider: The protocol's primary addresses register
     for specific marketplaces. The most recent contract addresses should be
     obtained from this contract by making the necessary calls.
