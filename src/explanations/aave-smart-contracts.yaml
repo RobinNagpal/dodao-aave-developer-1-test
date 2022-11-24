@@ -511,6 +511,7 @@
 
     </div>
 
+
     #### `function setUserUseReserveAsCollateral(address _reserve, bool
     _useAsCollateral)`
 
