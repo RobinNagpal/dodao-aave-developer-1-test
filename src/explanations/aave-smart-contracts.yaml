@@ -534,9 +534,9 @@
     will have to pay because, as its name suggests, it will remain fairly
     stable. The variable rate changes over time and, depending on market
     conditions, could be the optimal rate.
-- title: AAVE Functionalities in Details - II
+- key: functions-2
+  title: AAVE Functionalities in Details - II
   shortTitle: Functions - II
-  key: functions-2
   details: >
     #### Borrow
 
@@ -582,13 +582,20 @@
     _borrowRateMode, _borrowRate, _originationFee, _borrowBalanceIncrease
 
 
-    Code:
-    https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L219 
+    [Code
+    here](https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L219
+    )
 
 
     The borrow() flow within the protocol:
 
-    https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH3GOEvYvbizwHC%2Flending%20pool%20borrow.png?alt=media&token=2031b536-733e-4a8a-866c-23c86706e641 
+    <div class="flex justify-center max-h-96">
+
+    <img
+    src="https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH3GOEvYvbizwHC%2Flending%20pool%20borrow.png?alt=media&token=2031b536-733e-4a8a-866c-23c86706e641"
+    />
+
+    </div> 
 
 
     #### repay()
@@ -608,13 +615,19 @@
     _amountMinusFees, _borrowBalanceIncrease
 
 
-    Code:
-    https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L249 
+    [Code
+    here](https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L249)
 
 
     The repay() flow within the protocol: 
 
-    https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH9NighH7i_73lI%2Flending%20pool%20repay.png?alt=media&token=cb6e102e-222b-412a-92f0-763ae34e7cce 
+    <div class="flex justify-center max-h-96">
+
+    <img
+    src="https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH9NighH7i_73lI%2Flending%20pool%20repay.png?alt=media&token=cb6e102e-222b-412a-92f0-763ae34e7cce"
+    />
+
+    </div>  
 
 
     #### swapBorrowRateMode()
@@ -623,8 +636,8 @@
 
     Changes the borrow rate modes of the msg.sender from stable to variable.
 
-    Code:
-    https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L326 
+    [Code
+    here](https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L326) 
 
 
     #### rebalanceStableBorrowRate()
@@ -633,12 +646,19 @@
 
     Rebalances the stable rate of _user
 
-    Code:
-    https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L336 
+    [Code
+    here](https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L336) 
 
 
-    The rebalance flow for stable rates in the protocol:
-    https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH7rY4WFE5jRwrB%2Flending%20pool%20rebalancing.png?alt=media&token=8a442d62-6087-4adf-b27b-163478547f79 
+    The rebalance flow for stable rates in the protocol: 
+
+    <div class="flex justify-center max-h-96">
+
+    <img
+    src="https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH7rY4WFE5jRwrB%2Flending%20pool%20rebalancing.png?alt=media&token=8a442d62-6087-4adf-b27b-163478547f79"
+    />
+
+    </div>   
 
 
     #### liquidationCall()
@@ -676,13 +696,19 @@
 
     To determine a user's health factor, use getUserAccountData().
 
-    Code:
-    https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L360 
+    [Code
+    Here](https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L360) 
 
 
     The liquidation flow in the protocol:
 
-    https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH6dX0q9LDXBn9X%2Flending%20pool%20liquidation.png?alt=media&token=6701e381-1fd1-42ce-919b-39da57434c57 
+    <div class="flex justify-center max-h-96">
+
+    <img
+    src="https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH6dX0q9LDXBn9X%2Flending%20pool%20liquidation.png?alt=media&token=6701e381-1fd1-42ce-919b-39da57434c57"
+    />
+
+    </div>   
 - title: AAVE Functionalities in Details - III
   shortTitle: Functions - III
   key: functions-3
