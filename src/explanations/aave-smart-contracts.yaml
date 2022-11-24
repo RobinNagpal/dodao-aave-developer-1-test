@@ -497,16 +497,14 @@
     **ERC20 deposits**
 
     The _reserve parameter corresponds to the underlying asset's ERC20 contract
-    address.
-
-
-    Code:
-    https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L753
+    address. [Code
+    here](https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L753)
 
 
     The deposit() flow within the protocol:
 
-    https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH4HvCIm09jkjFv%2Flending%20pool%20deposit.png?alt=media&token=c92f8256-9d73-41a1-9e96-a3d807425d08 
+    [!Borrow
+    Image](https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH4HvCIm09jkjFv%2Flending%20pool%20deposit.png?alt=media&token=c92f8256-9d73-41a1-9e96-a3d807425d08) 
 
 
     #### `function setUserUseReserveAsCollateral(address _reserve, bool
@@ -514,10 +512,9 @@
 
 
     Allow the user's deposit to be used as collateral. Users will only be able
-    to disable deposits that are not being used as collateral at the time.
-
-    Code:
-    https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L341 
+    to disable deposits that are not being used as collateral at the time. [Code
+    here](https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L341
+    )
 
 
     **Stable vs Variable Interest Rate**
