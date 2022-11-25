@@ -859,7 +859,3 @@
     * Getting into debt (i.e. not immediately paying back)
       - If you used mode=1 or mode=2 for any of the assets in the modes parameter, the address put in for onBehalfOf will incur the obligation if the onBehalfOf address previously authorised the msg.sender to incur debts on their behalf.
       - This means that you can have some assets that are promptly paid back while others incur debt.
-- key: some-neeeew
-  shortTitle: Some neeeew
-  details: Some neeeewSome neeeew
-  title: Some neeeew
