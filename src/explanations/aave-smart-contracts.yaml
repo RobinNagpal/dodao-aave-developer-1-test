@@ -1,96 +1,3 @@
-- key: aave-smart-contracts-intro
-  shortTitle: Introduction
-  details: >
-    Aave is a decentralized finance protocol that facilitates lending and
-    borrowing of cryptocurrency tokens usAave ing diverse algorithms and smart
-    contracts without the presence of centralized intermediaries. 
-
-    It is a non-custodial liquidity protocol that allows users to participate as
-    depositors or borrowers. Depositors provide liquidity to the market to earn
-    a passive income, while borrowers are able to borrow in an
-    overcollateralized manner.
-
-
-    Aave's transition from a decentralized P2P lending approach (a direct loan
-    relationship between lenders and borrowers, similar to ETHLend) to a
-    pool-based strategy is marked by the creation of the Aave Protocol. By
-    putting cryptocurrency in a pool contract, lenders offer liquidity. The
-    pooled funds can also be borrowed inside the same contract by pledging
-    collateral. Loans rely on the pooled money as well as the quantities
-    borrowed and their collateral rather than on individual matching. This makes
-    it possible to quickly lend money with terms that depend on the condition of
-    the pool. Figure 1 below shows a simplified version of the protocol's
-    structure.
-
-
-    ![AAVE](https://github.com/DoDAO-io/dodao-aave-developer-1-course/blob/6bd13f67bbb027bc58280c103f78b0b29d5ad810/images/aave.jpg?raw=true)
-
-    `Reference: https://docs.aave.com/developers/v/2.0/`
-
-
-    The participants lending the tokens get interest on their loan and the
-    participants borrowing the tokens pay interest. An individual can lend and
-    borrow simultaneously via Aave.
-
-    The working mechanism of Aave involves allocating a platform specific token,
-    called aTokens to a user's crypto investment. 
-
-    This is what lenders get when they deposit their assets into the pool.
-
-    For instance, a user who deposits Ethereum in Aave will hold aETH on Aave. 
-
-    aToken is based on a particular crypto asset and the interest rate each
-    aToken earns is specific to the token deposited, depending on the supply and
-    demand for the original coin.
-
-
-    Aave Protocol was created with security in mind and has been audited by
-    various auditors.
-
-    The White Paper provides a more in-depth look at the protocol, economics,
-    and how it operates.
-
-    On Github, the Aave Protocol repository can be found here:
-    https://github.com/aave/.
-
-
-    #### Lending and borrowing
-
-    Aave has a smart contract based working mechanism wherein the interest rates
-    are determined by different algorithms.
-
-    The depositors lend the funds in the liquidity pools and earn interest,
-    similarly borrowers can borrow the funds from the liquidity pools. 
-
-
-    The interest rate for both borrowers and lenders is decided algorithmically:
-
-
-    * **Interest rate for Borrowers**: The interest rate to be paid by the
-    borrowers depends on the cost of money and the amount of funds available in
-    the pool at a specific time.The amount of funds present in the pool has an
-    inverse relationship with the interest rate. As funds are borrowed from the
-    pool, the amount of funds available decreases which raises the interest
-    rate. 
-
-
-    * **Interest rate for Lenders**: The interest rate received by the lenders
-    corresponds to the earn rate, with the algorithm safeguarding a liquidity
-    reserve to guarantee withdrawals at any time.
-
-
-    And since cryptocurrency is highly volatile, borrowing in Aave demands
-    overcollateralization. 
-
-    For example-  Kevin wants to borrow $500 worth of ETH from the AAve
-    protocol. In order to do so, Kevin will have to put up more than that amount
-    in a different cryptocurrency. If the price falls and the amount in
-    collateral no longer covers the amount borrowed, the collateral can be
-    liquidated, meaning the protocol takes it to cover the cost of the loan.
-
-    A liquidation event happens when the price of the collateral drops below the
-    liquidation threshold.
-  title: Introduction
 - title: Important Tech Terms
   shortTitle: Tech Terms
   key: terminology
@@ -253,6 +160,99 @@
     wants to receive aTokens, false
     otherwise.                                                                                     
     |
+- key: aave-smart-contracts-intro
+  shortTitle: Introduction
+  details: >
+    Aave is a decentralized finance protocol that facilitates lending and
+    borrowing of cryptocurrency tokens usAave ing diverse algorithms and smart
+    contracts without the presence of centralized intermediaries. 
+
+    It is a non-custodial liquidity protocol that allows users to participate as
+    depositors or borrowers. Depositors provide liquidity to the market to earn
+    a passive income, while borrowers are able to borrow in an
+    overcollateralized manner.
+
+
+    Aave's transition from a decentralized P2P lending approach (a direct loan
+    relationship between lenders and borrowers, similar to ETHLend) to a
+    pool-based strategy is marked by the creation of the Aave Protocol. By
+    putting cryptocurrency in a pool contract, lenders offer liquidity. The
+    pooled funds can also be borrowed inside the same contract by pledging
+    collateral. Loans rely on the pooled money as well as the quantities
+    borrowed and their collateral rather than on individual matching. This makes
+    it possible to quickly lend money with terms that depend on the condition of
+    the pool. Figure 1 below shows a simplified version of the protocol's
+    structure.
+
+
+    ![AAVE](https://github.com/DoDAO-io/dodao-aave-developer-1-course/blob/6bd13f67bbb027bc58280c103f78b0b29d5ad810/images/aave.jpg?raw=true)
+
+    `Reference: https://docs.aave.com/developers/v/2.0/`
+
+
+    The participants lending the tokens get interest on their loan and the
+    participants borrowing the tokens pay interest. An individual can lend and
+    borrow simultaneously via Aave.
+
+    The working mechanism of Aave involves allocating a platform specific token,
+    called aTokens to a user's crypto investment. 
+
+    This is what lenders get when they deposit their assets into the pool.
+
+    For instance, a user who deposits Ethereum in Aave will hold aETH on Aave. 
+
+    aToken is based on a particular crypto asset and the interest rate each
+    aToken earns is specific to the token deposited, depending on the supply and
+    demand for the original coin.
+
+
+    Aave Protocol was created with security in mind and has been audited by
+    various auditors.
+
+    The White Paper provides a more in-depth look at the protocol, economics,
+    and how it operates.
+
+    On Github, the Aave Protocol repository can be found here:
+    https://github.com/aave/.
+
+
+    #### Lending and borrowing
+
+    Aave has a smart contract based working mechanism wherein the interest rates
+    are determined by different algorithms.
+
+    The depositors lend the funds in the liquidity pools and earn interest,
+    similarly borrowers can borrow the funds from the liquidity pools. 
+
+
+    The interest rate for both borrowers and lenders is decided algorithmically:
+
+
+    * **Interest rate for Borrowers**: The interest rate to be paid by the
+    borrowers depends on the cost of money and the amount of funds available in
+    the pool at a specific time.The amount of funds present in the pool has an
+    inverse relationship with the interest rate. As funds are borrowed from the
+    pool, the amount of funds available decreases which raises the interest
+    rate. 
+
+
+    * **Interest rate for Lenders**: The interest rate received by the lenders
+    corresponds to the earn rate, with the algorithm safeguarding a liquidity
+    reserve to guarantee withdrawals at any time.
+
+
+    And since cryptocurrency is highly volatile, borrowing in Aave demands
+    overcollateralization. 
+
+    For example-  Kevin wants to borrow $500 worth of ETH from the AAve
+    protocol. In order to do so, Kevin will have to put up more than that amount
+    in a different cryptocurrency. If the price falls and the amount in
+    collateral no longer covers the amount borrowed, the collateral can be
+    liquidated, meaning the protocol takes it to cover the cost of the loan.
+
+    A liquidation event happens when the price of the collateral drops below the
+    liquidation threshold.
+  title: Introduction
 - key: architecture
   title: AAVE Architecture
   shortTitle: Architecture
