@@ -873,14 +873,12 @@
         },
         {
           "uuid": "8b2485fe-7a9b-4dee-9e65-348c1dc7a66c",
-          "title": "Introduction to AAVE Smart Contracts",
-          "shortTitle": "Introduction",
+          "shortTitle": "V3 contracts",
+          "details": "This video enables learners to know about\n  * AAVE v3 features\n  * Build on top of AAVE\n",
+          "title": "Introduction to AAVE V3 Smart Contracts",
           "type": "YoutubeVideo",
           "url": "https://www.youtube.com/watch?v=LzaS8IiqnPY",
-          "subTopics": [
-            "aave-smart-contracts-intro"
-          ],
-          "details": "This video enables learners to know about\n  * AAVE v3 features\n  * Build on top of AAVE\n"
+          "subTopics": []
         }
       ],
       "summaries": [
