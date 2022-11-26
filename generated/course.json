@@ -864,9 +864,9 @@
       "readings": [
         {
           "uuid": "7441eb5f-68f3-40de-b12f-80dc17c80b2c",
-          "shortTitle": "Introduction",
+          "shortTitle": "V2 Contracts",
           "details": "This video enables learners to know about\n  * AAVE\n  * Main protocol features\n  * What's new in v2 protocol\n  * Resources\n",
-          "title": "Introduction to AAVE Smart Contracts",
+          "title": "Introduction to AAVE V2 Smart Contracts",
           "type": "YoutubeVideo",
           "url": "https://www.youtube.com/watch?v=AMAMvKc-O2s",
           "subTopics": []
