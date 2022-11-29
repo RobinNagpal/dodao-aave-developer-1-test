@@ -182,7 +182,7 @@
     with the header: "Content-Type: application/json" and the body comprising of
     your query on one line in quotations. As an example:
 
-    ```
+    ```javascript
 
     {"query": "{ reserves (where: {usageAsCollateralEnabled: true})  { id name
     price {id} liquidityRate variableBorrowRate stableBorrowRate}}" }
