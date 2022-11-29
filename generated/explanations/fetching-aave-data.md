@@ -77,13 +77,16 @@ If you are unable to utilize a client library (for example, while querying using
 {"query": "{ reserves (where: {usageAsCollateralEnabled: true})  { id name price {id} liquidityRate variableBorrowRate stableBorrowRate}}" }
 ```
 
+ 
+ **Graphql Queries**        
+
 #### Examples of Queries
 
 We'll be using the mainnet Big uints GraphQL endpoints in the queries below. These queries can be copied and pasted into the Graph playground links.
 
 ##### Reserve Data
 If we want to receive a list of all the reserves that can be used as collateral, as well as the interest rates for each reserve, we can use the following query:
-```
+```graphql
 {
   reserves (where: {
     usageAsCollateralEnabled: true
@@ -98,9 +101,9 @@ If we want to receive a list of all the reserves that can be used as collateral,
     stableBorrowRate
   }
 }
-```
+```=
 We would utilise the reserves ERC20 token address to retrieve data for a certain reserve. For the Chainlink reserve, for example:
-```
+```graphql
 {
   reserve(id: "0x514910771af9ca656af840dff83e8264ecf986ca0x24a42fd28c976a61df5d00d0599c34c4f90748c8") { // LINK
     symbol
@@ -113,7 +116,7 @@ We would utilise the reserves ERC20 token address to retrieve data for a certain
 ```
 
 If we wish to retrieve historical interest rate data for a specific reserve and paginate through the records, our query may look like this:
-```
+```graphql
 {
   reserve (id: "0x0000000000085d4780b73119b644ae5ecd22b3760x24a42fd28c976a61df5d00d0599c34c4f90748c8") { // TUSD
     id
@@ -131,7 +134,7 @@ If we wish to retrieve historical interest rate data for a specific reserve and 
 ##### User Data
 When an address communicates with the Aave Protocol, a UserReserve is generated, with the user ID equal to the user's address plus the reserve's ID (which is the ERC20 token address).
 To obtain information on a certain UserReserve:
-```
+```graphql
 {
   userReserve(id: "USER_ADDRESS_AND_RESERVE_ADDRESS") {
     reserve {
@@ -146,7 +149,7 @@ To obtain information on a certain UserReserve:
 ```
 
 To retrieve all reserves (i.e. positions) held by a specific user (notice that the user address must be lower case):
-```
+```graphql
 {
   userReserves(where: { user: "USER_ADDRESS"}) {
     id
@@ -163,7 +166,7 @@ To retrieve all reserves (i.e. positions) held by a specific user (notice that t
 
 ##### Deposit data
 To obtain recent deposits for a certain asset:
-```
+```graphql
 {
   deposits (orderBy: timestamp, orderDirection: desc, where: { 
     reserve: "0xdac17f958d2ee523a2206206994597c13d831ec70x24a42fd28c976a61df5d00d0599c34c4f90748c8" // USDT
@@ -177,7 +180,7 @@ To obtain recent deposits for a certain asset:
 
 ##### Borrow data
 To obtain recent borrows for a certain asset:
-```
+```graphql
 {
   borrows (orderBy: timestamp, orderDirection: desc, where: { 
     reserve: "0xdac17f958d2ee523a2206206994597c13d831ec70x24a42fd28c976a61df5d00d0599c34c4f90748c8" // USDT
@@ -191,7 +194,7 @@ To obtain recent borrows for a certain asset:
 
 ##### Flash loan data
 For instance, consider the following query for analysing the five most recent Flash Loans:
-```
+```graphql
 { 
   flashLoans( 
     first: 5 
@@ -209,8 +212,7 @@ For instance, consider the following query for analysing the five most recent Fl
     timestamp 
   } 
 } 
-```
- 
+``` 
  **Querying Aave's GraphQL database using React and implementing a Pie chart**        
 * **Initial Setup**
   First, let's create a React project, you can refer [this](https://create-react-app.dev/docs/getting-started/) documentation.
@@ -221,7 +223,7 @@ For instance, consider the following query for analysing the five most recent Fl
 
 * **Integrate ApolloClient**
   Let's integrate the Apollo client library. We can install and setup the client using [this](https://www.apollographql.com/docs/react/get-started/) documentation.
-  ```
+  ```shell
   npm install @apollo/client graphql
   ```
   We can use the sample code to fetch the data and test our setup.
@@ -229,11 +231,11 @@ For instance, consider the following query for analysing the five most recent Fl
 * **Initialize the ApolloClient**
   With our dependencies already set up, we can now create an ApolloClient instance.
   Let's start by importing the symbols we require from @apollo/client into index.js:
-  ```
+  ```javascript
   import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
   ```
   Next, we'll initialize ApolloClient by handing it a configuration object including the uri and cache fields:
-  ```
+  ```javascript
   const client = new ApolloClient({
     uri: 'https://api.thegraph.com/subgraphs/name/aave/protocol-v3-goerli',
     cache: new InMemoryCache(),
@@ -244,7 +246,7 @@ For instance, consider the following query for analysing the five most recent Fl
   We can connect Apollo Client to React with the ApolloProvider component. Similar to React's Context.Provider, ApolloProvider wraps our React app and places Apollo Client on the context, enabling us to access it from anywhere in our component tree.
 
   In index.js, let's wrap our React app with an ApolloProvider
-  ```
+  ```javascript
   import React from 'react';
   import * as ReactDOM from 'react-dom/client';
   import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
@@ -267,7 +269,7 @@ For instance, consider the following query for analysing the five most recent Fl
 * **Fetching data with useQuery**
   After the ApolloProvider is hooked up, we can start requesting data with useQuery. The useQuery hook is a React hook that shares GraphQL data with your UI.
   Switching over to our App.js file, we'll start by replacing our existing file contents with the code snippet below:
-  ```
+  ```javascript
   import { useQuery, gql } from '@apollo/client';
 
   export default function App() {
@@ -281,7 +283,7 @@ For instance, consider the following query for analysing the five most recent Fl
   }
   ```
   We can define the query we want to execute by wrapping it in the gql template literal:
-  ```
+  ```graphql
   const GET_QUERY = gql`
   {
       reserves {
@@ -295,7 +297,7 @@ For instance, consider the following query for analysing the five most recent Fl
   `;
   ```
   Next, let's define a component named DisplayGraphs that executes our GET_QUERY query with the useQuery hook:
-  ```
+  ```javascript
   function DisplayLocations() {
     const { loading, error, data } = useQuery(GET_QUERY);
 
@@ -328,7 +330,7 @@ For instance, consider the following query for analysing the five most recent Fl
   ```
 
 * Finally we will add the code to get our Pie chart:
-  ```
+  ```javascript
   const piedata = {
           labels: names,
           datasets: [
@@ -396,7 +398,7 @@ We need to make the fetch requests from https://aave-api-v2.aave.com/#/data/get_
 If you visit the above link, you can see that we require a reserveID to fetch the data (there is a sample reserveID already provided in case you want to try it out). So to get this reserveID, we will query the Aave v2 mainnet subgraph (https://thegraph.com/hosted-service/subgraph/aave/protocol-v2 ). We have already queried the reserveIDs for ChainLink Token (0x514910771af9ca656af840dff83e8264ecf986ca0xb53c1a33016b2dc2ff3653530bff1848a515c8c5) and TrueUSD (0x0000000000085d4780b73119b644ae5ecd22b3760xb53c1a33016b2dc2ff3653530bff1848a515c8c5) which we will be using to plot the graph. 
 
 If you want to query the reserveID yourself, you can try this:
-```
+```graphql
 {
   pools {
     reserves {
@@ -416,7 +418,7 @@ So now you can visit the aave protocol api and playaround with different reserve
 Now, let's visit our App.js and add some changes to code to get our desired graph.
 
 * Let's add some import statements as we need to use Line Chart this time to represent the time series data. So you can update your import statements to the following:
-  ```
+  ```javascript
   import React, {useEffect, useState} from 'react';
   import { useQuery, gql } from '@apollo/client';
   import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement, Title, } from 'chart.js';
@@ -436,7 +438,7 @@ Now, let's visit our App.js and add some changes to code to get our desired grap
   ```
 
 * Now, we need to fetch the get requests so for that we will use the useEffect hook from React and store the data using useState hook. So add the following code to your DisplayGraphs functions:
-  ```
+  ```javascript
   const [linedata1, setLinedata1] = useState([]);
       const [linedata2, setLinedata2] = useState([]);
 
@@ -460,7 +462,7 @@ Now, let's visit our App.js and add some changes to code to get our desired grap
   ```
 
   The Get request also returns some unwanted data and the timestamp is in a format which we don't like much, so let's update it:
-  ```
+  ```javascript
   let timestamps = linedata1.map(a => (a.x.year + '/' + a.x.month + '/' + a.x.date + ' ' + a.x.hours + ' hours'));
       let utilization1 = linedata1.map(a => a.utilizationRate_avg);
       let utilization2 = linedata2.map(a => a.utilizationRate_avg);
@@ -470,7 +472,7 @@ Now, let's visit our App.js and add some changes to code to get our desired grap
       });
   ```
 * Now, let's create the Line chart using the following code:
-  ```
+  ```javascript
   const optionsLineChart = {
           responsive: true,
           plugins: {

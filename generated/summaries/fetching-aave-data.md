@@ -7,7 +7,7 @@ This is the course header. This will be added on top of every page. Go to [DoDAO
  
  **Introduction**        
 * AAVE is a DeFi protocol that facilitates the lending and borrowing of cryptocurrency tokens using diverse algorithms and smart contracts without centralized intermediaries. 
-* It is a non-custodial liquidity protocol that allows users to participate as lenders or borrowers. Depositors provide liquidity to the market to earn a passive income, while borrowers are able to borrow in an overcollateralized manner.
+* It is a non-custodial liquidity protocol that allows users to participate as lenders or borrowers. Depositors provide liquidity to the market to earn a passive income, while borrowers are able to borrow in an over-collateralized manner.
 * Aave's GraphQL data layer is a great resource for developers, allowing developers to access data that may not have been available otherwise. This way developers can work with more data and create more advanced applications. 
 * Just like any decentralized blockchain application, Aave's data can be classified into three types: 
   - **Real-time data or current information** - This includes the current state and the new events. With real-time data, you can use data visualisations that reflect changes as they occur in real-time. This means that dashboards are interactive and accurate at any given moment.
@@ -16,7 +16,7 @@ This is the course header. This will be added on top of every page. Go to [DoDAO
 * There are multiple use cases of this data provided by Aave and varied applications (including read-only as well as read/write applications) can be built on top of it and we can examine this data to gain insights on how to update and continue to improve the application.
 
 * The focus of this chapter will be to use Aave's data and show it on the UI in a couple of use cases. 
-  - Creating a pie graph to review the aave treasury in USDT 
+  - Creating a pie graph to review the Aave treasury in USDT 
   - Implementing a time series graph of how the holdings of different pools have changed over time.
 
 * **Importance of Analytics**

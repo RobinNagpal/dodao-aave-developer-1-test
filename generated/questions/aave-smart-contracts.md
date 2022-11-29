@@ -387,7 +387,7 @@ Hint: NoHint
          
 Explanation: Flash Loans are special transactions that allow you to borrow an asset as long as the borrowed amount (plus a fee) is returned before the transaction ends (also called One Block Borrows). These transactions do not necessitate the provision of collateral by the user prior to the transaction.
 
-Sub Topics: functions-3
+Sub Topics: 
  
 
 ---

@@ -116,20 +116,21 @@ Below image provides an overview of the protocol.
 #### Main Contracts
 The main contracts in Aave and their purposes are:
 * LendingPool: The main entry point into the Aave Protocol. Most interactions with Aave will happen via the LendingPool, including:
-  - deposit()
-  - borrow()
-  - repay()
-  - swapBorrowRateMode()
-  - setUserUseReserveAsCollateral()
-  - withdraw()
-  - flashloan()
-  - liquidationCall()
+  - `deposit()`
+  - `borrow()`
+  - `repay()`
+  - `swapBorrowRateMode()`
+  - `setUserUseReserveAsCollateral()`
+  - `withdraw()`
+  - `flashloan()`
+  - `liquidationCall()`
 * LendingPoolAddressesProvider: The protocol's primary addresses register for specific marketplaces. The most recent contract addresses should be obtained from this contract by making the necessary calls.
 * LendingPoolAddressesProviderRegistry: Contains a list of active LendingPoolAddressesProvider addresses, for different markets.
 * aTokens: The yield-producing, tokenized deposits that are used throughout the Aave protocol. They implement, with minor modifications, the majority of the standard EIP-20/ERC20 token methods, as well as Aave-specific methods such as:
   - `scaledBalanceOf()`
   - `getScaledUserBalanceAndSupply()`
   - `scaledTotalSupply()`
+
   All aTokens also implement EIP-2612, which via the permit() function enables gas-less transfers and single transaction approve + actions.
 * Stable and Variable Debt Tokens: The Aave protocol employs tokenised borrow locations throughout. Because debt tokens are non-transferable, most common EIP-20/ERC20 techniques are disabled.
 
@@ -150,6 +151,7 @@ Only the primary LendingPool contract should be used to call the above function.
   - Updates a reserve's decimals,
   - Updates a reserve's interest rate strategy address,
   - Activates / Deactivates all functions of a LendingPool in emergencies.
+
   For all of the above functions, relevant events are emitted to the blockchain. Anyone can monitor these changes to know when values have been modified or added/removed.
 * Interest Rate Strategy: Contains the data required to calculate and adjust the interest rates on individual reserves.
 Each contract stores the optimised base curves using the relevant currency parameters. This means that each asset pool's interest rate is determined by a mathematical function, with the interest rate varying based on the amount of borrowed funds and the asset pool's total liquidity (i.e. utilisation).
@@ -172,33 +174,35 @@ Lenders are also entitled to a portion of the Flash Loan fees, equal to 0.09% of
 There is no minimum or maximum deposit amount; you may deposit any amount you choose.
 
 #### Methods
-#### deposit()
-**function deposit( address _reserve, uint256 _amount, uint16 _referralCode)**
-Deposits a certain _amount of an asset specified by the _reserve parameter.
+####  `function deposit( address _reserve, uint256 _amount, uint16 _referralCode)`
+
+Deposits a certain `_amount` of an asset specified by the `_reserve` parameter.
 In exchange, the caller receives a specific number of aTokens. aTokens can be redeemed for the underlying token in a 1:1 ratio.
-Please see the referral programme section for further information about _referralCode input. You can use the referral code: 0 during testing.
-When depositing an ERC-20 token, the LendingPoolCore contract (not the LendingPool contract) must have the required allowance of _amount for the underlying ERC20 of the _reserve asset via approve().
-Emitted events: _reserve, _user, _amount, _referral, _timestamp
+
+Please see the referral programme section for further information about `_referralCode` input. You can use the referral code: 0 during testing.
+
+When depositing an ERC-20 token, the `LendingPoolCore` contract (not the `LendingPool` contract) must have the required allowance of `_amount` for the underlying ERC20 of the `_reserve` asset via `approve()`.
+Emitted events: `_reserve`, `_user`, `_amount`, `_referral`, `_timestamp`
 
 **ETH deposits**
 Because the protocol does not employ an EIP-20 wrapper like wETH for ETH deposits, the deposit() method's amount parameter must match the transaction's msg.value parameter and be included in your deposit() call.
-E.g: lendingPool.deposit{ value: msg.value }(reserve, msg.value, referralCode)
-Because ETH is utilised directly in the protocol (rather than an abstraction like WETH), we use a dummy address to represent it: 0xEeeeeEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+E.g: `lendingPool.deposit{ value: msg.value }(reserve, msg.value, referralCode)`
+Because ETH is utilized directly in the protocol (rather than an abstraction like WETH), we use a dummy address to represent it: `0xEeeeeEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee`
 
 **ERC20 deposits**
-The _reserve parameter corresponds to the underlying asset's ERC20 contract address.
-
-Code: https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L753
+The _reserve parameter corresponds to the underlying asset's ERC20 contract address. [Code here](https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L753)
 
 The deposit() flow within the protocol:
-https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH4HvCIm09jkjFv%2Flending%20pool%20deposit.png?alt=media&token=c92f8256-9d73-41a1-9e96-a3d807425d08 
+<div class="flex justify-center max-h-96">
+<img src="https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH4HvCIm09jkjFv%2Flending%20pool%20deposit.png?alt=media&token=c92f8256-9d73-41a1-9e96-a3d807425d08" />
+</div> 
 
-#### setUserUseReserveAsCollateral()
-**function setUserUseReserveAsCollateral(address _reserve, bool _useAsCollateral)**
-Allow the user's deposit to be used as collateral. Users will only be able to disable deposits that are not being used as collateral at the time.
-Code: https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L341 
+#### `function setUserUseReserveAsCollateral(address _reserve, bool _useAsCollateral)`
+
+Allow the user's deposit to be used as collateral. Users will only be able to disable deposits that are not being used as collateral at the time. [Code here](https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L341 )
 
 **Stable vs Variable Interest Rate**
+
 In the short-term, stable rates function as a fixed rate, but they can be rebalanced in the long run in reaction to alterations in the market environment. Depending on supply and demand in Aave, the variable rate can change.
 The stable rate is the better choice for forecasting how much interest you will have to pay because, as its name suggests, it will remain fairly stable. The variable rate changes over time and, depending on market conditions, could be the optimal rate.
  
@@ -216,10 +220,12 @@ Every loan can be opened in either a fixed or variable rate mode. Borrows have a
 Please see the [referral programme section](https://docs.aave.com/developers/v/1.0/integrating-aave/referral-program) for further information about _referralCode input. You can use the referral code: 0 during testing.
 Emitted events: _reserve, _user, _amount, _referral, _timestamp, _borrowRateMode, _borrowRate, _originationFee, _borrowBalanceIncrease
 
-Code: https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L219 
+[Code here](https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L219 )
 
 The borrow() flow within the protocol:
-https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH3GOEvYvbizwHC%2Flending%20pool%20borrow.png?alt=media&token=2031b536-733e-4a8a-866c-23c86706e641 
+<div class="flex justify-center max-h-48">
+<img src="https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH3GOEvYvbizwHC%2Flending%20pool%20borrow.png?alt=media&token=2031b536-733e-4a8a-866c-23c86706e641" class="max-h-48" />
+</div> 
 
 #### repay()
 **function repay( address _reserve, uint256 _amount, address payable _onBehalfOf)**
@@ -227,22 +233,27 @@ Repay a borrowed asset in whole or in part. The _onBehalfOf parameter can be use
 When a third-party repays another user's debt on their behalf, the third-party address must approve() the LendingPoolCore contract (which is separate from the LendingPool contract) with the _amount of the underlying ERC20 of the _reserve contract.
 Emitted events: _reserve, _user, _repayer, _fees, _referral, _timestamp, _amountMinusFees, _borrowBalanceIncrease
 
-Code: https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L249 
+[Code here](https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L249)
 
 The repay() flow within the protocol: 
-https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH9NighH7i_73lI%2Flending%20pool%20repay.png?alt=media&token=cb6e102e-222b-412a-92f0-763ae34e7cce 
+<div class="flex justify-center max-h-48">
+<img src="https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH9NighH7i_73lI%2Flending%20pool%20repay.png?alt=media&token=cb6e102e-222b-412a-92f0-763ae34e7cce" />
+</div>  
 
 #### swapBorrowRateMode()
 **function swapBorrowRateMode(address _reserve)**
 Changes the borrow rate modes of the msg.sender from stable to variable.
-Code: https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L326 
+[Code here](https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L326) 
 
 #### rebalanceStableBorrowRate()
 **function rebalanceStableBorrowRate(address _reserve, address _user)**
 Rebalances the stable rate of _user
-Code: https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L336 
+[Code here](https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L336) 
 
-The rebalance flow for stable rates in the protocol: https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH7rY4WFE5jRwrB%2Flending%20pool%20rebalancing.png?alt=media&token=8a442d62-6087-4adf-b27b-163478547f79 
+The rebalance flow for stable rates in the protocol: 
+<div class="flex justify-center max-h-48">
+<img src="https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH7rY4WFE5jRwrB%2Flending%20pool%20rebalancing.png?alt=media&token=8a442d62-6087-4adf-b27b-163478547f79" />
+</div>   
 
 #### liquidationCall()
 **function liquidationCall(address _collateral, address _reserve, address _user, uint256 _purchaseAmount, bool _receiveaToken)**
@@ -254,10 +265,12 @@ Liquidators must approve() the LendingPoolCore contract (which is distinct from 
 purchaseAmount parameter can be set to uint(-1) and the protocol will proceed with the largest liquidation allowed by the close factor.
 For ETH liquidations, the transaction's msg.value should be identical to the _purchaseAmount parameter.
 To determine a user's health factor, use getUserAccountData().
-Code: https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L360 
+[Code Here](https://github.com/aave/aave-v3-core/blob/f3e037b3638e3b7c98f0c09c56c5efde54f7c5d2/contracts/protocol/pool/Pool.sol#L360) 
 
 The liquidation flow in the protocol:
-https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH6dX0q9LDXBn9X%2Flending%20pool%20liquidation.png?alt=media&token=6701e381-1fd1-42ce-919b-39da57434c57 
+<div class="flex justify-center max-h-48">
+<img src="https://2799188404-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M3C77KySce4HXyLqkEq%2F-M3Gt4qcUdOm3jNNgZ3O%2F-M3GtjH6dX0q9LDXBn9X%2Flending%20pool%20liquidation.png?alt=media&token=6701e381-1fd1-42ce-919b-39da57434c57" />
+</div>   
  
  **AAVE Functionalities in Details - III**        
 Flash Loans are special transactions that allow you to borrow an asset as long as the borrowed amount (plus a fee) is returned before the transaction ends (also called One Block Borrows). These transactions do not necessitate the provision of collateral by the user prior to the transaction. Because there is no real-world equivalent for Flash Loans, some basic grasp of how the state is managed within blocks in blockchains is required.
