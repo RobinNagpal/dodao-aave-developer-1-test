@@ -220,10 +220,12 @@
       }
     }
 
-    ```=
+    ```
 
-    We would utilise the reserves ERC20 token address to retrieve data for a
+
+    We would utilize the reserves ERC20 token address to retrieve data for a
     certain reserve. For the Chainlink reserve, for example:
+
 
     ```graphql
 
