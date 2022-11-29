@@ -550,9 +550,9 @@
       This will give us a Pie chart in our React app.
 
       You can get the complete code [here](https://github.com/DoDAO-io/aava-analytics-sample-app).
-- title: Historical Rest Data
+- key: historical-rest-data
+  title: Historical Rest Data
   shortTitle: Historical Rest Data
-  key: historical-rest-data
   details: >
     Now we will use the [Aave Protocol API](https://aave-api-v2.aave.com/) to
     create a time series graph.
@@ -583,7 +583,7 @@
 
     If you want to query the reserveID yourself, you can try this:
 
-    ```
+    ```graphql
 
     {
       pools {
@@ -618,7 +618,7 @@
     * Let's add some import statements as we need to use Line Chart this time to
     represent the time series data. So you can update your import statements to
     the following:
-      ```
+      ```javascript
       import React, {useEffect, useState} from 'react';
       import { useQuery, gql } from '@apollo/client';
       import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement, Title, } from 'chart.js';
@@ -640,7 +640,7 @@
     * Now, we need to fetch the get requests so for that we will use the
     useEffect hook from React and store the data using useState hook. So add the
     following code to your DisplayGraphs functions:
-      ```
+      ```javascript
       const [linedata1, setLinedata1] = useState([]);
           const [linedata2, setLinedata2] = useState([]);
 
@@ -664,7 +664,7 @@
       ```
 
       The Get request also returns some unwanted data and the timestamp is in a format which we don't like much, so let's update it:
-      ```
+      ```javascript
       let timestamps = linedata1.map(a => (a.x.year + '/' + a.x.month + '/' + a.x.date + ' ' + a.x.hours + ' hours'));
           let utilization1 = linedata1.map(a => a.utilizationRate_avg);
           let utilization2 = linedata2.map(a => a.utilizationRate_avg);
@@ -674,7 +674,7 @@
           });
       ```
     * Now, let's create the Line chart using the following code:
-      ```
+      ```javascript
       const optionsLineChart = {
               responsive: true,
               plugins: {
