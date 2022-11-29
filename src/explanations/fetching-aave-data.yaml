@@ -190,6 +190,7 @@
     ```
 
 - key: graphql-queries
+  title: Graphql Queries
   shortTitle: Graphql Queries
   details: >-
 
@@ -223,10 +224,12 @@
       }
     }
 
-    ```=
+    ```
+
 
     We would utilise the reserves ERC20 token address to retrieve data for a
     certain reserve. For the Chainlink reserve, for example:
+
 
     ```graphql
 
@@ -374,7 +377,6 @@
     } 
 
     ```
-  title: Graphql Queries
 - key: historical-rest-data
   title: Historical Rest Data
   shortTitle: Historical Rest Data
