@@ -67,128 +67,6 @@
     Aave's data can be queried in the form of REST or GraphQL. Aave uses “The
     Graph” to index its data and anyone can query the subgraphs to get access to
     this information.
-- key: graphql
-  title: Realtime GraphQL Data
-  shortTitle: Realtime Data
-  details: >+
-    #### The Graph and GraphQL
-
-    The Graph is a decentralized protocol for indexing and querying data from
-    Ethereum-based blockchains. That is, obtaining specific data from the
-    blockchain is a more convenient approach while adhering to the web3 ethos
-    and benefiting from decentralization and stability.
-
-
-    The underlying query language used in The Graph is GraphQL. What is the
-    distinction between RESTFUL API calls and GraphQL calls? Traditional APIs,
-    on the other hand, require developers to define unique endpoints for users
-    that return specified data. If the user requires further information, they
-    may need to make repeated API calls, potentially hundreds of API calls, to
-    obtain it. As long as the developer has established a flexible schema, The
-    Graph (which uses GraphQL) just requires one call to a subgraph.
-
-    See this [GraphQL
-    primer](https://medium.com/graphprotocol/graphql-will-power-the-decentralized-web-d7443a69c69a)
-    for additional information on The Graph and the underlying GraphQL.
-
-
-    #### Source of Aave Subgraphs
-
-    To view the source of the subgraphs, see our [Github
-    repo](https://github.com/aave/protocol-v2-subgraph).
-
-
-    Production Network:
-    [Polygon](https://thegraph.com/hosted-service/subgraph/aave/protocol-v3-polygon)
-
-
-    #### How to Make Use of the Playground
-
-
-    - If you use your browser to navigate to the above playground links, you
-    will be directed to The Graph's playground, where you can simply write and
-    test GraphQL queries.
-
-    - Select the purple play button to run your query.
-
-    - In the middle column, the query results will be returned.
-
-    - Use the 'Schema' column on the right to see what data is available, which
-    may be investigated to discover the underlying data.
-
-    - You can also type in the left column and use the auto-complete feature to
-    identify the appropriate query/types.
-
-
-    #### Points to keep in mind
-
-    - All address values (for example, when used for id) must be in lowercase.
-
-    - In lowercase, the ID of reserves is the asset's address and the address of
-    the market's LendingPoolAddressProvider.
-
-    - When utilizing the raw endpoints, the numeric number queried will be
-    returned in either wei units (i.e. 10^18), the decimals of the asset itself
-    (i.e. 10^6 for USDC), or ray units (i.e. 10^27).
-
-    - By default, each 'page' of results returns 100 entries. This is expandable
-    to a maximum of 1000 entries per page.
-
-    - To list the following 1000 entries, for example, put something like:
-    (skip:1000, first: 1000) to your query's arguments.
-
-    - This is also true for nested entries, such as arrays.
-
-
-    This Graph endpoint contains only static data. To obtain a user's most
-    recent balance (including interest earned up to that moment), you must
-    either compute it yourself or make a balanceOf() call to the aToken
-    contract.
-
-
-    | Return Data Type           | Subgraph
-    Address                                                       |
-
-    | -------------------------- |
-    ---------------------------------------------------------------------- | 
-
-    | Mainnet                    |
-    https://thegraph.com/explorer/subgraph/aave/aave-v2-matic              |
-
-    | Görli (Goerli) Testnet     |
-    https://thegraph.com/hosted-service/subgraph/aave/protocol-v3-goerli   |
-
-
-    Goerli is an Ethereum test network that allows blockchain development
-    testing prior to deployment on the main Ethereum network, Mainnet. Görli
-    (Goerli) Testnet is the first proof-of-authority cross-client testnet,
-    synching Parity Ethereum, Geth, Nethermind, Hyperledger Besu (formerly
-    Pantheon), and EthereumJS. This testnet is a community-based project,
-    completely open-source, naturally. It was born in September 2018 during
-    ETHBerlin and has been growing in contributors ever since.
-
-
-    #### Using your app to access GraphQL data
-
-
-    The preferred method is to utilize a client library that can handle the
-    'plumbing' to ensure you have up-to-date data (with caching sometimes
-    included). Apollo is used internally, but there are several choices
-    depending on your programming language; read the official GraphQL page for
-    more information.
-
-    If you are unable to utilize a client library (for example, while querying
-    using Postman), you can send a POST request to our subgraph's HTTP endpoint
-    with the header: "Content-Type: application/json" and the body comprising of
-    your query on one line in quotations. As an example:
-
-    ```
-
-    {"query": "{ reserves (where: {usageAsCollateralEnabled: true})  { id name
-    price {id} liquidityRate variableBorrowRate stableBorrowRate}}" }
-
-    ```
-
 - key: historical-rest-data
   title: Historical Rest Data
   shortTitle: Historical Rest Data
@@ -362,6 +240,128 @@
 
     You can get the complete code
     [here](https://github.com/DoDAO-io/aava-analytics-sample-app). 
+- key: graphql
+  title: Realtime GraphQL Data
+  shortTitle: Realtime Data
+  details: >+
+    #### The Graph and GraphQL
+
+    The Graph is a decentralized protocol for indexing and querying data from
+    Ethereum-based blockchains. That is, obtaining specific data from the
+    blockchain is a more convenient approach while adhering to the web3 ethos
+    and benefiting from decentralization and stability.
+
+
+    The underlying query language used in The Graph is GraphQL. What is the
+    distinction between RESTFUL API calls and GraphQL calls? Traditional APIs,
+    on the other hand, require developers to define unique endpoints for users
+    that return specified data. If the user requires further information, they
+    may need to make repeated API calls, potentially hundreds of API calls, to
+    obtain it. As long as the developer has established a flexible schema, The
+    Graph (which uses GraphQL) just requires one call to a subgraph.
+
+    See this [GraphQL
+    primer](https://medium.com/graphprotocol/graphql-will-power-the-decentralized-web-d7443a69c69a)
+    for additional information on The Graph and the underlying GraphQL.
+
+
+    #### Source of Aave Subgraphs
+
+    To view the source of the subgraphs, see our [Github
+    repo](https://github.com/aave/protocol-v2-subgraph).
+
+
+    Production Network:
+    [Polygon](https://thegraph.com/hosted-service/subgraph/aave/protocol-v3-polygon)
+
+
+    #### How to Make Use of the Playground
+
+
+    - If you use your browser to navigate to the above playground links, you
+    will be directed to The Graph's playground, where you can simply write and
+    test GraphQL queries.
+
+    - Select the purple play button to run your query.
+
+    - In the middle column, the query results will be returned.
+
+    - Use the 'Schema' column on the right to see what data is available, which
+    may be investigated to discover the underlying data.
+
+    - You can also type in the left column and use the auto-complete feature to
+    identify the appropriate query/types.
+
+
+    #### Points to keep in mind
+
+    - All address values (for example, when used for id) must be in lowercase.
+
+    - In lowercase, the ID of reserves is the asset's address and the address of
+    the market's LendingPoolAddressProvider.
+
+    - When utilizing the raw endpoints, the numeric number queried will be
+    returned in either wei units (i.e. 10^18), the decimals of the asset itself
+    (i.e. 10^6 for USDC), or ray units (i.e. 10^27).
+
+    - By default, each 'page' of results returns 100 entries. This is expandable
+    to a maximum of 1000 entries per page.
+
+    - To list the following 1000 entries, for example, put something like:
+    (skip:1000, first: 1000) to your query's arguments.
+
+    - This is also true for nested entries, such as arrays.
+
+
+    This Graph endpoint contains only static data. To obtain a user's most
+    recent balance (including interest earned up to that moment), you must
+    either compute it yourself or make a balanceOf() call to the aToken
+    contract.
+
+
+    | Return Data Type           | Subgraph
+    Address                                                       |
+
+    | -------------------------- |
+    ---------------------------------------------------------------------- | 
+
+    | Mainnet                    |
+    https://thegraph.com/explorer/subgraph/aave/aave-v2-matic              |
+
+    | Görli (Goerli) Testnet     |
+    https://thegraph.com/hosted-service/subgraph/aave/protocol-v3-goerli   |
+
+
+    Goerli is an Ethereum test network that allows blockchain development
+    testing prior to deployment on the main Ethereum network, Mainnet. Görli
+    (Goerli) Testnet is the first proof-of-authority cross-client testnet,
+    synching Parity Ethereum, Geth, Nethermind, Hyperledger Besu (formerly
+    Pantheon), and EthereumJS. This testnet is a community-based project,
+    completely open-source, naturally. It was born in September 2018 during
+    ETHBerlin and has been growing in contributors ever since.
+
+
+    #### Using your app to access GraphQL data
+
+
+    The preferred method is to utilize a client library that can handle the
+    'plumbing' to ensure you have up-to-date data (with caching sometimes
+    included). Apollo is used internally, but there are several choices
+    depending on your programming language; read the official GraphQL page for
+    more information.
+
+    If you are unable to utilize a client library (for example, while querying
+    using Postman), you can send a POST request to our subgraph's HTTP endpoint
+    with the header: "Content-Type: application/json" and the body comprising of
+    your query on one line in quotations. As an example:
+
+    ```
+
+    {"query": "{ reserves (where: {usageAsCollateralEnabled: true})  { id name
+    price {id} liquidityRate variableBorrowRate stableBorrowRate}}" }
+
+    ```
+
 - key: graphql-queries
   title: Graphql Queries
   shortTitle: Graphql Queries
