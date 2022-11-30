@@ -1,3 +1,72 @@
+- title: Introduction
+  shortTitle: Introduction
+  key: aave-data-intro
+  details: >
+    AAVE is a DeFi protocol that facilitates the lending and borrowing of
+    cryptocurrency tokens using diverse algorithms and smart contracts without
+    centralized intermediaries. 
+
+    It is a non-custodial liquidity protocol that allows users to participate as
+    lenders or borrowers. Depositors provide liquidity to the market to earn a
+    passive income, while borrowers are able to borrow in an overcollateralized
+    manner.
+
+    Aave's GraphQL data layer is a great resource for developers, allowing
+    developers to access data that may not have been available otherwise. This
+    way developers can work with more data and create more advanced
+    applications. 
+
+    Just like any decentralized blockchain application, Aave's data can be
+    classified into three types: 
+
+    - **Real-time data or current information** - This includes the current
+    state and the new events. With real-time data, you can use data
+    visualisations that reflect changes as they occur in real-time. This means
+    that dashboards are interactive and accurate at any given moment.
+
+    - **Historical** - This includes past state and events. With historical
+    data, you can get a snapshot of information displayed in a chart.
+
+
+    As discussed above, there are multiple use cases of this data provided by
+    Aave and varied applications (including read-only as well as read/write
+    applications) can be built on top of it and we can examine this data to gain
+    insights on how to update and continue to improve the application.
+
+
+    The focus of this chapter will be to use Aave's data and show it on the UI
+    in a couple of use cases. 
+
+    - Creating a pie graph to review the aave treasury in USDT 
+
+    - Implementing a time series graph of how the holdings of different pools
+    have changed over time.
+
+
+    Before moving on to the code, let's have a look at the importance of
+    analytics.
+
+
+    **Importance of Analytics**
+
+    - Make informed decisions
+
+    - Improve efficiency
+
+    - Identify frauds
+
+    - Improve protocol governance
+
+    - Accelerate through uncertainty
+
+    - Tackle bugs and problems
+
+    - Transform raw data into more valuable information
+
+
+    Aave's data can be queried in the form of REST or GraphQL. Aave uses “The
+    Graph” to index its data and anyone can query the subgraphs to get access to
+    this information.
 - key: historical-rest-data
   title: Historical Rest Data
   shortTitle: Historical Rest Data
@@ -171,75 +240,6 @@
 
     You can get the complete code
     [here](https://github.com/DoDAO-io/aava-analytics-sample-app). 
-- title: Introduction
-  shortTitle: Introduction
-  key: aave-data-intro
-  details: >
-    AAVE is a DeFi protocol that facilitates the lending and borrowing of
-    cryptocurrency tokens using diverse algorithms and smart contracts without
-    centralized intermediaries. 
-
-    It is a non-custodial liquidity protocol that allows users to participate as
-    lenders or borrowers. Depositors provide liquidity to the market to earn a
-    passive income, while borrowers are able to borrow in an overcollateralized
-    manner.
-
-    Aave's GraphQL data layer is a great resource for developers, allowing
-    developers to access data that may not have been available otherwise. This
-    way developers can work with more data and create more advanced
-    applications. 
-
-    Just like any decentralized blockchain application, Aave's data can be
-    classified into three types: 
-
-    - **Real-time data or current information** - This includes the current
-    state and the new events. With real-time data, you can use data
-    visualisations that reflect changes as they occur in real-time. This means
-    that dashboards are interactive and accurate at any given moment.
-
-    - **Historical** - This includes past state and events. With historical
-    data, you can get a snapshot of information displayed in a chart.
-
-
-    As discussed above, there are multiple use cases of this data provided by
-    Aave and varied applications (including read-only as well as read/write
-    applications) can be built on top of it and we can examine this data to gain
-    insights on how to update and continue to improve the application.
-
-
-    The focus of this chapter will be to use Aave's data and show it on the UI
-    in a couple of use cases. 
-
-    - Creating a pie graph to review the aave treasury in USDT 
-
-    - Implementing a time series graph of how the holdings of different pools
-    have changed over time.
-
-
-    Before moving on to the code, let's have a look at the importance of
-    analytics.
-
-
-    **Importance of Analytics**
-
-    - Make informed decisions
-
-    - Improve efficiency
-
-    - Identify frauds
-
-    - Improve protocol governance
-
-    - Accelerate through uncertainty
-
-    - Tackle bugs and problems
-
-    - Transform raw data into more valuable information
-
-
-    Aave's data can be queried in the form of REST or GraphQL. Aave uses “The
-    Graph” to index its data and anyone can query the subgraphs to get access to
-    this information.
 - key: graphql
   title: Realtime GraphQL Data
   shortTitle: Realtime Data
