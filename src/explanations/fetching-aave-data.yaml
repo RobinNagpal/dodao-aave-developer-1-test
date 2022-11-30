@@ -362,183 +362,6 @@
 
     ```
 
-- key: react-app
-  title: Querying Aave's GraphQL database using React and implementing a Pie chart
-  shortTitle: React App
-  details: |
-    * **Initial Setup**
-      First, let's create a React project, you can refer [this](https://create-react-app.dev/docs/getting-started/) documentation.
-      ```
-      npx create-react-app aave-analytics-sample-app
-      ```
-      Run npm start to check if the project runs fine.
-
-    * **Integrate ApolloClient**
-      Let's integrate the Apollo client library. We can install and setup the client using [this](https://www.apollographql.com/docs/react/get-started/) documentation.
-      ```shell
-      npm install @apollo/client graphql
-      ```
-      We can use the sample code to fetch the data and test our setup.
-
-    * **Initialize the ApolloClient**
-      With our dependencies already set up, we can now create an ApolloClient instance.
-      Let's start by importing the symbols we require from @apollo/client into index.js:
-      ```javascript
-      import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
-      ```
-      Next, we'll initialize ApolloClient by handing it a configuration object including the uri and cache fields:
-      ```javascript
-      const client = new ApolloClient({
-        uri: 'https://api.thegraph.com/subgraphs/name/aave/protocol-v3-goerli',
-        cache: new InMemoryCache(),
-      });
-      ```
-
-    * **Connect the client to React**
-      We can connect Apollo Client to React with the ApolloProvider component. Similar to React's Context.Provider, ApolloProvider wraps our React app and places Apollo Client on the context, enabling us to access it from anywhere in our component tree.
-
-      In index.js, let's wrap our React app with an ApolloProvider
-      ```javascript
-      import React from 'react';
-      import * as ReactDOM from 'react-dom/client';
-      import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
-      import App from './App';
-
-      const client = new ApolloClient({
-        uri: 'https://api.thegraph.com/subgraphs/name/aave/protocol-v3-goerli',
-        cache: new InMemoryCache(),
-      });
-
-      const root = ReactDOM.createRoot(document.getElementById('root'));
-
-      root.render(
-        <ApolloProvider client={client}>
-          <App />
-        </ApolloProvider>,
-      );
-      ```
-
-    * **Fetching data with useQuery**
-      After the ApolloProvider is hooked up, we can start requesting data with useQuery. The useQuery hook is a React hook that shares GraphQL data with your UI.
-      Switching over to our App.js file, we'll start by replacing our existing file contents with the code snippet below:
-      ```javascript
-      import { useQuery, gql } from '@apollo/client';
-
-      export default function App() {
-      return (
-          <div className="App">
-              <h2 className="App-header">AAVE Analytics</h2>
-              <br/>
-              <DisplayGraphs />
-          </div>
-      );
-      }
-      ```
-      We can define the query we want to execute by wrapping it in the gql template literal:
-      ```graphql
-      const GET_QUERY = gql`
-      {
-          reserves {
-              id
-              symbol
-              name
-        
-              totalLiquidity
-          }
-      }
-      `;
-      ```
-      Next, let's define a component named DisplayGraphs that executes our GET_QUERY query with the useQuery hook:
-      ```javascript
-      function DisplayLocations() {
-        const { loading, error, data } = useQuery(GET_QUERY);
-
-        if (loading) return <p>Loading...</p>;
-        if (error) return <p>Error :(</p>;
-
-        let names = data.reserves.map(a => a.name);
-          let total = data.reserves.map(a => a.totalLiquidity);
-          let utilization = data.reserves.map(a => a.utilizationRate);
-
-          total.forEach((element, index) => {
-              total[index] = element % 10^18;
-          });
-      ….
-      }
-      ```
-
-    * **Implementing the Pie Chart**
-      Now, our aim is to create a pie chart using the data we receive. So now we'll use [react-chartjs-2](https://react-chartjs-2.js.org/).
-      ```
-      npm install --save chart.js react-chartjs-2
-      ```
-      Then we will import it in our App.js:
-      ```
-      import { Pie } from 'react-chartjs-2';
-      ```
-      Now we need to initialize our code to get a Pie chart:
-      ```
-      ChartJS.register(ArcElement, Tooltip, Legend);
-      ```
-
-    * Finally we will add the code to get our Pie chart:
-      ```javascript
-      const piedata = {
-              labels: names,
-              datasets: [
-                {
-                  label: 'percentage',
-                  data: total,
-                  backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 140, 64, 0.2)',
-                    'rgba(205, 159, 64, 0.2)',
-                  ],
-                  borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(205, 159, 64, 1)',
-                    'rgba(255, 149, 64, 1)',
-                  ],
-                  borderWidth: 1,
-                },
-              ],
-          };
-
-      const optionsPieChart = {
-              responsive: true,
-              plugins: {
-                legend: {
-                  position: 'top',
-                },
-                title: {
-                  display: true,
-                  text: 'Total Liquidity',
-                },
-              },
-          };
-
-        return (
-              <div className="Chart-container">
-                  <div className="Pie-container">
-                      <Pie options={optionsPieChart} data={piedata} />
-                  </div>
-              </div>
-          );
-      ```
-
-      This will give us a Pie chart in our React app.
-
-      You can get the complete code [here](https://github.com/DoDAO-io/aava-analytics-sample-app).
 - key: graphql-queries
   title: Graphql Queries
   shortTitle: Graphql Queries
@@ -727,3 +550,180 @@
     } 
 
     ```
+- key: react-app
+  title: Querying Aave's GraphQL database using React and implementing a Pie chart
+  shortTitle: React App
+  details: |
+    * **Initial Setup**
+      First, let's create a React project, you can refer [this](https://create-react-app.dev/docs/getting-started/) documentation.
+      ```
+      npx create-react-app aave-analytics-sample-app
+      ```
+      Run npm start to check if the project runs fine.
+
+    * **Integrate ApolloClient**
+      Let's integrate the Apollo client library. We can install and setup the client using [this](https://www.apollographql.com/docs/react/get-started/) documentation.
+      ```shell
+      npm install @apollo/client graphql
+      ```
+      We can use the sample code to fetch the data and test our setup.
+
+    * **Initialize the ApolloClient**
+      With our dependencies already set up, we can now create an ApolloClient instance.
+      Let's start by importing the symbols we require from @apollo/client into index.js:
+      ```javascript
+      import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+      ```
+      Next, we'll initialize ApolloClient by handing it a configuration object including the uri and cache fields:
+      ```javascript
+      const client = new ApolloClient({
+        uri: 'https://api.thegraph.com/subgraphs/name/aave/protocol-v3-goerli',
+        cache: new InMemoryCache(),
+      });
+      ```
+
+    * **Connect the client to React**
+      We can connect Apollo Client to React with the ApolloProvider component. Similar to React's Context.Provider, ApolloProvider wraps our React app and places Apollo Client on the context, enabling us to access it from anywhere in our component tree.
+
+      In index.js, let's wrap our React app with an ApolloProvider
+      ```javascript
+      import React from 'react';
+      import * as ReactDOM from 'react-dom/client';
+      import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+      import App from './App';
+
+      const client = new ApolloClient({
+        uri: 'https://api.thegraph.com/subgraphs/name/aave/protocol-v3-goerli',
+        cache: new InMemoryCache(),
+      });
+
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+
+      root.render(
+        <ApolloProvider client={client}>
+          <App />
+        </ApolloProvider>,
+      );
+      ```
+
+    * **Fetching data with useQuery**
+      After the ApolloProvider is hooked up, we can start requesting data with useQuery. The useQuery hook is a React hook that shares GraphQL data with your UI.
+      Switching over to our App.js file, we'll start by replacing our existing file contents with the code snippet below:
+      ```javascript
+      import { useQuery, gql } from '@apollo/client';
+
+      export default function App() {
+      return (
+          <div className="App">
+              <h2 className="App-header">AAVE Analytics</h2>
+              <br/>
+              <DisplayGraphs />
+          </div>
+      );
+      }
+      ```
+      We can define the query we want to execute by wrapping it in the gql template literal:
+      ```graphql
+      const GET_QUERY = gql`
+      {
+          reserves {
+              id
+              symbol
+              name
+        
+              totalLiquidity
+          }
+      }
+      `;
+      ```
+      Next, let's define a component named DisplayGraphs that executes our GET_QUERY query with the useQuery hook:
+      ```javascript
+      function DisplayLocations() {
+        const { loading, error, data } = useQuery(GET_QUERY);
+
+        if (loading) return <p>Loading...</p>;
+        if (error) return <p>Error :(</p>;
+
+        let names = data.reserves.map(a => a.name);
+          let total = data.reserves.map(a => a.totalLiquidity);
+          let utilization = data.reserves.map(a => a.utilizationRate);
+
+          total.forEach((element, index) => {
+              total[index] = element % 10^18;
+          });
+      ….
+      }
+      ```
+
+    * **Implementing the Pie Chart**
+      Now, our aim is to create a pie chart using the data we receive. So now we'll use [react-chartjs-2](https://react-chartjs-2.js.org/).
+      ```
+      npm install --save chart.js react-chartjs-2
+      ```
+      Then we will import it in our App.js:
+      ```
+      import { Pie } from 'react-chartjs-2';
+      ```
+      Now we need to initialize our code to get a Pie chart:
+      ```
+      ChartJS.register(ArcElement, Tooltip, Legend);
+      ```
+
+    * Finally we will add the code to get our Pie chart:
+      ```javascript
+      const piedata = {
+              labels: names,
+              datasets: [
+                {
+                  label: 'percentage',
+                  data: total,
+                  backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 140, 64, 0.2)',
+                    'rgba(205, 159, 64, 0.2)',
+                  ],
+                  borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(205, 159, 64, 1)',
+                    'rgba(255, 149, 64, 1)',
+                  ],
+                  borderWidth: 1,
+                },
+              ],
+          };
+
+      const optionsPieChart = {
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: 'top',
+                },
+                title: {
+                  display: true,
+                  text: 'Total Liquidity',
+                },
+              },
+          };
+
+        return (
+              <div className="Chart-container">
+                  <div className="Pie-container">
+                      <Pie options={optionsPieChart} data={piedata} />
+                  </div>
+              </div>
+          );
+      ```
+
+      This will give us a Pie chart in our React app.
+
+      You can get the complete code [here](https://github.com/DoDAO-io/aava-analytics-sample-app).
