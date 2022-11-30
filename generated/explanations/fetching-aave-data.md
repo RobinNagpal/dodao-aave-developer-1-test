@@ -78,6 +78,138 @@ If you are unable to utilize a client library (for example, while querying using
 ```
 
  
+ **Historical Rest Data**        
+Now we will use the [Aave Protocol API](https://aave-api-v2.aave.com/) to create a time series graph.
+We will use the same react application to create the time series graph too, so if you still haven't create a react app by following the previous steps.
+
+Since the the [Aave Protocol API](https://aave-api-v2.aave.com/) is for v2 mainnet so now we need to query the Aave v2 mainnet subgraph.
+
+We need to make the fetch requests from https://aave-api-v2.aave.com/#/data/get_data_rates_history to get the time series data for any Aave reserve. 
+If you visit the above link, you can see that we require a reserveID to fetch the data (there is a sample reserveID already provided in case you want to try it out). So to get this reserveID, we will query the Aave v2 mainnet subgraph (https://thegraph.com/hosted-service/subgraph/aave/protocol-v2 ). We have already queried the reserveIDs for ChainLink Token (0x514910771af9ca656af840dff83e8264ecf986ca0xb53c1a33016b2dc2ff3653530bff1848a515c8c5) and TrueUSD (0x0000000000085d4780b73119b644ae5ecd22b3760xb53c1a33016b2dc2ff3653530bff1848a515c8c5) which we will be using to plot the graph. 
+
+If you want to query the reserveID yourself, you can try this:
+```graphql
+{
+  pools {
+    reserves {
+      id
+      name
+      symbol
+    }
+  }
+}
+```
+
+This query returns us an array of objects which contains the pools with the reserves id, name and symbol.
+
+Also, in the GET request we need to provide the start date (from) and time interval (resolutionInHours) to fetch the data. You can use [this](https://www.epochconverter.com/) UNIX timestamp convertor to change the date.
+So now you can visit the aave protocol api and playaround with different reserveID, from and resolutionInHours.
+
+Now, let's visit our App.js and add some changes to code to get our desired graph.
+
+* Let's add some import statements as we need to use Line Chart this time to represent the time series data. So you can update your import statements to the following:
+  ```javascript
+  import React, {useEffect, useState} from 'react';
+  import { useQuery, gql } from '@apollo/client';
+  import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement, Title, } from 'chart.js';
+
+  import { Pie, Line } from 'react-chartjs-2';
+  import './App.css';
+
+  ChartJS.register(ArcElement, 
+      CategoryScale,
+      LinearScale,
+      PointElement,
+      LineElement,
+      Title,
+      Tooltip,
+      Legend
+  );
+  ```
+
+* Now, we need to fetch the get requests so for that we will use the useEffect hook from React and store the data using useState hook. So add the following code to your DisplayGraphs functions:
+  ```javascript
+  const [linedata1, setLinedata1] = useState([]);
+      const [linedata2, setLinedata2] = useState([]);
+
+      useEffect(() => {
+          Promise.all([
+              fetch('https://aave-api-v2.aave.com/data/rates-history?reserveId=0x514910771af9ca656af840dff83e8264ecf986ca0xb53c1a33016b2dc2ff3653530bff1848a515c8c5&from=1667952000&resolutionInHours=6'),
+              fetch('https://aave-api-v2.aave.com/data/rates-history?reserveId=0x0000000000085d4780b73119b644ae5ecd22b3760xb53c1a33016b2dc2ff3653530bff1848a515c8c5&from=1667952000&resolutionInHours=6'),
+          ])
+          .then(([resData1, resData2]) => 
+              Promise.all([resData1.json(), resData2.json()])
+          )
+          .then(([data1, data2]) => {
+              console.log(data1, data2);
+              setLinedata1(data1);
+              setLinedata2(data2);
+          })
+          .catch(([err1, err2]) => {
+              console.log(err1.message, err2.message);
+          });
+      }, []);
+  ```
+
+  The Get request also returns some unwanted data and the timestamp is in a format which we don't like much, so let's update it:
+  ```javascript
+  let timestamps = linedata1.map(a => (a.x.year + '/' + a.x.month + '/' + a.x.date + ' ' + a.x.hours + ' hours'));
+      let utilization1 = linedata1.map(a => a.utilizationRate_avg);
+      let utilization2 = linedata2.map(a => a.utilizationRate_avg);
+
+      timestamps.forEach((element, index) => {
+          timestamps[index] = element.toString();
+      });
+  ```
+* Now, let's create the Line chart using the following code:
+  ```javascript
+  const optionsLineChart = {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            title: {
+              display: true,
+              text: 'Avg Utilization Rate',
+            },
+          },
+      };
+        
+  const linedata = {
+      labels: timestamps,
+      datasets: [
+        {
+          label: 'ChainLink Token',
+          data: utilization1,
+          borderColor: 'rgb(255, 99, 132)',
+          backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        },
+        {
+          label: 'TrueUSD',
+          data: utilization2,
+          borderColor: 'rgb(53, 162, 235)',
+          backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        },
+      ],
+  };
+
+  return (
+      <div className="Chart-container">
+          <div className="Pie-container">
+              <Pie options={optionsPieChart} data={piedata} />
+          </div>
+          <div className="Line-container">
+              <Line options={optionsLineChart} data={linedata} />
+          </div> 
+      </div>
+  );
+  ```
+
+This will provide us with the following time series graph:
+
+You can get the complete code [here](https://github.com/DoDAO-io/aava-analytics-sample-app). 
+ 
  **Graphql Queries**        
 
 #### Examples of Queries
@@ -101,8 +233,10 @@ If we want to receive a list of all the reserves that can be used as collateral,
     stableBorrowRate
   }
 }
-```=
+```
+
 We would utilise the reserves ERC20 token address to retrieve data for a certain reserve. For the Chainlink reserve, for example:
+
 ```graphql
 {
   reserve(id: "0x514910771af9ca656af840dff83e8264ecf986ca0x24a42fd28c976a61df5d00d0599c34c4f90748c8") { // LINK
@@ -387,137 +521,5 @@ For instance, consider the following query for analysing the five most recent Fl
   This will give us a Pie chart in our React app.
 
   You can get the complete code [here](https://github.com/DoDAO-io/aava-analytics-sample-app).
- 
- **Historical Rest Data**        
-Now we will use the [Aave Protocol API](https://aave-api-v2.aave.com/) to create a time series graph.
-We will use the same react application to create the time series graph too, so if you still haven't create a react app by following the previous steps.
-
-Since the the [Aave Protocol API](https://aave-api-v2.aave.com/) is for v2 mainnet so now we need to query the Aave v2 mainnet subgraph.
-
-We need to make the fetch requests from https://aave-api-v2.aave.com/#/data/get_data_rates_history to get the time series data for any Aave reserve. 
-If you visit the above link, you can see that we require a reserveID to fetch the data (there is a sample reserveID already provided in case you want to try it out). So to get this reserveID, we will query the Aave v2 mainnet subgraph (https://thegraph.com/hosted-service/subgraph/aave/protocol-v2 ). We have already queried the reserveIDs for ChainLink Token (0x514910771af9ca656af840dff83e8264ecf986ca0xb53c1a33016b2dc2ff3653530bff1848a515c8c5) and TrueUSD (0x0000000000085d4780b73119b644ae5ecd22b3760xb53c1a33016b2dc2ff3653530bff1848a515c8c5) which we will be using to plot the graph. 
-
-If you want to query the reserveID yourself, you can try this:
-```graphql
-{
-  pools {
-    reserves {
-      id
-      name
-      symbol
-    }
-  }
-}
-```
-
-This query returns us an array of objects which contains the pools with the reserves id, name and symbol.
-
-Also, in the GET request we need to provide the start date (from) and time interval (resolutionInHours) to fetch the data. You can use [this](https://www.epochconverter.com/) UNIX timestamp convertor to change the date.
-So now you can visit the aave protocol api and playaround with different reserveID, from and resolutionInHours.
-
-Now, let's visit our App.js and add some changes to code to get our desired graph.
-
-* Let's add some import statements as we need to use Line Chart this time to represent the time series data. So you can update your import statements to the following:
-  ```javascript
-  import React, {useEffect, useState} from 'react';
-  import { useQuery, gql } from '@apollo/client';
-  import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement, Title, } from 'chart.js';
-
-  import { Pie, Line } from 'react-chartjs-2';
-  import './App.css';
-
-  ChartJS.register(ArcElement, 
-      CategoryScale,
-      LinearScale,
-      PointElement,
-      LineElement,
-      Title,
-      Tooltip,
-      Legend
-  );
-  ```
-
-* Now, we need to fetch the get requests so for that we will use the useEffect hook from React and store the data using useState hook. So add the following code to your DisplayGraphs functions:
-  ```javascript
-  const [linedata1, setLinedata1] = useState([]);
-      const [linedata2, setLinedata2] = useState([]);
-
-      useEffect(() => {
-          Promise.all([
-              fetch('https://aave-api-v2.aave.com/data/rates-history?reserveId=0x514910771af9ca656af840dff83e8264ecf986ca0xb53c1a33016b2dc2ff3653530bff1848a515c8c5&from=1667952000&resolutionInHours=6'),
-              fetch('https://aave-api-v2.aave.com/data/rates-history?reserveId=0x0000000000085d4780b73119b644ae5ecd22b3760xb53c1a33016b2dc2ff3653530bff1848a515c8c5&from=1667952000&resolutionInHours=6'),
-          ])
-          .then(([resData1, resData2]) => 
-              Promise.all([resData1.json(), resData2.json()])
-          )
-          .then(([data1, data2]) => {
-              console.log(data1, data2);
-              setLinedata1(data1);
-              setLinedata2(data2);
-          })
-          .catch(([err1, err2]) => {
-              console.log(err1.message, err2.message);
-          });
-      }, []);
-  ```
-
-  The Get request also returns some unwanted data and the timestamp is in a format which we don't like much, so let's update it:
-  ```javascript
-  let timestamps = linedata1.map(a => (a.x.year + '/' + a.x.month + '/' + a.x.date + ' ' + a.x.hours + ' hours'));
-      let utilization1 = linedata1.map(a => a.utilizationRate_avg);
-      let utilization2 = linedata2.map(a => a.utilizationRate_avg);
-
-      timestamps.forEach((element, index) => {
-          timestamps[index] = element.toString();
-      });
-  ```
-* Now, let's create the Line chart using the following code:
-  ```javascript
-  const optionsLineChart = {
-          responsive: true,
-          plugins: {
-            legend: {
-              position: 'top',
-            },
-            title: {
-              display: true,
-              text: 'Avg Utilization Rate',
-            },
-          },
-      };
-        
-  const linedata = {
-      labels: timestamps,
-      datasets: [
-        {
-          label: 'ChainLink Token',
-          data: utilization1,
-          borderColor: 'rgb(255, 99, 132)',
-          backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        },
-        {
-          label: 'TrueUSD',
-          data: utilization2,
-          borderColor: 'rgb(53, 162, 235)',
-          backgroundColor: 'rgba(53, 162, 235, 0.5)',
-        },
-      ],
-  };
-
-  return (
-      <div className="Chart-container">
-          <div className="Pie-container">
-              <Pie options={optionsPieChart} data={piedata} />
-          </div>
-          <div className="Line-container">
-              <Line options={optionsLineChart} data={linedata} />
-          </div> 
-      </div>
-  );
-  ```
-
-This will provide us with the following time series graph:
-
-You can get the complete code [here](https://github.com/DoDAO-io/aava-analytics-sample-app). 
  
  
