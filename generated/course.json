@@ -1209,5 +1209,10 @@
       ]
     }
   ],
-  "uuid": "aave-developer-1"
+  "uuid": "aave-developer-1",
+  "courseAdmins": [],
+  "topicConfig": {
+    "showExplanations": true,
+    "showHints": true
+  }
 }

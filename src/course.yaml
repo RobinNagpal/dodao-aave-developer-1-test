@@ -46,3 +46,7 @@ topics:
     questions: fetching-aave-data.yaml
     status: In Progress
     completionWeek: In Progress
+courseAdmins: []
+topicConfig:
+  showExplanations: true
+  showHints: true
