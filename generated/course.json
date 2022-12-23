@@ -1212,7 +1212,7 @@
   "uuid": "aave-developer-1",
   "courseAdmins": [],
   "topicConfig": {
-    "showExplanations": true,
+    "showExplanations": false,
     "showHints": true
   }
 }

@@ -48,5 +48,5 @@ topics:
     completionWeek: In Progress
 courseAdmins: []
 topicConfig:
-  showExplanations: true
+  showExplanations: false
   showHints: true
